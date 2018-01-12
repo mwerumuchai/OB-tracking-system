@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ob_system'
-    'bootstrap3'
+    'ob_system',
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
@@ -82,8 +82,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'karao',
-        'USER': 'muchai',
-        'PASSWORD': 'Ngea!2017##',
+        'USER': 'soleeh',
+        'PASSWORD': 'soleeh..',
     }
 }
 
