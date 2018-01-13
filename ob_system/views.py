@@ -2,6 +2,8 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from ob_system.forms import SignUpForm
 
+import datetime as dt
+
 
 # Create your views here.
 
@@ -19,3 +21,10 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
+
+
+def current_days_records(request):
+
+    date = dt.date.today()
+
+    return render(request, 'ob.html', {'date': date})

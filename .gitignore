@@ -4,6 +4,5 @@ virtual/
 .env
 media
 .idea/
-db.sqlite3
 categories.json
 confusables.json
