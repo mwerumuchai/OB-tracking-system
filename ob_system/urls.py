@@ -1,14 +1,18 @@
-from django.urls import path, include
-from registration.backends.hmac.views import RegistrationView
-from .forms import PoliceUserForm
-
+from django.urls import path
 from . import views
 
 
 urlpatterns = [
-    path('accounts/register', RegistrationView.as_view(form_class=PoliceUserForm),
-         name='registration'),
-    path('accounts/', include('registration.backends.hmac.urls')),
 
+    # the landing url
+    path('',views.index,name='index'),
 
+    # occurrence book url
+    path('occurrence_book/',views.occurrence_book,name='occurrence_book'),
+
+    # archives url
+    path('archives/',views.archives,name='archives'),
+
+    # Cash bail book url
+    path('cash_bail_book',views.cash_bail,name='cash_bail')
 ]

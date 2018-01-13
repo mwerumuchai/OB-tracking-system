@@ -7,7 +7,6 @@ import datetime as dt
 
 # Create your views here.
 
-
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -23,8 +22,26 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
 
 
-def current_days_records(request):
+# The landing page
+def index(request):
+    return render(request, 'index.html')
+
+
+# occurrence book
+def occurrence_book(request):
 
     date = dt.date.today()
 
-    return render(request, 'ob.html', {'date': date})
+    return render(request, 'occurrence-book/occurrence.html', {'date': date})
+
+
+# Archives page
+def archives(request):
+
+    return render(request, 'occurrence-book/archives.html')
+
+
+#  Cash bail page
+def cash_bail(request):
+    return render(request, 'occurrence-book/cashbail.html')
+
