@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ob_system',
     'phonenumber_field',
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
@@ -82,8 +83,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'karao',
-        'USER': 'muchai',
-        'PASSWORD': 'Ngea!2017##',
+        'USER': 'soleeh',
+        'PASSWORD': 'soleeh..',
     }
 }
 
