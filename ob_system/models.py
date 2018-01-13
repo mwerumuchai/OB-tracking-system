@@ -5,11 +5,13 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 
 # Create your models here.
-class Officer(models.Model):
+class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    badge_no = models.IntegerField(blank=False)
+    badge_no = models.IntegerField(blank=True, null=True)
     rank = models.TextField(max_length=50)
     email = models.EmailField()
+
+    User.profile = property(lambda u: Profile.objects.get_or_create(user=u)[0])
 
     def __str__(self):
         return self.user.username
@@ -17,14 +19,22 @@ class Officer(models.Model):
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-
         Profile.objects.create(user=instance)
 
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
-
     instance.profile.save()
+
+
+@classmethod
+def get_other_userprofiles(cls,user_id):
+    profiles = Profile.objects.all()
+    other_userprofiles = []
+    for profile in profiles:
+        if profile.user_id !=user_id:
+             other_userprofiles.append(profile)
+    return other_userprofiles
 
 class CriminalProfile(models.Model):
     criminal_name = models.CharField(max_length=30)
@@ -45,7 +55,7 @@ class OccurrenceBook(models.Model):
     date_posted = models.DateTimeField(auto_now_add=True)
     remarks = models.CharField(max_length=250, blank=False)
     nature_of_occurence = models.CharField(max_length=250, blank=False)
-    badge_no = models.ForeignKey(Officer, on_delete=models.CASCADE)
+    badge_no = models.ForeignKey(Profile, on_delete=models.CASCADE)
     crime_committed = models.ForeignKey(CriminalProfile, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -71,7 +81,7 @@ class Report(models.Model):
 
 class Booking(models.Model):
     criminal_name = models.ForeignKey(CriminalProfile, on_delete=models.CASCADE)
-    badge_no = models.ForeignKey(Officer, on_delete=models.CASCADE)
+    badge_no = models.ForeignKey(Profile, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     crime_committed = models.ForeignKey(OccurrenceBook, on_delete=models.CASCADE)
 
