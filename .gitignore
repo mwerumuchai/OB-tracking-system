@@ -2,3 +2,8 @@ DS_Store
 virtual/
 *.pyc
 .env
+media
+.idea/
+db.sqlite3
+categories.json
+confusables.json

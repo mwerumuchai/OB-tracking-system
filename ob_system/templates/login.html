@@ -1,0 +1,14 @@
+{% extends 'registration/base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+  <h2>Login </h2>
+  <form method="post">
+    {% csrf_token %}
+
+      {{ field.label_tag }}<br>
+        {{ field }}
+
+    <button type="submit">Sign up</button>
+  </form>
+{% endblock %}
