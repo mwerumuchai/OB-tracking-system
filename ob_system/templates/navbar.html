@@ -1,0 +1,43 @@
+<div class="navbar navbar-inverse navbar-fixed-top opaque-navbar">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navMain"><span class="glyphicon glyphicon-chevron-right" style="color:white;"></span>
+          </button>
+      <ul class="nav navbar-nav pull-left text-left">
+        <li>
+          <a href="" style="color:white;">Home</a>
+        </li>
+      </ul>
+      <a class="navbar-brand" href="/">
+        <!-- <img src="/static/images/Kenya_logo.png" alt="" width="150"> -->
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="nav navbar-nav pull-right text-right">
+        {% if user.is_authenticated %}
+        <ul class="nav navbar-nav" id="navigation" style="color: black;">
+          <li><a href="/"  style="color: white;">Logout</a></li>
+        </ul>
+    </div>
+
+    {% else %}
+    <li>
+      <a href="/accounts/register">Register/Login</a>
+    </li>
+
+    {% endif %}
+    </ul>
+  </div>
+</div>
+
+<section class="banner">
+<div class="container">
+  <div class="row">
+  <img src="/static/images/Kenya_logo.png" alt="" width="150">
+  </div>
+  </div>
+  </section>
+<!--
+********************************************************************
+* Responsive Transparent Navbar
+******************************************************************** -->
