@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from ob_system import views as core_views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +26,9 @@ urlpatterns = [
     path('accounts/', include('registration.backends.hmac.urls')),
 
     path('signup/', core_views.signup, name='signup'),
+
+    path('login/', core_views.login, name='login'),
+
+    path('logout/', auth_views.logout, {'next_page': 'login'}, name='login'),
 ]
 
