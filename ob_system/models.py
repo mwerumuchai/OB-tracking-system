@@ -83,6 +83,9 @@ class Report(models.Model):
 
     pub_date = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.name
+
     @classmethod
     def current_day_reports(cls):
         day = dt.date.today()
@@ -114,6 +117,8 @@ class Booking(models.Model):
 
     pub_date = models.DateTimeField(auto_now_add=True)
 
+
+
     def __str__(self):
         return self.a_o_name
 
@@ -128,13 +133,23 @@ class Booking(models.Model):
 
 class Remark(models.Model):
 
-    report = models.ForeignKey(Report, on_delete=models.CASCADE, blank=True)
+    report = models.ForeignKey(Report, on_delete=models.CASCADE, blank=True, null=True)
 
-    booking = models.ForeignKey(Booking, on_delete=models.CASCADE, blank=True)
+    booking = models.ForeignKey(Booking, on_delete=models.CASCADE, blank=True, null=True)
 
     remarks = models.TextField()
 
     sign = models.CharField(max_length=100, blank=True)
+
+    # def __str__(self):
+    #     return self.
+
+    @classmethod
+    def single_remark(cls):
+
+        remark = cls.objects.filter()
+
+        return remark
 
 
 class OccurrenceBook(models.Model):

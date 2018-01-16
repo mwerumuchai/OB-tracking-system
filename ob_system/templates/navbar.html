@@ -15,29 +15,31 @@
     <div class="collapse navbar-collapse" id="navMain">
       <ul class="nav navbar-nav pull-right text-right">
         {% if user.is_authenticated %}
-        <ul class="nav navbar-nav" id="navigation">
-          <li><a href="/" >Logout</a></li>
+
+        <ul class="nav navbar-nav" id="navigation" style="color: black;">
+          <li><a href="/" style="color: white;">Logout</a></li>
         </ul>
+
+      </ul>
+
     </div>
 
     {% else %}
+
     <li id="navigation">
       <a href="/signup">Register/Login</a>
     </li>
 
     {% endif %}
-    </ul>
+
   </div>
 </div>
 
-<!-- <section class="banner">
-<div class="container">
-  <div class="row">
-  <img src="/static/images/Kenya_logo.png" alt="" width="150">
+
+<section class="banner">
+  <div class="container">
+    <div class="row">
+      <img src="/static/images/Kenya_logo.png" alt="" width="150">
+    </div>
   </div>
-  </div>
-  </section> -->
-<!--
-********************************************************************
-* Responsive Transparent Navbar
-******************************************************************** -->
+</section>

@@ -1,151 +1,144 @@
-{%extends 'occurrence-book/base.html'%}
-{%load bootstrap3%}
-{%load static%}
+{%extends 'occurrence-book/base.html'%} {%load bootstrap3%} {%load static%}
+<!-- block -->
 
-<!DOCTYPE html>
-<html>
-<head>
+{% block content %} {{ block.super }}
+<!--<div onload="startTime()">-->
 
-<script>
+<!--<div id="todaydate" style="display:none;">2014, 07, 02, 08, 14, 35</div>&lt;!&ndash; This field is normally passed from Django-View to Template  &ndash;&gt;-->
+<!--<div id="clock"></div>-->
 
+<!--</div>-->
 
-</script>
-</head>
 
-<body>
+<div class="container-fluid" id="ob">
+  <h4>Legend</h4>
+  <p>A.O - Arresting Officer</p>
+  <p>N.O.O - Nature Of Occurence</p>
+  <p>Signature - Sign</p>
 
-{% block content %}
+  <h1 align="center">Occurrence book page</h1>
 
-    {{ block.super }}
 
+  <h5 align="right"> {{date|date:"l d-F Y"}} </h5>
 
 
+  <table id="example" class="display" cellspacing="0" width="100%">
 
+    <!-- BOOKINGS TABLE -->
 
+    <h2> Bookings </h2>
 
-        <!--<div onload="startTime()">-->
+    <thead class="thead">
 
-        <!--<div id="todaydate" style="display:none;">2014, 07, 02, 08, 14, 35</div>&lt;!&ndash; This field is normally passed from Django-View to Template  &ndash;&gt;-->
-        <!--<div id="clock"></div>-->
+      <tr>
 
-    <!--</div>-->
+        <th> Time </th>
 
+        <th> Arresting Officer </th>
 
-        <div class="container-fluid">
+        <th> Arresting Officer Badge No </th>
 
-            <h1>Occurrence book page</h1>
+        <th> Criminal Name </th>
 
+        <th> Criminal ID </th>
 
-            <h2> {{date|date:"l d-F Y"}} </h2>
+        <th> Crime </th>
 
+        <th> Nature Of Occurrence </th>
 
-            <table>
+        <th> Remarks </th>
 
-                <h2> Bookings </h2>
+        <th> Signature </th>
 
-                <thead>
+      </tr>
 
-                    <tr>
+    </thead>
+    <tbody>
 
-                        <th> Time </th>
+      {% for item in bookings %}
 
-                        <th> Arresting Officer </th>
+      <tr>
 
-                        <th> Arresting Officer Badge No </th>
+        <td> {{ item.time }} </td>
 
-                        <th> Criminal Name </th>
+        <td> {{ item.a_o_name }} </td>
 
-                        <th> Criminal ID </th>
+        <td> {{ item.a_o_badge_no }} </td>
 
-                        <th> Crime </th>
+        <td> {{ item.criminal.name }} </td>
 
-                        <th> Nature Of Occurrence </th>
+        <td> {{ item.criminal.id_no }} </td>
 
-                        <th> Remarks </th>
+        <td> {{ item.crime.name }} </td>
 
-                        <th> Signature </th>
+        <td> I {{ item.a_o_name }} of badge number {{ item.a_o_badge_no }}, now booking {{ item.criminal.name }} to be charged for the offense of {{ item.crime_description }} </td>
 
-                    </tr>
+        <td> {{ item.remarks }} </td>
 
-                </thead>
+        <td> {{ item.sign }} </td>
 
-                {% for item in bookings %}
+      </tr>
 
-                    <tr>
+      {% endfor %}
+    </tbody>
 
-                        <td> {{ item.time }} </td>
+  </table>
 
-                        <td> {{ item.a_o_name }} </td>
 
-                        <td> {{ item.a_o_badge_no }} </td>
+  <table>
+    <hr>
 
-                        <td> {{ item.criminal.name }} </td>
+    <!-- REPORTS TABLE -->
 
-                        <td> {{ item.criminal.id_no }} </td>
+    <h2> Reports </h2>
 
-                        <td> {{ item.crime.name }} </td>
+    <thead>
 
-                        <td> I {{ item.a_o_name }} of badge number {{ item.a_o_badge_no }}, now booking {{ item.criminal.name }} to be charged for the offense of {{ item.crime_description }} </td>
+      <tr>
 
-                    </tr>
+        <th> Time </th>
 
-                {% endfor %}
+        <th> Name </th>
 
-            </table>
+        <th> ID NO </th>
 
+        <th> Reference Number </th>
 
-            <table>
+        <th> Case File Number </th>
 
-                <h2> Reports </h2>
+        <th> Crime </th>
 
-                <thead>
+        <th> Description </th>
 
-                    <tr>
+      </tr>
 
-                        <th> Time </th>
+    </thead>
 
-                        <th> Name </th>
+    {% for item in reports %}
 
-                        <th> ID NO </th>
+    <tr>
 
-                        <th> Reference Number </th>
+      <td> {{ item.time }} </td>
 
-                        <th> Case File Number </th>
+      <td> {{ item.name }} </td>
 
-                        <th> Crime </th>
+      <td> {{ item.id_no }} </td>
 
-                        <th> Description </th>
+      <td> {{ item.ref_no }} </td>
 
-                    </tr>
+      <td> {{ item.case_file_no }} </td>
 
-                </thead>
+      <td> {{ item.crime }} </td>
 
-                {% for item in reports %}
+      <td> {{ item.crime_description }} </td>
 
-                    <tr>
+    </tr>
 
-                        <td> {{ item.time }} </td>
+    {% endfor %}
 
-                        <td> {{ item.name }} </td>
+  </table>
 
-                        <td> {{ item.id_no }} </td>
-
-                        <td> {{ item.ref_no }} </td>
-
-                        <td> {{ item.case_file_no }} </td>
-
-                        <td> {{ item.crime }} </td>
-
-                        <td> {{ item.crime_description }} </td>
-
-                    </tr>
-
-                {% endfor %}
-
-            </table>
-
-        </div>
-        
+</div>
 
 
 
@@ -166,4 +159,5 @@
 
 
 </body>
+
 </html>

@@ -105,7 +105,7 @@ def archives(request):
 
         archive = Booking.objects.filter().all().order_by('-id')
 
-        return render(request, 'archives/archive.html', {'archive': archive})
+        return render(request, 'archives/archives.html', {'archive': archive})
 
     except ValueError:
 
