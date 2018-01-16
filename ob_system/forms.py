@@ -4,7 +4,9 @@ from django.contrib.auth.models import User
 
 from django import forms
 
-from .models import Profile
+from dal import autocomplete
+
+from .models import Archive
 
 RANKS = (
     ('OCS', 'OCS'),
@@ -43,3 +45,17 @@ class LoginForm(UserCreationForm):
         model = User
 
         fields = ('badge_no', 'password1')
+
+
+class SearchForm(forms.ModelForm):
+
+    pub_date = forms.ModelChoiceField(
+        queryset=Archive.objects.all(),
+        widget=autocomplete.ModelSelect2(url='search-results')
+    )
+
+    class Meta:
+
+        model = Archive
+
+        fields = ('__all__')

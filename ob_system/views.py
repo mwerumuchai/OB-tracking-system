@@ -3,10 +3,13 @@ from django.shortcuts import render, redirect
 from ob_system.forms import SignUpForm, LoginForm
 
 from django.http import Http404
+from django.core.exceptions import ObjectDoesNotExist, EmptyResultSet
 
-from .models import Booking, Report, OccurrenceBook
+from .models import Booking, Report, Archive
 
 import datetime as dt
+
+from dal import autocomplete
 
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes
@@ -32,7 +35,7 @@ def signup(request):
 
             current_site = get_current_site(request)
             subject = 'Activate Your Account'
-            message = render_to_string('account_activation_email.html', {
+            message = render_to_string('emailing/account_activation_email.html', {
                 'user': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
@@ -77,13 +80,22 @@ def index(request):
 # occurrence book
 def occurrence_book(request):
 
-    date = dt.date.today()
+    # if not request.user.is_authenticated():
+    #
+    #     return Archive.objects.none()
 
-    bookings = Booking.current_day_bookings().order_by('-time')
+    try:
+        date = dt.date.today()
 
-    reports = Report.current_day_reports().order_by('-time')
+        bookings = Booking.current_day_bookings().order_by('-time')
 
-    return render(request, 'occurrence-book/occurrence.html', {'date': date, 'bookings': bookings, 'reports': reports})
+        reports = Report.current_day_reports().order_by('-time')
+
+        return render(request, 'occurrence-book/occurrence.html', {'date': date, 'bookings': bookings, 'reports': reports})
+
+    except Exception as exception:
+
+        raise exception
 
 
 # Archives page
@@ -93,7 +105,7 @@ def archives(request):
 
         archive = Booking.objects.filter().all().order_by('-id')
     
-        return render(request, 'archives/archives.html', {'archive': archive})
+        return render(request, 'archives/archive.html', {'archive': archive})
 
     except ValueError:
 
@@ -104,3 +116,39 @@ def archives(request):
 def cash_bail(request):
     return render(request, 'occurrence-book/cashbail.html')
 
+
+def search_results(request):
+
+    try:
+
+        if 'pub_date' in request.GET and request.GET["pub_date"]:
+            search_term = request.GET.get("pub_date")
+
+            searched_dates = Archive.search_by_pub_date(search_term)
+
+            bookings = Booking.objects.filter(pub_date=searched_dates).all().order_by('-pub_date')
+
+            reportings = Report.objects.filter(pub_date=searched_dates).all().order_by('-pub_date')
+
+            return render(request, 'archives/archive.html', {'bookings': bookings, 'reportings': reportings})
+
+    except Exception as exception:
+
+        raise exception
+
+
+class SearchAutocomplete(autocomplete.Select2QuerySetView):
+
+    def get_queryset(self):
+
+        if not self.request.user.is_authenticated():
+
+            return Archive.objects.none()
+
+        query = Archive.objects.all()
+
+        if self.q:
+
+            query = query.filter(pub_date=self.q)
+
+        return query

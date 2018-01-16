@@ -91,6 +91,10 @@ class Report(models.Model):
 
         return reports
 
+    def __str__(self):
+
+        return self.name
+
 
 # A_O stands for Arresting Officer
 
@@ -159,3 +163,19 @@ class OccurrenceBook(models.Model):
         archive = cls.objects.filter(pub_date__date=date)
 
         return archive
+
+
+class Archive(models.Model):
+
+    bookings = models.ForeignKey(Booking, on_delete=models.CASCADE)
+
+    reports = models.ForeignKey(Report, on_delete=models.CASCADE)
+
+    pub_date = models.DateField(auto_now_add=True)
+
+    @classmethod
+    def search_by_pub_date(cls, search_term):
+
+        reports = cls.objects.filter(pub_date__icontains=search_term)
+
+        return reports
