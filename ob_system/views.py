@@ -32,7 +32,7 @@ def signup(request):
 
             current_site = get_current_site(request)
             subject = 'Activate Your Account'
-            message = render_to_string('account_activation_email.html', {
+            message = render_to_string('emailing/account_activation_email.html', {
                 'user': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
@@ -92,7 +92,7 @@ def archives(request):
     try:
 
         archive = Booking.objects.filter().all().order_by('-id')
-    
+
         return render(request, 'archives/archives.html', {'archive': archive})
 
     except ValueError:
@@ -103,4 +103,3 @@ def archives(request):
 #  Cash bail page
 def cash_bail(request):
     return render(request, 'occurrence-book/cashbail.html')
-
