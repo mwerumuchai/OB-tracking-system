@@ -32,3 +32,14 @@ class SignUpForm(UserCreationForm):
         model = User
 
         fields = ('first_name', 'last_name', 'badge_no', 'rank', 'email', 'password1', 'password2',)
+
+
+class LoginForm(UserCreationForm):
+
+    badge_no = forms.IntegerField()
+
+    class Meta:
+
+        model = User
+
+        fields = ('badge_no', 'password1')
