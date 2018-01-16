@@ -4,19 +4,22 @@
 
 {% block content %}
 {{block.super}}
+<div class="container">
+  <h2 class="head">OBS <small>Occurrence Book System</small></h2>
+</div><br><br>
 <div class="container" class="item">
   <div class="row">
   <div class="col-md-4">
   <div class="card horizontal">
     <div class="card-image">
-      <img src="https://lorempixel.com/100/190/nature/6">
+      <!-- <img src="https://lorempixel.com/100/190/nature/6"> -->
     </div>
     <div class="card-stacked">
       <div class="card-content">
-        <p>I am a very simple card. I am good at containing small bits of information.</p>
+        <h5 class="content">Cash bail collected from the suspects.</h5>
       </div>
-      <div class="card-action">
-        <a href="{%url 'cash_bail'%}">Cash Book</a>
+      <div class="card-action" id="cb">
+        <a class="link" href="{%url 'cash_bail'%}">Cash Book</a>
       </div>
     </div>
   </div>
@@ -24,14 +27,14 @@
   <div class="col-md-4">
   <div class="card horizontal">
     <div class="card-image">
-      <img src="https://lorempixel.com/100/190/nature/6">
+      <!-- <img src="https://lorempixel.com/100/190/nature/6"> -->
     </div>
     <div class="card-stacked">
       <div class="card-content">
-        <p>I am a very simple card. I am good at containing small bits of information.</p>
+        <h5 class="content">Bookings and reporting register</h5>
       </div>
-      <div class="card-action">
-        <a href="{%url 'occurrence_book'%}">Occurrence Book</a>
+      <div class="card-action" id="ob">
+        <a class="link" href="{%url 'occurrence_book'%}">Occurrence Book</a>
       </div>
     </div>
   </div>
@@ -39,20 +42,21 @@
   <div class="col-md-4">
   <div class="card horizontal">
     <div class="card-image">
-      <img src="https://lorempixel.com/100/190/nature/6">
+      <!-- <img src="https://lorempixel.com/100/190/nature/6"> -->
     </div>
     <div class="card-stacked">
       <div class="card-content">
-        <p>I am a very simple card. I am good at containing small bits of information.</p>
+        <h5 class="content">Archives of the occurrence book.</h5>
       </div>
-      <div class="card-action">
-        <a href="{%url 'archives'%}">Archives</a>
+      <div class="card-action" id="ar">
+        <a class="link" href="{%url 'archives'%}">Archives</a>
       </div>
     </div>
   </div>
 </div>
 </div>
 </div>
+
 <footer>&#9426; Copyright 2018 OBS. <small>All Rights Reserved</small></footer>
 
 
