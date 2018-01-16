@@ -4,6 +4,55 @@
 
 {% block content %}
 {{block.super}}
-<h1 class="text-center">The index page</h1>
+<div class="container">
+  <div class="row">
+  <div class="col-md-4">
+  <div class="card horizontal">
+    <div class="card-image">
+      <img src="https://lorempixel.com/100/190/nature/6">
+    </div>
+    <div class="card-stacked">
+      <div class="card-content">
+        <p>I am a very simple card. I am good at containing small bits of information.</p>
+      </div>
+      <div class="card-action">
+        <a href="{%url 'cash_bail'%}">Cash Book</a>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="col-md-4">
+  <div class="card horizontal">
+    <div class="card-image">
+      <img src="https://lorempixel.com/100/190/nature/6">
+    </div>
+    <div class="card-stacked">
+      <div class="card-content">
+        <p>I am a very simple card. I am good at containing small bits of information.</p>
+      </div>
+      <div class="card-action">
+        <a href="{%url 'occurrence_book'%}">Occurrence Book</a>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="col-md-4">
+  <div class="card horizontal">
+    <div class="card-image">
+      <img src="https://lorempixel.com/100/190/nature/6">
+    </div>
+    <div class="card-stacked">
+      <div class="card-content">
+        <p>I am a very simple card. I am good at containing small bits of information.</p>
+      </div>
+      <div class="card-action">
+        <a href="{%url 'archives'%}">Archives</a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
 
 {%endblock%}
