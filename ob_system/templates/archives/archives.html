@@ -1,0 +1,20 @@
+{%extends 'occurrence-book/base.html'%}
+{%load bootstrap3%}
+{%load static%}
+
+
+{% block content %}
+
+    <div class="container-fluid">
+
+        <h1> ARCHIVES </h1>
+
+        {% for item in archive %}
+
+            {{ item.name }}
+
+        {% endfor %}
+
+    </div>
+
+{%endblock%}

@@ -2,9 +2,167 @@
 {%load bootstrap3%}
 {%load static%}
 
+<!DOCTYPE html>
+<html>
+<head>
+
+<script>
+
+
+</script>
+</head>
+
+<body>
 
 {% block content %}
 
-<h1>Occurrence book page</h1>
+    {{ block.super }}
+
+
+
+
+
+
+        <!--<div onload="startTime()">-->
+
+        <!--<div id="todaydate" style="display:none;">2014, 07, 02, 08, 14, 35</div>&lt;!&ndash; This field is normally passed from Django-View to Template  &ndash;&gt;-->
+        <!--<div id="clock"></div>-->
+
+    <!--</div>-->
+
+
+        <div class="container-fluid">
+
+            <h1>Occurrence book page</h1>
+
+
+            <h2> {{date|date:"l d-F Y"}} </h2>
+
+
+            <table>
+
+                <h2> Bookings </h2>
+
+                <thead>
+
+                    <tr>
+
+                        <th> Time </th>
+
+                        <th> Arresting Officer </th>
+
+                        <th> Arresting Officer Badge No </th>
+
+                        <th> Criminal Name </th>
+
+                        <th> Criminal ID </th>
+
+                        <th> Crime </th>
+
+                        <th> Nature Of Occurrence </th>
+
+                        <th> Remarks </th>
+
+                        <th> Signature </th>
+
+                    </tr>
+
+                </thead>
+
+                {% for item in bookings %}
+
+                    <tr>
+
+                        <td> {{ item.time }} </td>
+
+                        <td> {{ item.a_o_name }} </td>
+
+                        <td> {{ item.a_o_badge_no }} </td>
+
+                        <td> {{ item.criminal.name }} </td>
+
+                        <td> {{ item.criminal.id_no }} </td>
+
+                        <td> {{ item.crime.name }} </td>
+
+                        <td> I {{ item.a_o_name }} of badge number {{ item.a_o_badge_no }}, now booking {{ item.criminal.name }} to be charged for the offense of {{ item.crime_description }} </td>
+
+                    </tr>
+
+                {% endfor %}
+
+            </table>
+
+
+            <table>
+
+                <h2> Reports </h2>
+
+                <thead>
+
+                    <tr>
+
+                        <th> Time </th>
+
+                        <th> Name </th>
+
+                        <th> ID NO </th>
+
+                        <th> Reference Number </th>
+
+                        <th> Case File Number </th>
+
+                        <th> Crime </th>
+
+                        <th> Description </th>
+
+                    </tr>
+
+                </thead>
+
+                {% for item in reports %}
+
+                    <tr>
+
+                        <td> {{ item.time }} </td>
+
+                        <td> {{ item.name }} </td>
+
+                        <td> {{ item.id_no }} </td>
+
+                        <td> {{ item.ref_no }} </td>
+
+                        <td> {{ item.case_file_no }} </td>
+
+                        <td> {{ item.crime }} </td>
+
+                        <td> {{ item.crime_description }} </td>
+
+                    </tr>
+
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+
 
 {% endblock%}
+
+
+    {% block scripts %}
+
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+            <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+
+            <script src="{% static 'js/time.js' %}" type="text/javascript"></script>
+
+      {% bootstrap_javascript %}
+
+    {% endblock %}
+
+
+</body>
+</html>

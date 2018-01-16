@@ -1,20 +1,36 @@
-{% load bootstrap3 %} {%load static%}
+{% load bootstrap3 %}
+{% load static %}
 
 <!DOCTYPE html>
 <html>
 
   <head>
-    <meta charset="utf-8"> {% if title %}
-    <title>OB - Tracking System {{title}}</title>
-    {% else %}
-    <title> OB Tracking System </title>
-    {% endif %} {% block styles %} {% bootstrap_css %}
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <meta charset="utf-8">
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    {% if title %}
+
+    <title>OB - Tracking System {{title}}</title>
+
+    {% else %}
+
+    <title> OB Tracking System </title>
+
+
+    {% endif %}
+
+
+      {% block styles %}
+
+        {% bootstrap_css %}
+
+            <link rel="stylesheet" href="{% static 'css/index.css' %}">
+            <!-- Compiled and minified CSS -->
+
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+            <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+            <!-- Compiled and minified JavaScript -->
 
 
      {% endblock %}
@@ -22,9 +38,28 @@
   </head>
 
   <body>
-    {%include 'navbar.html'%} {% block content %} {%endblock%} {% block scripts %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    {% bootstrap_javascript %} {% endblock %}
+
+      {%include 'navbar.html'%}
+
+
+        {% block content %}
+
+
+
+        {% endblock %}
+
+
+
+      {% block scripts %}
+
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+      {% bootstrap_javascript %}
+
+      {% endblock %}
+
   </body>
 
 </html>

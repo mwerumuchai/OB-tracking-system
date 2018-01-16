@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ob_system',
-    'phonenumber_field',
     'bootstrap3',
+    'django_archive',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +73,8 @@ TEMPLATES = [
     },
 ]
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 WSGI_APPLICATION = 'occurrence_book.wsgi.application'
 
 
@@ -83,8 +85,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'karao',
-        'USER': 'soleeh',
-        'PASSWORD': 'soleeh..',
+        'USER': 'erick',
+        'PASSWORD': 'Ngea!2017##',
     }
 }
 
