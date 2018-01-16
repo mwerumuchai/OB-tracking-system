@@ -17,10 +17,6 @@ section
 {
   color:white;
 }
-body {
-  background-color: #2d2764;
-}
-
 
 /***********************************************************************
 *  OPAQUE NAVBAR SECTION
@@ -47,7 +43,6 @@ ul.dropdown-menu {
 @media (max-width: 992px) {
   body
   {
-    background: #2d2764;
   }
   .opaque-navbar {
     background-color: #fafafa;
