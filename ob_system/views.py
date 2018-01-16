@@ -4,7 +4,7 @@ from ob_system.forms import SignUpForm, LoginForm
 
 from django.http import Http404
 
-from .models import Booking, Report, OccurrenceBook
+from .models import Booking, Report, OccurrenceBook, Remark
 
 import datetime as dt
 
@@ -32,7 +32,7 @@ def signup(request):
 
             current_site = get_current_site(request)
             subject = 'Activate Your Account'
-            message = render_to_string('account_activation_email.html', {
+            message = render_to_string('emailing/account_activation_email.html', {
                 'user': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
@@ -83,7 +83,9 @@ def occurrence_book(request):
 
     reports = Report.current_day_reports().order_by('-time')
 
-    return render(request, 'occurrence-book/occurrence.html', {'date': date, 'bookings': bookings, 'reports': reports})
+    remarks = Remark.single_remark()
+
+    return render(request, 'occurrence-book/occurrence.html', {'date': date, 'bookings': bookings, 'reports': reports, 'remarks': remarks})
 
 
 # Archives page
@@ -92,7 +94,7 @@ def archives(request):
     try:
 
         archive = Booking.objects.filter().all().order_by('-id')
-    
+
         return render(request, 'archives/archives.html', {'archive': archive})
 
     except ValueError:
@@ -103,4 +105,3 @@ def archives(request):
 #  Cash bail page
 def cash_bail(request):
     return render(request, 'occurrence-book/cashbail.html')
-
