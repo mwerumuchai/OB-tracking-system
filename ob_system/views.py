@@ -139,21 +139,21 @@ def search_results(request):
         raise exception
 
 
-# class SearchAutocomplete(autocomplete.Select2QuerySetView):
-#
-#     def get_queryset(self):
-#
-#         if not self.request.user.is_authenticated():
-#
-#             return Archive.objects.none()
-#
-#         query = Archive.objects.all()
-#
-#         if self.q:
-#
-#             query = query.filter(pub_date=self.q)
-#
-#         return query
+class SearchAutocomplete(autocomplete.Select2QuerySetView):
+
+    def get_queryset(self):
+
+        if not self.request.user.is_authenticated():
+
+            return Archive.objects.none()
+
+        query = Archive.objects.all()
+
+        if self.q:
+
+            query = query.filter(pub_date=self.q)
+
+        return query
 
 
 def book(request):
@@ -299,9 +299,9 @@ def criminal_profile(request, id_no):
 
     try:
 
-        profile = CriminalProfile.criminal_profile()
+        profile = CriminalProfile.objects.filter(id_no=id_no)
 
-        bookings = Booking.single_criminal_bookng().order_by('-id')
+        bookings = Booking.objects.filter(criminal=id_no).order_by('-id')
 
         return render(request, 'profiles/criminal-profile.html', {'profile': profile, 'bookings': bookings})
 

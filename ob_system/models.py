@@ -46,13 +46,13 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
 
     instance.profile.save()
-
-
+#
+#
 class CriminalProfile(models.Model):
 
     name = models.CharField(max_length=100)
 
-    id_no = models.IntegerField(null=True)
+    id_no = models.IntegerField(null=False, blank=False)
 
     dob = models.DateField()
 
@@ -70,15 +70,15 @@ class CriminalProfile(models.Model):
 
         return profile
 
-
+#
 class Crime(models.Model):
 
     name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
-
-
+#
+#
 class Report(models.Model):
 
     name = models.CharField(max_length=100)
@@ -107,10 +107,10 @@ class Report(models.Model):
         reports = cls.objects.filter(pub_date__date=day)
 
         return reports
-
-
-# A_O stands for Arresting Officer
-
+#
+#
+# # A_O stands for Arresting Officer
+#
 class Booking(models.Model):
 
     a_o_name = models.CharField(max_length=100)
@@ -139,13 +139,13 @@ class Booking(models.Model):
         return bookings
 
     @classmethod
-    def single_criminal_bookng(cls, criminal):
+    def single_criminal_booking(cls, criminal):
 
         bookings = cls.objects.filter(id=criminal)
 
         return bookings
-
-
+#
+#
 class Remark(models.Model):
 
     report = models.ForeignKey(Report, on_delete=models.CASCADE, blank=True, null=True)
@@ -165,8 +165,8 @@ class Remark(models.Model):
         remark = cls.objects.filter()
 
         return remark
-
-
+#
+#
 class OccurrenceBook(models.Model):
 
     bookings = models.ForeignKey(Booking, on_delete=models.CASCADE)
@@ -193,8 +193,8 @@ class OccurrenceBook(models.Model):
         archive = cls.objects.filter(pub_date__date=date)
 
         return archive
-
-
+#
+#
 class Archive(models.Model):
 
     bookings = models.ForeignKey(Booking, on_delete=models.CASCADE)
@@ -209,6 +209,7 @@ class Archive(models.Model):
         reports = cls.objects.filter(pub_date__icontains=search_term)
 
         return reports
+
 
 
 class CashBail(models.Model):

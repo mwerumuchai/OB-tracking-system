@@ -28,9 +28,10 @@ urlpatterns = [
 
     path('occurrence_book/report/', views.report, name='report'),
 
-    path('occurrence_book/create-criminal-profile/', views.create_criminal_profile, name='create-criminal-profile'),
+    path('occurrence_book/create-criminal-profile/', views.create_criminal_profile,
+         name='create-criminal-profile'),
 
     path('cash-bail-book/', views.cashbailform, name='bail'),
 
-    path('criminal/profile/', views.criminal_profile, name='criminal-profile'),
+    path('criminal/profile/<int:id>/', views.criminal_profile, name='criminal-profile'),
 ]

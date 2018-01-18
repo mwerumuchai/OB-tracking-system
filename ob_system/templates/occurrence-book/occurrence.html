@@ -71,7 +71,7 @@
 
         <td> {{ item.a_o_badge_no }} </td>
 
-        <td> <a href="{% url 'criminal-profile' %}"> {{ item.criminal.name }} </a>  </td>
+        <td> <a href="{% url 'criminal-profile' criminal.id_no %}"> {{ item.criminal.name }} </a>  </td>
 
         <td> {{ item.criminal.id_no }} </td>
 
