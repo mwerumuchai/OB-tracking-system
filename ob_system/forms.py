@@ -6,7 +6,7 @@ from django import forms
 
 from dal import autocomplete
 
-from .models import Archive
+from .models import Archive, Booking, Report, CriminalProfile, CashBail
 
 RANKS = (
     ('OCS', 'OCS'),
@@ -57,5 +57,41 @@ class SearchForm(forms.ModelForm):
     class Meta:
 
         model = Archive
+
+        fields = ('__all__')
+
+
+class BookingForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Booking
+
+        fields = ('__all__')
+
+
+class ReportingForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Report
+
+        fields = ('__all__')
+
+
+class CriminalProfileForm(forms.ModelForm):
+
+    class Meta:
+
+        model = CriminalProfile
+
+        fields = ('__all__')
+
+
+class CashBailForm(forms.ModelForm):
+
+    class Meta:
+
+        model = CashBail
 
         fields = ('__all__')

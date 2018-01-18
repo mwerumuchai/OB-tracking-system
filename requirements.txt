@@ -6,13 +6,10 @@ Django==2.0
 django-archive==0.1.5
 django-bootstrap3==9.1.0
 django-decouple==2.1
-django-phonenumber-field==2.0.0
 django-registration==2.3
 gunicorn==19.7.1
 olefile==0.44
-phonenumberslite==8.8.9
 Pillow==4.3.0
-
 psycopg2==2.7.3.2
 pytz==2017.3
 static3==0.7.0
