@@ -10,13 +10,28 @@
 <!--</div>-->
 <br>
 
+<<<<<<< HEAD
 <div class="container-fluid">
   <br>
+=======
+
+<div class="container-fluid">
+  <h4>Legend</h4>
+  <p>A.O - Arresting Officer</p>
+  <p>N.O.O - Nature Of Occurence</p>
+  <p>Signature - Sign</p>
+>>>>>>> bc699faeee5c4e95a35abef0fd59486fe7b9a9dc
 
   <h1 align="center">Occurrence book page</h1>
 
 
   <h5 align="right"> {{date|date:"l d-F Y"}} </h5>
+
+    <a class="btn btn-default" href="{% url 'book' %}"> BOOK </a>
+
+    <a class="btn btn default" href="{% url 'report' %}"> REPORT </a>
+
+    <a class="btn btn-default" href="{% url 'create-criminal-profile' %}"> CREATE CRIMINAL PROFILE </a>
 
 
   <table id="example" class="display" cellspacing="0" width="100%">
@@ -53,7 +68,7 @@
 
         <td> {{ item.a_o_badge_no }} </td>
 
-        <td> {{ item.criminal.name }} </td>
+        <td> <a href="{% url 'criminal-profile' %}"> {{ item.criminal.name }} </a>  </td>
 
         <td>
           <!-- test -->
@@ -191,6 +206,7 @@
 
 
 
+<<<<<<< HEAD
 
 
 
@@ -203,8 +219,24 @@
 <script src="{% static 'js/time.js' %}" type="text/javascript"></script>
 
 <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet"> {% bootstrap_javascript %} {% endblock %}
+=======
+{% endblock%}
 
 
+    {% block scripts %}
+
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+            <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+
+            <script src="{% static 'js/time.js' %}" type="text/javascript"></script>
+>>>>>>> bc699faeee5c4e95a35abef0fd59486fe7b9a9dc
+
+
+<<<<<<< HEAD
+=======
+    {% endblock %}
+>>>>>>> bc699faeee5c4e95a35abef0fd59486fe7b9a9dc
 
 
 </body>

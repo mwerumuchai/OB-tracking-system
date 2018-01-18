@@ -21,4 +21,16 @@ urlpatterns = [
 
     re_path(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
             core_views.activate, name='activate'),
+
+    path('search/', views.search_results, name='search_results'),
+
+    path('occurrence_book/book/', views.book, name='book'),
+
+    path('occurrence_book/report/', views.report, name='report'),
+
+    path('occurrence_book/create-criminal-profile/', views.create_criminal_profile, name='create-criminal-profile'),
+
+    path('cash-bail-book/', views.cashbailform, name='bail'),
+
+    path('criminal/profile/', views.criminal_profile, name='criminal-profile'),
 ]

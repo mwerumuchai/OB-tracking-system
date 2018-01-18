@@ -21,10 +21,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY =config('SECRET_KEY')
+SECRET_KEY = config('SECRET_KEY')
+GOOGLE_APPLICATION_CREDENTIALS = config
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =config('DEBUG',default=False,cast=bool)
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -33,6 +34,9 @@ LOGIN_REDIRECT_URL = ('/')
 # Application definition
 
 INSTALLED_APPS = [
+    'dal',
+    'dal_select2',
+    # 'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -81,14 +85,30 @@ WSGI_APPLICATION = 'occurrence_book.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'karao',
-        'USER': 'muchai',
-        'PASSWORD': 'Ngea!2017##',
+if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
+    # Running on production App Engine, so connect to Google Cloud SQL using
+    # the unix socket at /cloudsql/<your-cloudsql-connection string>
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'HOST': '/cloudsql/karao-digital:us-central1:karao',
+            'NAME': 'karao',
+            'USER': 'erick',
+            'PASSWORD': 'qwerty12345',
+        }
     }
-}
+
+else:
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'karao',
+            'USER': 'soleeh',
+            'PASSWORD': 'soleeh..',
+        }
+    }
 
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
