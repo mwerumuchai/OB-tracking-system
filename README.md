@@ -12,6 +12,16 @@ The system is web based and makes use of a centralised database to store all sys
 System security is achieved using usernames and passwords linked to specific roles and rights as well as built-in database security mechanisms. To further extend the system’s security options, it can be set up to run securely using encryption.
 
 ## User Stories
+As a user, I would like to;
+1. Register to the app to start using the application.
+2. Add in a new criminal by accessing a new registration form to key in the details.
+3. View a list of all  the different records fetched from the database.
+4. Filter crime data by date.
+5. Filter crime data by nature of crime.
+6. See the repeat offenders.
+7. See different categories of crimes.
+8. See the time a criminal was brought in.
+
 
 ## Specifications
 
