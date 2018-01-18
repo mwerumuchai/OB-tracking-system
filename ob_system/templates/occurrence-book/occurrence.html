@@ -21,6 +21,12 @@
 
   <h5 align="right"> {{date|date:"l d-F Y"}} </h5>
 
+    <a class="btn btn-default" href="{% url 'book' %}"> BOOK </a>
+
+    <a class="btn btn default" href="{% url 'report' %}"> REPORT </a>
+
+    <a class="btn btn-default" href="{% url 'create-criminal-profile' %}"> CREATE CRIMINAL PROFILE </a>
+
 
   <table id="example" class="display" cellspacing="0" width="100%">
 
@@ -65,7 +71,7 @@
 
         <td> {{ item.a_o_badge_no }} </td>
 
-        <td> {{ item.criminal.name }} </td>
+        <td> <a href="{% url 'criminal-profile' %}"> {{ item.criminal.name }} </a>  </td>
 
         <td> {{ item.criminal.id_no }} </td>
 
