@@ -3,11 +3,15 @@ from django.shortcuts import render, redirect
 from ob_system.forms import SignUpForm, LoginForm
 
 from django.http import Http404
+from django.core.exceptions import ObjectDoesNotExist, EmptyResultSet
 
-from .models import Booking, Report, OccurrenceBook
+from .models import Booking, Report, Archive, CriminalProfile
+from .forms import BookingForm, ReportingForm, CriminalProfileForm, CashBailForm
 
 import datetime as dt
 import datetime
+
+from dal import autocomplete
 
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes
@@ -78,13 +82,22 @@ def index(request):
 # occurrence book
 def occurrence_book(request):
 
-    date = dt.date.today()
+    # if not request.user.is_authenticated():
+    #
+    #     return Archive.objects.none()
 
-    bookings = Booking.current_day_bookings().order_by('-time')
+    try:
+        date = dt.date.today()
 
-    reports = Report.current_day_reports().order_by('-time')
+        bookings = Booking.current_day_bookings().order_by('-time')
 
-    return render(request, 'occurrence-book/occurrence.html', {'date': date, 'bookings': bookings, 'reports': reports})
+        reports = Report.current_day_reports().order_by('-time')
+
+        return render(request, 'occurrence-book/occurrence.html', {'date': date, 'bookings': bookings, 'reports': reports})
+
+    except Exception as exception:
+
+        raise exception
 
 
 # Archives page
@@ -108,3 +121,193 @@ def cash_bail(request):
     # now = datetime.datetime.now().strftime('%H:%M:%S')
 
     return render(request, 'occurrence-book/cashbail.html',{'date':date})
+
+def search_results(request):
+
+    try:
+
+        if 'pub_date' in request.GET and request.GET["pub_date"]:
+            search_term = request.GET.get("pub_date")
+
+            searched_dates = Archive.search_by_pub_date(search_term)
+
+            bookings = Booking.objects.filter(pub_date=searched_dates).all().order_by('-pub_date')
+
+            reportings = Report.objects.filter(pub_date=searched_dates).all().order_by('-pub_date')
+
+            return render(request, 'archives/archive.html', {'bookings': bookings, 'reportings': reportings})
+
+    except Exception as exception:
+
+        raise exception
+
+
+# class SearchAutocomplete(autocomplete.Select2QuerySetView):
+#
+#     def get_queryset(self):
+#
+#         if not self.request.user.is_authenticated():
+#
+#             return Archive.objects.none()
+#
+#         query = Archive.objects.all()
+#
+#         if self.q:
+#
+#             query = query.filter(pub_date=self.q)
+#
+#         return query
+
+
+def book(request):
+
+    try:
+
+        if request.method == 'POST':
+
+            form = BookingForm(request.POST)
+
+            if form.is_valid():
+                booking = form.save(commit=False)
+
+                booking.user = request.user
+
+                booking.save()
+
+                return redirect(occurrence_book)
+
+            else:
+
+                form = BookingForm()
+
+                return render(request, 'occurrence-book/occurrence.html', {'form': form})
+
+        else:
+
+            form = BookingForm()
+
+            return render(request, 'occurrence-book/occurrence.html', {'form': form})
+
+    except Exception as exception:
+
+        raise exception
+
+
+def report(request):
+
+    try:
+
+        if request.method == 'POST':
+
+            form = ReportingForm(request.POST)
+
+            if form.is_valid():
+
+                reporting = form.save(commit=False)
+
+                reporting.user = request.user
+
+                reporting.save()
+
+                return redirect(occurrence_book)
+
+            else:
+
+                form = ReportingForm()
+
+                return render(request, 'occurrence-book/occurrence.html', {'form': form})
+
+        else:
+
+            form = ReportingForm()
+
+            return render(request, 'occurrence-book/occurrence.html', {'form': form})
+
+    except Exception as exception:
+
+        raise exception
+
+
+def create_criminal_profile(request):
+
+    try:
+
+        if request.method == 'POST':
+
+            form = CriminalProfileForm(request.POST)
+
+            if form.is_valid():
+
+                profile = form.save(commit=False)
+
+                profile.user = request.user
+
+                profile.save()
+
+                return redirect(occurrence_book)
+
+            else:
+
+                form = CriminalProfileForm()
+
+                return render(request, 'occurrence-book/occurrence.html', {'form': form})
+
+        else:
+
+            form = CriminalProfileForm()
+
+            return render(request, 'occurrence-book/occurrence.html', {'form': form})
+
+    except Exception as exception:
+
+        raise exception
+
+
+def cashbailform(request):
+
+    try:
+
+        if request.method == 'POST':
+
+            form = CashBailForm(request.POST)
+
+            if form.is_valid():
+
+                bail = form.save(commit=False)
+
+                bail.user = request.user
+
+                bail.save()
+
+                return redirect(cash_bail)
+
+            else:
+
+                form = CashBailForm()
+
+                return render(request, 'cashbail/cashbail.html', {'form': form})
+
+        else:
+
+            form = CashBailForm()
+
+            return render(request, 'cashbail/cashbail.html', {'form': form})
+
+    except Exception as exception:
+
+        raise exception
+
+
+def criminal_profile(request, id_no):
+
+    try:
+
+        profile = CriminalProfile.criminal_profile()
+
+        bookings = Booking.single_criminal_bookng().order_by('-id')
+
+        return render(request, 'profiles/criminal-profile.html', {'profile': profile, 'bookings': bookings})
+
+    except Exception as exception:
+
+        raise exception

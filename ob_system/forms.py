@@ -4,7 +4,9 @@ from django.contrib.auth.models import User
 
 from django import forms
 
-from .models import Profile
+from dal import autocomplete
+
+from .models import Archive, Booking, Report, CriminalProfile, CashBail
 
 RANKS = (
     ('OCS', 'OCS'),
@@ -43,3 +45,53 @@ class LoginForm(UserCreationForm):
         model = User
 
         fields = ('badge_no', 'password1')
+
+
+class SearchForm(forms.ModelForm):
+
+    pub_date = forms.ModelChoiceField(
+        queryset=Archive.objects.all(),
+        widget=autocomplete.ModelSelect2(url='search-results')
+    )
+
+    class Meta:
+
+        model = Archive
+
+        fields = ('__all__')
+
+
+class BookingForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Booking
+
+        fields = ('__all__')
+
+
+class ReportingForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Report
+
+        fields = ('__all__')
+
+
+class CriminalProfileForm(forms.ModelForm):
+
+    class Meta:
+
+        model = CriminalProfile
+
+        fields = ('__all__')
+
+
+class CashBailForm(forms.ModelForm):
+
+    class Meta:
+
+        model = CashBail
+
+        fields = ('__all__')
