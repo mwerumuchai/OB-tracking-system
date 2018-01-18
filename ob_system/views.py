@@ -7,6 +7,7 @@ from django.http import Http404
 from .models import Booking, Report, OccurrenceBook, Remark
 
 import datetime as dt
+import datetime
 
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes
@@ -104,4 +105,8 @@ def archives(request):
 
 #  Cash bail page
 def cash_bail(request):
-    return render(request, 'occurrence-book/cashbail.html')
+    date = dt.date.today()
+
+    # now = datetime.datetime.now().strftime('%H:%M:%S')
+
+    return render(request, 'occurrence-book/cashbail.html',{'date':date})

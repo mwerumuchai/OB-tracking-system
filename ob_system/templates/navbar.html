@@ -5,7 +5,7 @@
           </button>
       <ul class="nav navbar-nav pull-left text-left">
         <li>
-          <a href="" style="color:white;">Home</a>
+          <a href="" style="color:black;">Home</a>
         </li>
       </ul>
       <a class="navbar-brand" href="/">
@@ -15,14 +15,14 @@
     <div class="collapse navbar-collapse" id="navMain">
       <ul class="nav navbar-nav pull-right text-right">
         {% if user.is_authenticated %}
-        <ul class="nav navbar-nav" id="navigation" style="color: black;">
-          <li><a href="/" style="color: white;">Logout</a></li>
+        <ul class="nav navbar-nav" id="navigation">
+          <li><a href="/">Logout</a></li>
         </ul>
     </div>
 
     {% else %}
-    <li>
-      <a href="signup">Register/Login</a>
+    <li id="navigation">
+      <a href="/signup">Register/Login</a>
     </li>
 
     {% endif %}
@@ -30,13 +30,6 @@
   </div>
 </div>
 
-<!-- <section class="banner">
-  <div class="container">
-    <div class="row">
-      <img src="/static/images/Kenya_logo.png" alt="" width="150">
-    </div>
-  </div>
-</section> -->
 <!--
 ********************************************************************
 * Responsive Transparent Navbar

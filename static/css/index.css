@@ -6,19 +6,19 @@
   background: #fafafa;
   min-height: 300px;
   margin-top: 73px;
+  color: #000;
 }
 
-.banner .row {
-  text-align: center;
-  margin-top: -13px;
+.head {
+  margin-bottom: 150px;
+  /*margin-top: 120px;*/
 }
 
-.banner h1 {
-  color: white;
+.link {
+  color: #fafafa !important;
 }
 
-body {
-  background-color: #fafafa;
+.navbar-inverse .navbar-nav>li>a {
   color: #000;
 }
 
@@ -27,7 +27,7 @@ body {
 ***********************************************************************/
 
 .opaque-navbar {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #fff;
   /*Transparent = rgba(0,0,0,0) / Translucent = (0,0,0,0.5);  */
   height: 60px;
   border-bottom: 0px;
@@ -35,7 +35,7 @@ body {
 }
 
 .opaque-navbar.opaque {
-  background-color: #fafafa;
+  background-color: rgba(0, 0, 0, 0.5);
   height: 60px;
   transition: background-color .5s ease 0s;
 }
@@ -63,6 +63,21 @@ ul.dropdown-menu {
   padding: 0;
 }
 
+#cb {
+  background-color: #000;
+  text-align: center;
+}
+
+#ob {
+  background-color: red;
+  text-align: center;
+}
+
+#ar {
+  background-color: green;
+  text-align: center;
+}
+
 div.help-block {
   display: none;
   margin-top: 5px;
@@ -84,133 +99,23 @@ div.help-block {
   transform: scale(1.1);
 }
 
-/*********************************
-Occurence book
-***********************************/
-
-.legend {
-  margin-top: 69px;
-}
-
-.booking {
-  color: #d61414;
-}
-
-.reports {
-  color: #d61414;
-}
-
-btn, .btn-large {
-  text-decoration: none;
-  color: #fff;
-  background-color: #fafafa;
-  text-align: center;
-}
-
-#ob {
-  margin-bottom: 254px;
-}
-
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-  background-color: #dddddd;
-}
-
-td {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-
-hr {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border: 0;
-  border-top: 2px solid green;
-}
-
-.three {
-  font-family: 'Playfair Display', serif;
-}
-
-#occurrence {
-  margin-bottom: -134px;
-  margin-top: 32px;
-}
-
-/****************************
-modal
-***************************/
-
-.modal.modal-wide .modal-dialog {
-  width: 80%;
-}
-
-.modal-wide .modal-body {
-  overflow-y: auto;
-}
-
-/* irrelevant styling */
-
-body {
-  text-align: center;
-}
-
-body p {
-  max-width: 200px;
-  margin: 5px 5px;
-}
-
-#{{item.id}
-}
-
-.modal-body p {
-  /*margin-bottom: 90px*/
-}
-
-#mheader {
-  background-color: #000;
-  color: #fff;
-}
-
-#mfooter {
-  background-color: #ee2c2c;
-  color: #fff;
-}
-
-#close {
-  background-color: green;
-  color: #fff;
-}
-
-.sign {
-  text-align: right;
-  margin: 219px;
-}
-
-/*********************************
-End Occurence book
-***********************************/
-
 footer {
   position: fixed;
   right: 0;
   bottom: 0;
   left: 0;
   padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
+  background-color: #fff;
+  color: #000;
   text-align: center;
+}
+
+/*CASH BAIL*/
+
+.header {
+  text-align: center;
+}
+
+.date {
+  float: right;
 }
