@@ -106,3 +106,10 @@ footer {
   color: #000;
   text-align: center;
 }
+/*CASH BAIL*/
+.header{
+  text-align: center;
+}
+.date{
+  float: right;
+}
