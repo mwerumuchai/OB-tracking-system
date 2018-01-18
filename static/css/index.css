@@ -1,6 +1,6 @@
-section {
+/*section {
   background: yellow;
-}
+}*/
 
 .banner {
   background: #fafafa;
@@ -46,7 +46,7 @@ ul.dropdown-menu {
 
 @media (max-width: 992px) {
   body {
-    background: #2d2764;
+    background: #fafafa;
   }
   .opaque-navbar {
     background-color: #fafafa;
@@ -88,8 +88,27 @@ div.help-block {
 Occurence book
 ***********************************/
 
+.legend {
+  margin-top: 69px;
+}
+
+.booking {
+  color: #d61414;
+}
+
+.reports {
+  color: #d61414;
+}
+
+btn, .btn-large {
+  text-decoration: none;
+  color: #fff;
+  background-color: #fafafa;
+  text-align: center;
+}
+
 #ob {
-  margin-bottom: 102px;
+  margin-bottom: 254px;
 }
 
 table {
@@ -120,6 +139,65 @@ hr {
   margin-bottom: 20px;
   border: 0;
   border-top: 2px solid green;
+}
+
+.three {
+  font-family: 'Playfair Display', serif;
+}
+
+#occurrence {
+  margin-bottom: -134px;
+  margin-top: 32px;
+}
+
+/****************************
+modal
+***************************/
+
+.modal.modal-wide .modal-dialog {
+  width: 80%;
+}
+
+.modal-wide .modal-body {
+  overflow-y: auto;
+}
+
+/* irrelevant styling */
+
+body {
+  text-align: center;
+}
+
+body p {
+  max-width: 200px;
+  margin: 5px 5px;
+}
+
+#{{item.id}
+}
+
+.modal-body p {
+  /*margin-bottom: 90px*/
+}
+
+#mheader {
+  background-color: #000;
+  color: #fff;
+}
+
+#mfooter {
+  background-color: #ee2c2c;
+  color: #fff;
+}
+
+#close {
+  background-color: green;
+  color: #fff;
+}
+
+.sign {
+  text-align: right;
+  margin: 219px;
 }
 
 /*********************************
