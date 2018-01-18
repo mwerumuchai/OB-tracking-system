@@ -121,8 +121,6 @@ def cash_bail(request):
     # now = datetime.datetime.now().strftime('%H:%M:%S')
 
     return render(request, 'occurrence-book/cashbail.html',{'date':date})
-<<<<<<< HEAD
-=======
 
 def search_results(request):
 
@@ -313,4 +311,3 @@ def criminal_profile(request, id_no):
     except Exception as exception:
 
         raise exception
->>>>>>> bc699faeee5c4e95a35abef0fd59486fe7b9a9dc
