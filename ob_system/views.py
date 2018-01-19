@@ -9,6 +9,7 @@ from .models import Booking, Report, Archive, CriminalProfile
 from .forms import BookingForm, ReportingForm, CriminalProfileForm, CashBailForm
 
 import datetime as dt
+import datetime
 
 from dal import autocomplete
 
@@ -106,7 +107,7 @@ def archives(request):
 
         archive = Booking.objects.filter().all().order_by('-id')
 
-        return render(request, 'archives/archives.html', {'archive': archive})
+        return render(request, 'archives/archive.html', {'archive': archive})
 
     except ValueError:
 
@@ -115,9 +116,11 @@ def archives(request):
 
 #  Cash bail page
 def cash_bail(request):
+    date = dt.date.today()
 
-    return render(request, 'cashbail/cashbail.html')
+    # now = datetime.datetime.now().strftime('%H:%M:%S')
 
+    return render(request, 'occurrence-book/cashbail.html',{'date':date})
 
 def search_results(request):
 
@@ -308,10 +311,3 @@ def criminal_profile(request, id_no):
     except Exception as exception:
 
         raise exception
-
-
-
-
-
-
-
