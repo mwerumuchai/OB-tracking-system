@@ -1,24 +1,6 @@
-html
-{
-  /*background: #fafafa;*/
-  /*min-height:200px;*/
-  /*margin-top: 50px;*/
+html {
   padding: 50px;
-
-
-.banner {
-  background: #fafafa;
-  min-height: 300px;
-  margin-top: 73px;
 }
-
-.banner .row {
-  text-align: center;
-  margin-top: -13px;
-}
-
-.banner h1 {
-  color: white;
 
 .head {
   margin-bottom: 150px;

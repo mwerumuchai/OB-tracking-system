@@ -60,7 +60,7 @@
 
         <td> {{ item.a_o_badge_no }} </td>
 
-        <td> <a href="{% url 'criminal-profile' %}"> {{ item.criminal.name }} </a> </td>
+        <td> <a href=""> {{ item.criminal.name }} </a> </td>
 
         <td>
           <!-- test -->
@@ -196,33 +196,25 @@
 
 </div>
 
-<<<<<<< HEAD
+
 {% endblock%}
 
 
-    {% block scripts %}
+  {% block scripts %}
 
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-=======
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-{% endblock%} {% block scripts %}
+    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
->>>>>>> b025a481d78b86964897fa5818bcc7759e4e1261
+    <script src="{% static 'js/time.js' %}" type="text/javascript"></script>
 
-<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
 
-<script src="{% static 'js/time.js' %}" type="text/javascript"></script>
+  {% bootstrap_javascript %}
 
-<<<<<<< HEAD
-    {% endblock %}
-=======
-<link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet"> {% bootstrap_javascript %} {% endblock %}
-
-
+  {% endblock %}
 
 
 </body>
 
 </html>
->>>>>>> b025a481d78b86964897fa5818bcc7759e4e1261

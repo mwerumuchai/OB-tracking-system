@@ -105,7 +105,7 @@ else:
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'karao',
-            'USER': 'muchai',
+            'USER': 'erick',
             'PASSWORD': 'Ngea!2017##',
         }
     }
