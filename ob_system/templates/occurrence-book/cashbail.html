@@ -1,35 +1,33 @@
-{%extends 'occurrence-book/base.html'%}
-{%load bootstrap3%}
-{%load static%}
+{%extends 'occurrence-book/base.html'%} {%load bootstrap3%} {%load static%}
 
-
+<!--  -->
 {% block content %}
 <div class="container-fluid">
   <h2 class="header">Cash Bail</h2>
   <h6 class="date"> {{date|date:"l d-F Y"}} </h6>
   <h4>{{now}}</h4>
-<table>
-  <thead>
-    <tr>
-      <th>Suspect name</th>
-      <th>Police Station</th>
-      <th>Crime Committed</th>
-      <th>Court Name</th>
-      <th>Court Date</th>
-      <th>Amount Paid</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Peter Maina</td>
-      <td>Kilimani</td>
-      <td>Jay walking</td>
-      <td>Milimani courts</td>
-      <td>18/8/2017</td>
-      <td>100,000</td>
-    </tr>
-  </tbody>
-</table>
+  <table>
+    <thead>
+      <tr>
+        <th>Suspect name</th>
+        <th>Police Station</th>
+        <th>Crime Committed</th>
+        <th>Court Name</th>
+        <th>Court Date</th>
+        <th>Amount Paid</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Peter Maina</td>
+        <td>Kilimani</td>
+        <td>Jay walking</td>
+        <td>Milimani courts</td>
+        <td>18/8/2017</td>
+        <td>100,000</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 {%endblock%}
