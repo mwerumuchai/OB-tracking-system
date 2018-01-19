@@ -231,4 +231,13 @@ class CashBail(models.Model):
 
     crime = models.ForeignKey(Crime, on_delete=models.CASCADE)
 
+    # def __str__(self):
+    #     return self.criminal
 
+
+    @classmethod
+    def criminal_court_date(cls):
+
+        criminal = cls.objects.filter()
+
+        return criminal

@@ -6,6 +6,7 @@
   <h2 class="header">Cash Bail</h2>
   <h6 class="date"> {{date|date:"l d-F Y"}} </h6>
   <h4>{{now}}</h4>
+<<<<<<< HEAD
   <table>
     <thead>
       <tr>
@@ -28,6 +29,32 @@
       </tr>
     </tbody>
   </table>
+=======
+<table>
+  <thead>
+    <tr>
+      <th>Suspect name</th>
+      <th>Police Station</th>
+      <th>Crime Committed</th>
+      <th>Court Name</th>
+      <th>Court Date</th>
+      <th>Amount Paid</th>
+    </tr>
+  </thead>
+  <tbody>
+    {%for item in bail%}
+    <tr>
+      <td>{{item.criminal}}</td>
+      <td>{{item.p_station}}</td>
+      <td>{{item.crime}}</td>
+      <td>{{item.court_name}}</td>
+      <td>{{item.court_date}}</td>
+      <td>{{item.sum}}</td>
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+>>>>>>> 603846daefeed6812381b6dc527b16dbb7124a30
 </div>
 
 {%endblock%}
