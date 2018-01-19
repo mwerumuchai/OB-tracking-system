@@ -21,3 +21,18 @@ $(".modal-wide").on("show.bs.modal", function() {
   var height = $(window).height() - 200;
   $(this).find(".modal-body").css("max-height", height);
 });
+
+// tabs
+(function($) {
+
+	var tabs =  $(".tabs li a");
+
+	tabs.click(function() {
+		var terms = this.hash.replace('/','');
+		tabs.removeClass("active");
+		$(this).addClass("active");
+    $("#terms").find('p').hide();
+    $(terms).fadeIn(200);
+	});
+
+})(jQuery);
