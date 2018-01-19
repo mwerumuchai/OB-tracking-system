@@ -33,5 +33,5 @@ urlpatterns = [
 
     path('cash-bail-book/', views.cashbailform, name='bail'),
 
-    path('criminal/profile/<int:id>/', views.criminal_profile, name='criminal-profile'),
+    # path('criminal/profile//', views.criminal_profile, name='criminal-profile'),
 ]

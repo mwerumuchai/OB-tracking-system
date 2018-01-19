@@ -122,6 +122,7 @@ def cash_bail(request):
 
     return render(request, 'occurrence-book/cashbail.html',{'date':date})
 
+
 def search_results(request):
 
     try:
@@ -129,11 +130,9 @@ def search_results(request):
         if 'pub_date' in request.GET and request.GET["pub_date"]:
             search_term = request.GET.get("pub_date")
 
-            searched_dates = Archive.search_by_pub_date(search_term)
+            bookings = Booking.search_by_pub_date(search_term)
 
-            bookings = Booking.objects.filter(pub_date=searched_dates).all().order_by('-pub_date')
-
-            reportings = Report.objects.filter(pub_date=searched_dates).all().order_by('-pub_date')
+            reportings = Report.search_by_pub_date(search_term)
 
             return render(request, 'archives/archive.html', {'bookings': bookings, 'reportings': reportings})
 
