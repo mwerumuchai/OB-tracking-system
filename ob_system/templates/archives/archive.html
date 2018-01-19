@@ -86,7 +86,7 @@
 
                         <td> {{ bookings.crime.name }} </td>
 
-                        <td> I {{ bookings.a_o_name }} of badge number {{ item.a_o_badge_no }}, now booking {{ item.criminal.name }} to be charged for the offense of {{ item.crime_description }} </td>
+                        <td> I {{ bookings.a_o_name }} of badge number {{ bookings.a_o_badge_no }}, now booking {{ bookings.criminal.name }} to be charged for the offense of {{ bookings.crime_description }} </td>
 
                     </tr>
 
@@ -121,23 +121,23 @@
 
                 </thead>
 
-                {% if reports %}
+                {% if reportings %}
 
                     <tr>
 
-                        <td> {{ reports.time }} </td>
+                        <td> {{ reportings.time }} </td>
 
-                        <td> {{ reports.name }} </td>
+                        <td> {{ reportings.name }} </td>
 
-                        <td> {{ reports.id_no }} </td>
+                        <td> {{ reportings.id_no }} </td>
 
-                        <td> {{ reports.ref_no }} </td>
+                        <td> {{ reportings.ref_no }} </td>
 
-                        <td> {{ reports.case_file_no }} </td>
+                        <td> {{ reportings.case_file_no }} </td>
 
-                        <td> {{ reports.crime }} </td>
+                        <td> {{ reportings.crime }} </td>
 
-                        <td> {{ reports.crime_description }} </td>
+                        <td> {{ reportings.crime_description }} </td>
 
                     </tr>
 

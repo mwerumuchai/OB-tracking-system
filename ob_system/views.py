@@ -123,6 +123,7 @@ def cash_bail(request):
 
     return render(request, 'occurrence-book/cashbail.html',{'date':date,'bail':bail})
 
+
 def search_results(request):
 
     try:
@@ -130,11 +131,9 @@ def search_results(request):
         if 'pub_date' in request.GET and request.GET["pub_date"]:
             search_term = request.GET.get("pub_date")
 
-            searched_dates = Archive.search_by_pub_date(search_term)
+            bookings = Booking.search_by_pub_date(search_term)
 
-            bookings = Booking.objects.filter(pub_date=searched_dates).all().order_by('-pub_date')
-
-            reportings = Report.objects.filter(pub_date=searched_dates).all().order_by('-pub_date')
+            reportings = Report.search_by_pub_date(search_term)
 
             return render(request, 'archives/archive.html', {'bookings': bookings, 'reportings': reportings})
 
@@ -143,21 +142,21 @@ def search_results(request):
         raise exception
 
 
-# class SearchAutocomplete(autocomplete.Select2QuerySetView):
-#
-#     def get_queryset(self):
-#
-#         if not self.request.user.is_authenticated():
-#
-#             return Archive.objects.none()
-#
-#         query = Archive.objects.all()
-#
-#         if self.q:
-#
-#             query = query.filter(pub_date=self.q)
-#
-#         return query
+class SearchAutocomplete(autocomplete.Select2QuerySetView):
+
+    def get_queryset(self):
+
+        if not self.request.user.is_authenticated():
+
+            return Archive.objects.none()
+
+        query = Archive.objects.all()
+
+        if self.q:
+
+            query = query.filter(pub_date=self.q)
+
+        return query
 
 
 def book(request):
@@ -303,9 +302,9 @@ def criminal_profile(request, id_no):
 
     try:
 
-        profile = CriminalProfile.criminal_profile()
+        profile = CriminalProfile.objects.filter(id_no=id_no)
 
-        bookings = Booking.single_criminal_bookng().order_by('-id')
+        bookings = Booking.objects.filter(criminal=id_no).order_by('-id')
 
         return render(request, 'profiles/criminal-profile.html', {'profile': profile, 'bookings': bookings})
 

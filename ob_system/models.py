@@ -52,7 +52,7 @@ class CriminalProfile(models.Model):
 
     name = models.CharField(max_length=100)
 
-    id_no = models.IntegerField(null=True)
+    id_no = models.IntegerField(null=False, blank=False)
 
     dob = models.DateField()
 
@@ -108,8 +108,15 @@ class Report(models.Model):
 
         return reports
 
+    @classmethod
+    def search_by_pub_date(cls, search_term):
 
-# A_O stands for Arresting Officer
+        reports = cls.objects.get(pub_date__icontains=search_term)
+
+        return reports
+
+
+# # A_O stands for Arresting Officer
 
 class Booking(models.Model):
 
@@ -139,11 +146,18 @@ class Booking(models.Model):
         return bookings
 
     @classmethod
-    def single_criminal_bookng(cls, criminal):
+    def single_criminal_booking(cls, criminal):
 
         bookings = cls.objects.filter(id=criminal)
 
         return bookings
+
+    @classmethod
+    def search_by_pub_date(cls, search_term):
+
+        reports = cls.objects.get(pub_date__icontains=search_term)
+
+        return reports
 
 
 class Remark(models.Model):
@@ -202,13 +216,6 @@ class Archive(models.Model):
     reports = models.ForeignKey(Report, on_delete=models.CASCADE)
 
     pub_date = models.DateField(auto_now_add=True)
-
-    @classmethod
-    def search_by_pub_date(cls, search_term):
-
-        reports = cls.objects.filter(pub_date__icontains=search_term)
-
-        return reports
 
 
 class CashBail(models.Model):
