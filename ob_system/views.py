@@ -5,7 +5,7 @@ from ob_system.forms import SignUpForm, LoginForm
 from django.http import Http404
 from django.core.exceptions import ObjectDoesNotExist, EmptyResultSet
 
-from .models import Booking, Report, Archive, CriminalProfile
+from .models import Booking, Report, Archive, CriminalProfile, CashBail
 from .forms import BookingForm, ReportingForm, CriminalProfileForm, CashBailForm
 
 import datetime as dt
@@ -119,8 +119,9 @@ def cash_bail(request):
     date = dt.date.today()
 
     # now = datetime.datetime.now().strftime('%H:%M:%S')
+    bail = CashBail.objects.all()
 
-    return render(request, 'occurrence-book/cashbail.html',{'date':date})
+    return render(request, 'occurrence-book/cashbail.html',{'date':date,'bail':bail})
 
 def search_results(request):
 
