@@ -46,7 +46,13 @@ INSTALLED_APPS = [
     'ob_system',
     'bootstrap3',
     'django_archive',
+    # 'allauth',
+    # 'allauth.account',
 ]
+
+SITE_ID = 1
+
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -72,10 +78,17 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                'django.template.context_processors.request',
             ],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -105,8 +118,8 @@ else:
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'karao',
-            'USER': 'soleeh',
-            'PASSWORD': 'soleeh..',
+            'USER': 'erick',
+            'PASSWORD': 'Ngea!2017##',
         }
     }
 
