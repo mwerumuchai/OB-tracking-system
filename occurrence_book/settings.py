@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'ob_system',
     'bootstrap3',
     'django_archive',
+    
     # 'allauth',
     # 'allauth.account',
 ]
@@ -118,8 +119,8 @@ else:
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'karao',
-            'USER': 'erick',
-            'PASSWORD': 'Ngea!2017##',
+            'USER': 'soleeh',
+            'PASSWORD': 'soleeh..',
         }
     }
 
