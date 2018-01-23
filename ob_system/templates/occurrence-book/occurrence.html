@@ -1,7 +1,12 @@
-{%extends 'occurrence-book/base.html'%} {%load bootstrap3%} {%load static%}
+{%extends 'occurrence-book/base.html'%}
+{% load bootstrap3 %}
+{% load static %}
 <!-- block -->
 
-{% block content %} {{ block.super }}
+{% block content %}
+
+  {{ block.super }}
+
 <!--<div onload="startTime()">-->
 
 <!--<div id="todaydate" style="display:none;">2014, 07, 02, 08, 14, 35</div>&lt;!&ndash; This field is normally passed from Django-View to Template  &ndash;&gt;-->
@@ -78,7 +83,7 @@
 
                 <td> {{ item.a_o_badge_no }} </td>
 
-                <td> <a href="{% url 'criminal-profile' %}"> {{ item.criminal.name }} </a> </td>
+                <td> <a href=""> {{ item.criminal.name }} </a> </td>
 
                 <td>
                   <!-- test -->
@@ -214,8 +219,30 @@
     </div>
   </div>
 
-  <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet"> {% bootstrap_javascript %} {% endblock %}
 </div>
+
+  <form  action="{% url 'book' %}" method="post">
+
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <div class="form-group">
+              <input type="submit" class="btn btn-primary btn-sm" value="Login">
+            </div>
+
+            <input type="hidden" name="next" value="">
+
+          </form>
+
+  {% endblock %}
+
+  {% block scripts %}
+
+      <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+
+    {% bootstrap_javascript %}
+
+    {% endblock %}
 
 </body>
 

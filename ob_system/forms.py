@@ -20,14 +20,15 @@ class SignUpForm(UserCreationForm):
 
     last_name = forms.CharField(max_length=50, required=True, label='Last Name')
 
-    badge_no = forms.IntegerField()
+    badge_no = forms.IntegerField(required=True, label='Badge No')
 
     rank = forms.ChoiceField(
         required=True,
         choices=RANKS,
+        label='Rank'
     )
 
-    email = forms.EmailField(max_length=250, help_text='Required. Please Input a valid email address')
+    email = forms.EmailField(max_length=250, help_text='Required. Please Input a valid email address', label='Email')
 
     class Meta:
 
@@ -50,13 +51,13 @@ class LoginForm(UserCreationForm):
 class SearchForm(forms.ModelForm):
 
     pub_date = forms.ModelChoiceField(
-        queryset=Archive.objects.all(),
+        queryset=Booking.objects.all(),
         widget=autocomplete.ModelSelect2(url='search-results')
     )
 
     class Meta:
 
-        model = Archive
+        model = Booking
 
         fields = ('__all__')
 

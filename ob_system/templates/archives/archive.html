@@ -13,7 +13,7 @@
 
             <div class="input-group">
 
-                <input type="text" class="form-control" placeholder="Search Record" name="pub_date">
+                <input type="text" class="form-control" placeholder="Search Record" name="q">
 
                 <div class="input-group-btn">
 
@@ -144,6 +144,14 @@
                 {% endif %}
 
             </table>
+
+            {% if name %}
+
+                <h2> {{ name.name }} </h2>
+
+                <h2> {{ name.id_no }} </h2>
+
+            {% endif %}
 
     </div>
 
