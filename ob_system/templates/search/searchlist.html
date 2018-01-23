@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    {% block content %}
+
+        <form method="get">
+
+            {% csrf_token %}
+
+            {% bootstrap_form filter.form %}
+
+
+            <button type="submit">Search</button>
+
+        </form>
+
+        <ul>
+
+            {% for suspect in filter.qs %}
+
+                <li> <a href="{% url 'c_profile' suspect.id_no %}"> {{ suspect.name }} </a>  - {{suspect.id_no}} - {{ suspect.pub_date}} </li>
+
+            {% endfor %}
+
+        </ul>
+
+    {% endblock %}
+
+</body>
+</html>
