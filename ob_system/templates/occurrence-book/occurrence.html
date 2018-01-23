@@ -20,7 +20,39 @@
     <div class="col-md-4" id="legend">
 
 
-      <h3><a class="btn btn-success" href="{% url 'book' %}"> BOOK </a></h3>
+      <!-- <h3><a class="btn btn-success" href="{% url 'book' %}"> BOOK </a></h3> -->
+      <a data-toggle="modal" href="#book" class="btn btn-success"><h4>BOOK</h4></a>
+
+
+      <div id="book" class="modal modal-wide fade">
+
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header" id="mheader">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">Booking Details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                  <form  action="occurrence_book/book/" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    <div class="form-group">
+                      <input type="submit" class="btn btn-success btn-sm" value="Book">
+                    </div>
+                  </form>
+                </div>
+            </div>
+            <div class="modal-footer" id="mfooter">
+              <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
 
       <h3><a class="btn btn-success" href="{% url 'report' %}"> REPORT </a></h3>
 
@@ -78,7 +110,7 @@
 
                 <td> {{ item.a_o_badge_no }} </td>
 
-                <td> <a href="{% url 'criminal-profile' %}"> {{ item.criminal.name }} </a> </td>
+                <td>{{ item.criminal.name }} </td>
 
                 <td>
                   <!-- test -->
@@ -213,8 +245,6 @@
       </div>
     </div>
   </div>
-
-
   {% endblock%}
 </div>
 
