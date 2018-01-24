@@ -14,7 +14,6 @@ gunicorn==19.7.1
 olefile==0.44
 phonenumberslite==8.8.9
 Pillow==4.3.0
-pkg-resources==0.0.0
 psycopg2==2.7.3.2
 pytz==2017.3
 six==1.11.0
