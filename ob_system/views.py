@@ -1,4 +1,6 @@
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
+
 from django.shortcuts import render, redirect
 from ob_system.forms import SignUpForm, LoginForm
 
@@ -7,6 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist, EmptyResultSet
 
 from .models import Booking, Report, Archive, CriminalProfile, CashBail
 from .forms import BookingForm, ReportingForm, CriminalProfileForm, CashBailForm
+from .filters import SearchFilter
 
 import datetime as dt
 import datetime
@@ -26,32 +29,72 @@ from django.utils.http import urlsafe_base64_decode
 
 # Create your views here.
 
+def officer_login(request):
+
+    try:
+
+        if request.method == 'POST':
+
+            form = LoginForm(request.POST)
+
+            if form.is_valid():
+
+                user = form.save(commit=False)
+                user.is_active = True
+                user.save()
+
+                return redirect(index)
+
+            else:
+
+                form = LoginForm()
+
+                return render(request, 'login.html', {'form': form})
+
+        else:
+
+            form = LoginForm()
+
+            return render(request, 'login.html', {'form': form})
+
+    except Exception as exception:
+
+        raise exception
+
 
 def signup(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.is_active = False
-            user.save()
 
-            current_site = get_current_site(request)
-            subject = 'Activate Your Account'
-            message = render_to_string('emailing/account_activation_email.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': account_activation_token.make_token(user),
-            })
-            user.email_user(subject, message)
+    try:
 
-            return redirect('account_activation_sent')
-    else:
-        form = SignUpForm()
-    return render(request, 'signup.html', {'form': form})
+        if request.method == 'POST':
+            form = SignUpForm(request.POST)
+            if form.is_valid():
+                user = form.save(commit=False)
+                user.is_active = False
+                user.save()
+
+                current_site = get_current_site(request)
+                subject = 'Activate Your Account'
+                message = render_to_string('emailing/account_activation_email.html', {
+                    'user': user,
+                    'domain': current_site.domain,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': account_activation_token.make_token(user),
+                })
+                user.email_user(subject, message)
+
+                return redirect('account_activation_sent')
+        else:
+            form = SignUpForm()
+        return render(request, 'signup.html', {'form': form})
+
+    except Exception as exception:
+
+        raise exception
 
 
 def account_activation_sent(request):
+
     return render(request, 'emailing/account_activation_sent.html')
 
 
@@ -66,14 +109,12 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.profile.email_confirmed = True
         user.save()
-        login(request, user)
-        return redirect('home')
+        return redirect('login')
     else:
         return render(request, 'emailing/account_activation_invalid.html')
 
 
 # The landing page
-
 def index(request):
 
     return render(request, 'index.html')
@@ -81,6 +122,11 @@ def index(request):
 
 # occurrence book
 def occurrence_book(request):
+
+    '''
+    :param request: current day reports
+    :return: current day bookings and reports
+    '''
 
     # if not request.user.is_authenticated():
     #
@@ -93,7 +139,39 @@ def occurrence_book(request):
 
         reports = Report.current_day_reports().order_by('-time')
 
-        return render(request, 'occurrence-book/occurrence.html', {'date': date, 'bookings': bookings, 'reports': reports})
+        try:
+
+            if request.method == 'POST':
+
+                form = ReportingForm(request.POST)
+
+                if form.is_valid():
+
+                    reporting = form.save(commit=False)
+
+                    reporting.user = request.user
+
+                    reporting.save()
+
+                    return redirect(occurrence_book)
+
+                else:
+
+                    form = ReportingForm()
+
+                    return render(request, 'occurrence-book/occurrence.html', {'form': form, 'date': date,
+                                                                               'bookings': bookings, 'reports': reports})
+
+            else:
+
+                form = ReportingForm()
+
+                return render(request, 'occurrence-book/occurrence.html', {'form': form, 'date': date,
+                                                                           'bookings': bookings, 'reports': reports})
+
+        except Exception as exception:
+
+            raise exception
 
     except Exception as exception:
 
@@ -103,11 +181,16 @@ def occurrence_book(request):
 # Archives page
 def archives(request):
 
+    '''
+    :param request:
+    :return: list of searched record e.g bookings and reports
+
+    '''
+
+
     try:
 
-        archive = Booking.objects.filter().all().order_by('-id')
-
-        return render(request, 'archives/archive.html', {'archive': archive})
+        return render(request, 'archives/archive.html')
 
     except ValueError:
 
@@ -116,6 +199,11 @@ def archives(request):
 
 #  Cash bail page
 def cash_bail(request):
+
+    '''
+    :param request: list of current day bailed out suspects
+    :return:
+    '''
     date = dt.date.today()
 
     # now = datetime.datetime.now().strftime('%H:%M:%S')
@@ -124,111 +212,12 @@ def cash_bail(request):
     return render(request, 'occurrence-book/cashbail.html',{'date':date,'bail':bail})
 
 
-def search_results(request):
-
-    try:
-
-        if 'pub_date' in request.GET and request.GET["pub_date"]:
-            search_term = request.GET.get("pub_date")
-
-            bookings = Booking.search_by_pub_date(search_term)
-
-            reportings = Report.search_by_pub_date(search_term)
-
-            return render(request, 'archives/archive.html', {'bookings': bookings, 'reportings': reportings})
-
-    except Exception as exception:
-
-        raise exception
-
-
-class SearchAutocomplete(autocomplete.Select2QuerySetView):
-
-    def get_queryset(self):
-
-        if not self.request.user.is_authenticated():
-
-            return Archive.objects.none()
-
-        query = Archive.objects.all()
-
-        if self.q:
-
-            query = query.filter(pub_date=self.q)
-
-        return query
-
-
-def book(request):
-
-    try:
-
-        if request.method == 'POST':
-
-            form = BookingForm(request.POST)
-
-            if form.is_valid():
-                booking = form.save(commit=False)
-
-                booking.user = request.user
-
-                booking.save()
-
-                return redirect(occurrence_book)
-
-            else:
-
-                form = BookingForm()
-
-                return render(request, 'occurrence-book/occurrence.html', {'form': form})
-
-        else:
-
-            form = BookingForm()
-
-            return render(request, 'occurrence-book/occurrence.html', {'form': form})
-
-    except Exception as exception:
-
-        raise exception
-
-
-def report(request):
-
-    try:
-
-        if request.method == 'POST':
-
-            form = ReportingForm(request.POST)
-
-            if form.is_valid():
-
-                reporting = form.save(commit=False)
-
-                reporting.user = request.user
-
-                reporting.save()
-
-                return redirect(occurrence_book)
-
-            else:
-
-                form = ReportingForm()
-
-                return render(request, 'occurrence-book/occurrence.html', {'form': form})
-
-        else:
-
-            form = ReportingForm()
-
-            return render(request, 'occurrence-book/occurrence.html', {'form': form})
-
-    except Exception as exception:
-
-        raise exception
-
-
 def create_criminal_profile(request):
+
+    '''
+    :param request: function to create a new suspect profile
+    :return: created suspect profile
+    '''
 
     try:
 
@@ -265,6 +254,11 @@ def create_criminal_profile(request):
 
 def cashbailform(request):
 
+    '''
+    :param request: function to record a bailed out suspect
+    :return: list of all bailed out suspects
+    '''
+
     try:
 
         if request.method == 'POST':
@@ -298,16 +292,67 @@ def cashbailform(request):
         raise exception
 
 
-def criminal_profile(request, id_no):
+def criminal_profile(request, criminalprofile_id_no):
+
+    '''
+
+    :param request: single suspect
+    :param criminalprofile_id_no:
+    :return: suspect profile and related items
+    '''
 
     try:
 
-        profile = CriminalProfile.objects.filter(id_no=id_no)
+        profile = CriminalProfile.objects.get(id_no=criminalprofile_id_no)
 
-        bookings = Booking.objects.filter(criminal=id_no).order_by('-id')
+        bookings = Booking.objects.filter(criminal=criminalprofile_id_no).all().order_by('-id')
 
-        return render(request, 'profiles/criminal-profile.html', {'profile': profile, 'bookings': bookings})
+        try:
+
+            if request.method == 'POST':
+
+                form = BookingForm(request.POST)
+
+                if form.is_valid():
+                    booking = form.save(commit=False)
+                    booking.user = request.user
+                    booking.save()
+
+                    return redirect(occurrence_book)
+
+                else:
+
+                    form = BookingForm()
+
+                    return render(request, 'profiles/criminal-profile.html', {'profile': profile, 'bookings': bookings,
+                                                                              'form': form})
+
+            else:
+
+                form = BookingForm()
+
+                return render(request, 'profiles/criminal-profile.html', {'profile': profile, 'bookings': bookings,
+                                                                          'form': form})
+
+        except Exception as exception:
+
+            raise exception
 
     except Exception as exception:
 
         raise exception
+
+
+def search(request):
+
+    '''
+
+    :param request: function to search db for searched item
+    :return: return related searched items from the database
+    '''
+
+    suspect_list = CriminalProfile.objects.all()
+
+    suspect_filter = SearchFilter(request.GET, queryset=suspect_list)
+
+    return render(request, 'search/searchlist.html', {'filter': suspect_filter})

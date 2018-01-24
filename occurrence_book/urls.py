@@ -23,12 +23,5 @@ urlpatterns = [
 
     path(r'', include('ob_system.urls')),
 
-    path('accounts/', include('registration.backends.hmac.urls')),
-
-    path('signup/', core_views.signup, name='signup'),
-
-    path('login/', core_views.login, name='login'),
-
-    path('logout/', auth_views.logout, {'next_page': 'login'}, name='login'),
 ]
 

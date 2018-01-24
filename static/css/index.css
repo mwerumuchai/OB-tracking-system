@@ -15,11 +15,6 @@ html {
   color: #000;
 }
 
-body {
-  background-color: #eeeeee;
-  color: #000;
-}
-
 /***********************************************************************
 *  OPAQUE NAVBAR SECTION
 ***********************************************************************/
@@ -212,10 +207,6 @@ modal
 
 /* irrelevant styling */
 
-body {
-  text-align: center;
-}
-
 body p {
   max-width: 200px;
   margin: 5px 5px;
@@ -253,10 +244,6 @@ End Occurence book
 ***********************************/
 
 /*test tabs*/
-
-body {
-  padding: 10px;
-}
 
 #exTab1 .tab-content {
   padding: 5px 15px;

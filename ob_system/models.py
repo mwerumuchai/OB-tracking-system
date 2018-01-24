@@ -70,6 +70,20 @@ class CriminalProfile(models.Model):
 
         return profile
 
+    @classmethod
+    def search_by_name(cls, search_term):
+
+        name = cls.objects.get(name__icontains=search_term)
+
+        return name
+
+    @classmethod
+    def search_by_id_no(cls, search_term):
+
+        id = cls.objects.get(id_no__icontains=search_term)
+
+        return id
+
 
 class Crime(models.Model):
 
