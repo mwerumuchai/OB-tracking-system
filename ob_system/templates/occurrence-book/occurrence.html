@@ -29,7 +29,40 @@
 
       <h3><a class="btn btn-success" href=""> REPORT </a></h3>
 
-      <h3><a class="btn btn-success" href=""> CREATE CRIMINAL PROFILE </a></h3>
+      <a data-toggle="modal" href="#book" class="btn btn-success"><h3>Suspect Profile</h3></a>
+
+
+      <div id="book" class="modal modal-wide fade">
+
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header" id="mheader">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">Suspect Details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                  <form  action="occurrence_book/" method="post">
+
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    <div class="form-group">
+                      <input type="submit" class="btn btn-success btn-sm" value="Add Suspect">
+                    </div>
+                  </form>
+                </div>
+            </div>
+            <div class="modal-footer" id="mfooter">
+              <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
 
     </div>
 

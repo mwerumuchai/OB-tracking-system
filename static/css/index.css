@@ -193,20 +193,23 @@ hr {
   margin-top: 32px;
 }
 
-/*******
+//*******
 modal
 *******/
 
 .modal.modal-wide .modal-dialog {
   width: 80%;
 }
-
-.modal-wide .modal-body {
-  overflow-y: auto;
+.modal-backdrop.in {
+    filter: alpha(opacity=30);
+    opacity: .3;
 }
 
-/* irrelevant styling */
+/*.modal-wide .modal-body {
+  overflow-y: auto;
+}*/
 
+/* irrelevant styling */
 
 body p {
   max-width: 200px;
@@ -239,7 +242,6 @@ body p {
   text-align: right;
   margin: 219px;
 }
-
 /*********************************
 End Occurence book
 ***********************************/
@@ -291,3 +293,5 @@ footer {
 .header {
   text-align: center;
 }
+/*test modal*/
+/*end test modal*/

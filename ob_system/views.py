@@ -143,23 +143,34 @@ def occurrence_book(request):
 
             if request.method == 'POST':
 
-                form = ReportingForm(request.POST)
+                report_form = ReportingForm(request.POST)
 
-                if form.is_valid():
+                suspect_form = CriminalProfileForm(request.POST)
 
-                    reporting = form.save(commit=False)
+                if report_form.is_valid() and suspect_form.is_valid():
 
-                    reporting.user = request.user
+                    report_form = form.save(commit=False)
 
-                    reporting.save()
+                    suspect_form = form.save(commit=False)
+
+                    report_form.user = request.user
+
+                    report_form.save()
+
+                    suspect_form.user = request.user
+
+                    suspect_form.save()
+
 
                     return redirect(occurrence_book)
 
                 else:
 
-                    form = ReportingForm()
+                    report_form = ReportingForm()
 
-                    return render(request, 'occurrence-book/occurrence.html', {'form': form, 'date': date,
+                    suspect_form = CriminalProfileForm()
+
+                    return render(request, 'occurrence-book/occurrence.html', {'report_form': report_form, 'suspect_form':suspect_form, 'date': date,
                                                                                'bookings': bookings, 'reports': reports})
 
             else:
@@ -168,6 +179,7 @@ def occurrence_book(request):
 
                 return render(request, 'occurrence-book/occurrence.html', {'form': form, 'date': date,
                                                                            'bookings': bookings, 'reports': reports})
+
 
         except Exception as exception:
 
@@ -239,13 +251,13 @@ def create_criminal_profile(request):
 
                 form = CriminalProfileForm()
 
-                return render(request, 'occurrence-book/occurrence.html', {'form': form})
+                return render(request, 'occurrence-book/occurrence.html', {'suspectform': form})
 
         else:
 
             form = CriminalProfileForm()
 
-            return render(request, 'occurrence-book/occurrence.html', {'form': form})
+            return render(request, 'occurrence-book/occurrence.html', {'suspectform': form})
 
     except Exception as exception:
 
