@@ -1,11 +1,7 @@
-{%extends 'occurrence-book/base.html'%}
-{% load bootstrap3 %}
-{% load static %}
+{%extends 'occurrence-book/base.html'%} {% load bootstrap3 %} {% load static %}
 <!-- block -->
 
-{% block content %}
-
-  {{ block.super }}
+{% block content %} {{ block.super }}
 
 <!--<div onload="startTime()">-->
 
@@ -219,24 +215,13 @@
     </div>
   </div>
 
-<<<<<<< HEAD
-
-  {% endblock%}
-=======
->>>>>>> 1a11647c9f8fe320f96697beeac32d155ae20925
 </div>
 
 
 
-  {% endblock %}
+{% endblock %} {% block scripts %}
 
-  {% block scripts %}
-
-      <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
-
-    {% bootstrap_javascript %}
-
-    {% endblock %}
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet"> {% bootstrap_javascript %} {% endblock %}
 
 </body>
 
