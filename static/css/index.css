@@ -7,6 +7,11 @@ html {
   /*margin-top: 120px;*/
 }
 
+.fa-home:before {
+  content: "\f015";
+  color: #000;
+}
+
 #fa_home {
   margin-left: 47px;
 }
