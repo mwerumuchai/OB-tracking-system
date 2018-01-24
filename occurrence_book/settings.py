@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'ob_system',
     'bootstrap3',
     'django_archive',
-    
+    'django_filters',
     # 'allauth',
     # 'allauth.account',
 ]
