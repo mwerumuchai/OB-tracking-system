@@ -20,10 +20,40 @@
 
     <div class="col-md-4" id="legend">
 
+      <!-- <h3><a class="btn btn-success" href=""> REPORT </a></h3> -->
+      <a data-toggle="modal" href="#book1" class="btn btn-success"><h3>Add Report</h3></a>
 
-      <h3><a class="btn btn-success" href=""> BOOK </a></h3>
 
-      <h3><a class="btn btn-success" href=""> REPORT </a></h3>
+      <div id="book1" class="modal modal-wide fade">
+
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header" id="mheader">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">Report Details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                  <form  action="occurrence_book/" method="post">
+
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+
+                    <div class="form-group">
+                      <input type="submit" class="btn btn-success btn-sm" value="Add Suspect">
+                    </div>
+                  </form>
+                </div>
+            </div>
+            <div class="modal-footer" id="mfooter">
+              <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
 
       <a data-toggle="modal" href="#book" class="btn btn-success"><h3>Suspect Profile</h3></a>
 
@@ -41,7 +71,7 @@
                   <form  action="occurrence_book/" method="post">
 
                     {% csrf_token %}
-                    {{ form.as_p }}
+                    {% bootstrap_form form %}
 
                     <div class="form-group">
                       <input type="submit" class="btn btn-success btn-sm" value="Add Suspect">
@@ -78,7 +108,7 @@
       </li>
     </ul>
 
-    <div class="tab-content ">
+    <div class="tab-content">
       <div class="tab-pane active" id="1">
         <div class="row" id="booking-row">
 
@@ -112,7 +142,7 @@
 
                 <td> {{ item.a_o_badge_no }} </td>
 
-                <td> <a href=""> {{ item.criminal.name }} </a> </td>
+                <td><a href="{% url 'c_profile' item.criminal.id_no %}"> {{ item.criminal.name }} </a> </td>
 
                 <td>
                   <!-- test -->
@@ -198,7 +228,7 @@
             <td> {{ items.id_no }} </td>
             <td>
               <!-- test -->
-              <a data-toggle="modal" href="#{{ items.id }}" class="btn"><h4>Click Here</h4></a>
+              <a data-toggle="modal" href="#{{ items.id}}" class="btn"><h4>Click Here</h4></a>
 
 
               <div id="{{items.id}}" class="modal modal-wide fade">
