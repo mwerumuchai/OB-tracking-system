@@ -7,6 +7,10 @@ html {
   /*margin-top: 120px;*/
 }
 
+#fa_home {
+  margin-left: 47px;
+}
+
 .link {
   color: #fafafa !important;
 }
@@ -131,7 +135,7 @@ a {
 }
 
 #legend {
-  color: #fff;
+  color: #000;
   text-align: right;
 }
 

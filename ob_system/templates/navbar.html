@@ -1,4 +1,4 @@
-{%extends 'base.html'%} {%load bootstrap3%} {%load static%}
+{% load bootstrap3 %} {% load static %}
 <div class="navbar navbar-inverse navbar-fixed-top opaque-navbar">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -6,7 +6,7 @@
           </button>
       <ul class="nav navbar-nav pull-left text-left">
         <li>
-
+          <a href="/"><i class="fa fa-home" aria-hidden="true" style="font-size: 47px;" id="fa_home"></i></a>
           <!-- <a href="/" style="color:black; font-size: 30px;"></a> -->
         </li>
       </ul>
@@ -32,7 +32,11 @@
       <a href="/signup" style="color: black; font-size: 25px;">Register/Login</a>
     </li>
 
-    {% endif %}
+    {% endif %} {%block styles%} {%bootstrap_css%}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/avatar.jpg' %}" /> {%endblock%}
 
   </div>
 </div>
