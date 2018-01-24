@@ -189,6 +189,9 @@ body p {
 #{{item.id}
 }
 
+/*#{{items.id}
+}*/
+
 .modal-body p {
   /*margin-bottom: 90px*/
 }
