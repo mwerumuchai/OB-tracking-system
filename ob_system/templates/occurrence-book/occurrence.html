@@ -1,7 +1,12 @@
-{%extends 'occurrence-book/base.html'%} {%load bootstrap3%} {%load static%}
+{%extends 'occurrence-book/base.html'%}
+{% load bootstrap3 %}
+{% load static %}
 <!-- block -->
 
-{% block content %} {{ block.super }}
+{% block content %}
+
+  {{ block.super }}
+
 <!--<div onload="startTime()">-->
 
 <!--<div id="todaydate" style="display:none;">2014, 07, 02, 08, 14, 35</div>&lt;!&ndash; This field is normally passed from Django-View to Template  &ndash;&gt;-->
@@ -20,11 +25,11 @@
     <div class="col-md-4" id="legend">
 
 
-      <h3><a class="btn btn-success" href="{% url 'book' %}"> BOOK </a></h3>
+      <h3><a class="btn btn-success" href=""> BOOK </a></h3>
 
-      <h3><a class="btn btn-success" href="{% url 'report' %}"> REPORT </a></h3>
+      <h3><a class="btn btn-success" href=""> REPORT </a></h3>
 
-      <h3><a class="btn btn-success" href="{% url 'create-criminal-profile' %}"> CREATE CRIMINAL PROFILE </a></h3>
+      <h3><a class="btn btn-success" href=""> CREATE CRIMINAL PROFILE </a></h3>
 
     </div>
 
@@ -78,7 +83,7 @@
 
                 <td> {{ item.a_o_badge_no }} </td>
 
-                <td> <a href="{% url 'criminal-profile' %}"> {{ item.criminal.name }} </a> </td>
+                <td> <a href=""> {{ item.criminal.name }} </a> </td>
 
                 <td>
                   <!-- test -->
@@ -102,7 +107,7 @@
                           </div>
                           <div class="col-md-2"></div>
                           <div class="col-md-6">
-                            <h3><b>Id No:</b> <i>{{ item.criminal.id_no }}</i></h3>
+                            <h3><b>Id No:</b> <a href=""> <i>{{ item.criminal.id_no }}</i> </a> </h3>
                             <hr>
                           </div>
                         </div>
@@ -214,9 +219,19 @@
     </div>
   </div>
 
-
-  {% endblock%}
 </div>
+
+
+
+  {% endblock %}
+
+  {% block scripts %}
+
+      <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+
+    {% bootstrap_javascript %}
+
+    {% endblock %}
 
 </body>
 

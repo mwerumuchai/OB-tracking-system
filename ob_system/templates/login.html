@@ -19,11 +19,9 @@
 
   {% endif %}
 
-  <form method="post">
+  <form method="post" action="/account/login">
 
     {% csrf_token %}
-
-    <input type="hidden" name="next" value="{{ next }}" />
 
     {% for field in form %}
 
@@ -36,19 +34,15 @@
 
           {% endfor %}
 
-        {% if field.help_text %}
-
-            <p><small style="color: grey">{{ field.help_text }}</small></p>
-
-        {% endif %}
-
     {% endfor %}
 
     <button type="submit">Log in</button>
 
-    <a href="{% url 'signup' %}"> Don't have an account yet? Sign up</a>
+      <input type="hidden" name="next" value="{% url 'index' %}">
 
   </form>
+
+    <a href="{% url 'signup' %}"> Don't have an account yet? Sign up</a>
 
 {% endblock %}
 

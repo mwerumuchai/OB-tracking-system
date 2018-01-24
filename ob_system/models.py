@@ -52,7 +52,7 @@ class CriminalProfile(models.Model):
 
     name = models.CharField(max_length=100)
 
-    id_no = models.IntegerField(null=True)
+    id_no = models.IntegerField(null=False, blank=False)
 
     dob = models.DateField()
 
@@ -69,6 +69,20 @@ class CriminalProfile(models.Model):
         profile = cls.objects.get(id_no=id_no)
 
         return profile
+
+    @classmethod
+    def search_by_name(cls, search_term):
+
+        name = cls.objects.get(name__icontains=search_term)
+
+        return name
+
+    @classmethod
+    def search_by_id_no(cls, search_term):
+
+        id = cls.objects.get(id_no__icontains=search_term)
+
+        return id
 
 
 class Crime(models.Model):
@@ -108,8 +122,15 @@ class Report(models.Model):
 
         return reports
 
+    @classmethod
+    def search_by_pub_date(cls, search_term):
 
-# A_O stands for Arresting Officer
+        reports = cls.objects.get(pub_date__icontains=search_term)
+
+        return reports
+
+
+# # A_O stands for Arresting Officer
 
 class Booking(models.Model):
 
@@ -139,11 +160,18 @@ class Booking(models.Model):
         return bookings
 
     @classmethod
-    def single_criminal_bookng(cls, criminal):
+    def single_criminal_booking(cls, criminal):
 
         bookings = cls.objects.filter(id=criminal)
 
         return bookings
+
+    @classmethod
+    def search_by_pub_date(cls, search_term):
+
+        reports = cls.objects.get(pub_date__icontains=search_term)
+
+        return reports
 
 
 class Remark(models.Model):
@@ -203,13 +231,6 @@ class Archive(models.Model):
 
     pub_date = models.DateField(auto_now_add=True)
 
-    @classmethod
-    def search_by_pub_date(cls, search_term):
-
-        reports = cls.objects.filter(pub_date__icontains=search_term)
-
-        return reports
-
 
 class CashBail(models.Model):
 
@@ -231,4 +252,13 @@ class CashBail(models.Model):
 
     crime = models.ForeignKey(Crime, on_delete=models.CASCADE)
 
+    # def __str__(self):
+    #     return self.criminal
 
+
+    @classmethod
+    def criminal_court_date(cls):
+
+        criminal = cls.objects.filter()
+
+        return criminal

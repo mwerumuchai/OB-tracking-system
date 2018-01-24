@@ -15,11 +15,6 @@ html {
   color: #000;
 }
 
-body {
-  background-color: #eeeeee;
-  color: #000;
-}
-
 /***********************************************************************
 *  OPAQUE NAVBAR SECTION
 ***********************************************************************/
@@ -42,6 +37,10 @@ ul.dropdown-menu {
   background-color: #fafafa;
 }
 
+/***************************
+landing page
+*****************************/
+
 #cb {
   background-color: #000;
   text-align: center;
@@ -62,12 +61,17 @@ ul.dropdown-menu {
 
 .card-content {
   height: 235px;
+  background: #fff;
 }
 
 .content {
   margin: 65px;
   color: #000;
   font-size: 31px;
+}
+
+.well {
+  background-color: #fff;
 }
 
 @media (max-width: 992px) {
@@ -101,9 +105,35 @@ div.help-block {
   transform: scale(1.1);
 }
 
+/***************************
+end landing page
+*****************************/
+
 /*********************************
 Occurence book
 ***********************************/
+
+a {
+  text-decoration: none !important;
+  color: #000;
+}
+
+#booking-row {
+  margin-bottom: 50px;
+  margin-top: -34px;
+  font-size: 18px;
+}
+
+.date {
+  text-align: left;
+  margin-left: 15px;
+  padding-bottom: 15px;
+}
+
+#legend {
+  color: #fff;
+  text-align: right;
+}
 
 .legend {
   margin-top: 69px;
@@ -163,9 +193,9 @@ hr {
   margin-top: 32px;
 }
 
-/****************************
+/*******
 modal
-***************************/
+*******/
 
 .modal.modal-wide .modal-dialog {
   width: 80%;
@@ -177,10 +207,6 @@ modal
 
 /* irrelevant styling */
 
-body {
-  text-align: center;
-}
-
 body p {
   max-width: 200px;
   margin: 5px 5px;
@@ -189,11 +215,8 @@ body p {
 #{{item.id}
 }
 
-/*#{{items.id}
-}*/
-
-.modal-body p {
-  /*margin-bottom: 90px*/
+#report-description {
+  margin-bottom: -189px;
 }
 
 #mheader {
@@ -219,6 +242,35 @@ body p {
 /*********************************
 End Occurence book
 ***********************************/
+
+/*test tabs*/
+
+#exTab1 .tab-content {
+  padding: 5px 15px;
+}
+
+#exTab2 h3 {
+  padding: 5px 15px;
+}
+
+#exTab1 .nav-pills>li>a {
+  border-radius: 0;
+}
+
+#toggle-tabs {
+  position: relative;
+  display: block;
+  font-size: 28px;
+  /*padding: 27px 256px;*/
+}
+
+/*.nav>li>a {
+  position: relative;
+  display: block;
+  padding: 27px 256px;
+}*/
+
+/*end test tabs*/
 
 footer {
   position: fixed;
