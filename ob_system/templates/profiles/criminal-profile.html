@@ -1,10 +1,227 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %} {% load bootstrap3 %} {% load static %} {% block content %} {{ block.super }}
 
+<div class="container">
+
+
+</div>
+<br>
+<div class="container">
+  <!-- test profile -->
+  <div id="user-profile-2" class="user-profile">
+    <div class="tabbable">
+
+      <div class="tab-content no-border padding-24">
+        <div id="home" class="tab-pane in active">
+          <div class="row">
+            <div class="col-xs-12 col-sm-3 center">
+              <span class="profile-picture">
+    								<img class="editable img-responsive" alt=" Avatar" id="avatar2" src="{% static 'images/avatar.png' %}">
+    							</span>
+
+              <div class="space space-4"></div>
+
+              <a data-toggle="modal" href="#book1" class="btn btn-sm btn-success">
+    								<i class="ace-icon fa fa-plus-circle bigger-100"></i>
+    								<span class="bigger-110">Add Crime</span>
+    							</a>
+              <!-- modal -->
+              {% if profile %}
+              <div id="book1" class="modal modal-wide fade">
+
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header" id="mheader">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title">Report Details</h4>
+                    </div>
+                    <div class="modal-body">
+                      <div class="container-fluid">
+                        <form action="{% url 'c_profile' profile.id_no %}" method="post">
+
+                          {% csrf_token %} {% bootstrap_form form %}
+
+                          <div class="form-group">
+                            <input type="submit" class="btn btn-success btn-sm" value="Add Suspect">
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="modal-footer" id="mfooter">
+                      <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <!-- /.modal -->
+              {% endif %}
+              <!-- end modal -->
+            </div>
+            <!-- /.col -->
+
+            <div class="col-xs-12 col-sm-9">
+              <h4 class="blue">
+    								<span class="middle">Personal Information</span>
+
+    								<span class="label label-purple arrowed-in-right">
+    									<i class="ace-icon fa fa-circle smaller-80 align-middle"></i>
+    									online
+    								</span>
+    							</h4>
+
+              <div class="profile-user-info">
+                <div class="profile-info-row">
+                  <div class="profile-info-name"> Name: </div>
+
+                  <div class="profile-info-value">
+                    <span>{{ profile.name}}</span>
+                  </div>
+                </div>
+
+                <div class="profile-info-row">
+                  <div class="profile-info-name"> Location: </div>
+
+                  <div class="profile-info-value">
+                    <i class="fa fa-map-marker light-orange bigger-110"></i>
+                    <span>empty</span>
+                    <span>empty</span>
+                  </div>
+                </div>
+
+                <div class="profile-info-row">
+                  <div class="profile-info-name"> Age: </div>
+
+                  <div class="profile-info-value">
+                    <span>empty</span>
+                  </div>
+                </div>
+
+                <div class="profile-info-row">
+                  <div class="profile-info-name"> D.O.B: </div>
+
+                  <div class="profile-info-value">
+                    <span>0000/00/00</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hr hr-8 dotted"></div>
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+          <br>
+          <div class="space-20"></div>
+
+          <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-12">
+              <div class="widget-box transparent">
+                <div class="widget-header widget-header-small">
+                  <h4 class="widget-title smaller">
+    										<i class="ace-icon fa fa-check-square-o bigger-110"></i>
+    										Arrest and Criminal information
+    									</h4>
+                </div>
+
+                <div class="widget-body">
+                  <div class="widget-main">
+                    <table>
+
+                      <thead class="thead">
+
+                        <tr>
+
+                          <th> Time </th>
+
+                          <th> Arresting Officer </th>
+
+                          <th> Arresting Officer Badge No </th>
+
+                          <th> Crime Details </th>
+
+                        </tr>
+
+                      </thead>
+
+                      <tbody>
+
+                        {% for item in bookings %}
+
+                        <tr>
+
+                          <td> {{ item.time }} </td>
+
+                          <td> {{ item.a_o_name }} </td>
+
+                          <td> {{ item.a_o_badge_no }} </td>
+
+                          <td> <a href=""> {{ item.criminal.name }} </a> </td>
+
+                          <td>
+                            <!-- test -->
+                            <a data-toggle="modal" href="#{{ item.id }}" class="btn"><h4>Click Here</h4></a>
+
+
+                            <div id="{{item.id}}" class="modal modal-wide fade">
+
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header" id="mheader">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">Crime Details</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                    <div class="col-md-4">
+                                      <h3><b>Name:</b> <i>{{ item.criminal.name }}</i></h3>
+                                      <hr>
+                                      <h3><b>Type of Crime:</b> <i>{{ item.crime.name }}</i></h3>
+                                      <hr>
+                                    </div>
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-6">
+                                      <h3><b>Id No:</b> <a href=""> <i>{{ item.criminal.id_no }}</i> </a> </h3>
+                                      <hr>
+                                    </div>
+                                  </div>
+                                  <div class="container-fluid" id="occurrence">
+                                    <h3><b>Nature of Occurrence:</b></h3>
+                                    <h3 class="three">I {{ item.a_o_name }} of badge number {{ item.a_o_badge_no }},
+                         now booking {{ item.criminal.name }} to be charged for the offense of {{ item.crime_description }}</h3>
+                                    <div class="container"></div>
+                                    <h3> <b>Official Remark:</b> {{ item.remarks }}</h3>
+                                    <h3 class="sign"> <b>Signature: ........................</b></h3>
+                                  </div>
+                                  <div class="modal-footer" id="mfooter">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
+                                  </div>
+                                </div>
+                                <!-- /.modal-content -->
+                              </div>
+                              <!-- /.modal-dialog -->
+                            </div>
+                            <!-- /.modal -->
+                          </td>
+                        </tr>
+
+                        {% endfor %}
+                      </tbody>
+
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end test -->
+
+{% endblock %}
 </body>
+
 </html>
