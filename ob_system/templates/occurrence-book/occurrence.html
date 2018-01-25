@@ -1,11 +1,11 @@
 {%extends 'occurrence-book/base.html'%} {% load bootstrap3 %} {% load static %}
 {% block content %} {{ block.super }}
-<div class="jumbotron">
+<div class="header-top">
   <h1>occurrence book</h1>
-  <h4 class="date"> {{date|date:"l d-F Y"}} </h4>
 </div>
 <div class="row">
 <ul id="horizontal-list">
+  <li><h4 class="date"> {{date|date:"l d-F Y"}} </h4></li>
   <li><a id="btn-report" class="check" data-toggle="modal" href="#book1" class="btn btn-success"><h3>Add Report</h3></a></li>
   <li><a id="btn-profile" class="check" data-toggle="modal" href="#book" class="btn btn-success"><h3>Suspect Profile</h3></a></li>
 </ul>

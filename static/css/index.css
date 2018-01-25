@@ -349,6 +349,7 @@ a {
 .date {
   /*text-align: left;*/
   /*margin-left: 15px;*/
+  float: right;
   padding-bottom: 15px;
   /*font-family: 'Open Sans', cursive;*/
   /*font-size: 25px;*/
@@ -525,16 +526,17 @@ footer {
 }
 /*test modal*/
 /*end test modal*/
-.jumbotron{
+.header-top{
   background-color: #fff;
   text-align: center;
+  font-size: 100px;
 
 }
 ul#horizontal-list {
 	min-width: 696px;
 	list-style: none;
 	padding-top: 20px;
-  float: right;
+  /*float: right;*/
 	}
 	ul#horizontal-list li {
 		display: inline;
