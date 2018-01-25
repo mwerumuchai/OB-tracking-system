@@ -10,7 +10,6 @@
 
 <!--</div>-->
 <br>
-
 <div class="container-fluid">
 
   <div class="row">
@@ -38,7 +37,7 @@
 
                   {% csrf_token %} {% bootstrap_form reportingform %}
                     <input type="submit" class="btn btn-success btn-sm" value="Add Report">
-            
+
                 </form>
               </div>
             </div>
@@ -275,9 +274,9 @@
 
 </div>
 
-
-
-{% endblock %} {% block scripts %}
+{% endblock %}
+<!-- scripts -->
+{% block scripts %}
 
 <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet"> {% bootstrap_javascript %} {% endblock %}
 
