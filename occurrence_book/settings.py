@@ -87,7 +87,7 @@ TEMPLATES = [
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
+    # 'allauth.account.auth_backends.AuthenticationBackend',
 )
 
 
@@ -107,7 +107,7 @@ if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'HOST': '/cloudsql/karao-digital:us-central1:karao',
-            'NAME': 'karao',
+            'NAME': 'postgres',
             'USER': 'erick',
             'PASSWORD': 'qwerty12345',
         }

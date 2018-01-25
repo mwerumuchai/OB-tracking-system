@@ -1,36 +1,85 @@
-{%extends 'occurrence-book/base.html'%} {% load bootstrap3 %} {% load static %}
-<!-- block -->
-
-{% block content %} {{ block.super }}
-
-<!--<div onload="startTime()">-->
-
-<!--<div id="todaydate" style="display:none;">2014, 07, 02, 08, 14, 35</div>&lt;!&ndash; This field is normally passed from Django-View to Template  &ndash;&gt;-->
-<!--<div id="clock"></div>-->
-
-<!--</div>-->
+{%extends 'occurrence-book/base.html'%} {% load bootstrap3 %} {% load static %} {% block content %} {{ block.super }}
 <br>
-
+<div class="header-top">
+  <h1 class="ob-page">Occurrence Book</h1>
+</div>
+<div class="row">
+  <ul id="horizontal-list">
+    <li>
+      <h4 class="date"> {{date|date:"l d-F Y"}} </h4></li>
+    <li><a id="btn-report" class="check" data-toggle="modal" href="#book1" class="btn btn-success"><h3>Add Report</h3></a></li>
+    <li><a id="btn-profile" class="check" data-toggle="modal" href="#book" class="btn btn-success"><h3>Add New Suspect</h3></a></li>
+  </ul>
+</div>
 <div class="container-fluid">
 
   <div class="row">
 
-    <div class="col-md-8">
-      <h1 align="right">Occurrence book page</h1></div>
 
     <div class="col-md-4" id="legend">
+      <!-- REPORTING MODAL -->
+      <div id="book1" class="modal modal-wide fade">
+
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header" id="mheader">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">Report Details</h4>
+            </div>
+            <div class="modal-body">
+              <div class="container-fluid">
+                <form action="{% url 'occurrence_book' %}" method="post">
+
+                  {% csrf_token %} {% bootstrap_form reportingform %}
+                  <input type="submit" class="btn btn-success btn-sm" value="Add Report">
+
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer" id="mfooter">
+              <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
+      <!--  SUSPECT MODAL-->
 
 
-      <h3><a class="btn btn-success" href=""> BOOK </a></h3>
+      <div id="book" class="modal modal-wide fade">
 
-      <h3><a class="btn btn-success" href=""> REPORT </a></h3>
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header" id="mheader">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">Suspect Details</h4>
+            </div>
+            <div class="modal-body">
+              <div class="container-fluid">
+                <form action="{%url 'occurrence_book' %}" method="post" enctype="multipart/form-data">
 
-      <h3><a class="btn btn-success" href=""> CREATE CRIMINAL PROFILE </a></h3>
+                  {% csrf_token %} {% bootstrap_form suspectform %}
+
+                  <input type="submit" class="btn btn-success btn-sm" value="Add Suspect">
+
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer" id="mfooter">
+              <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
 
     </div>
-
-    <h5 class="date"> {{date|date:"l d-F Y"}} </h5>
-
   </div>
   <!-- test tabs -->
 
@@ -45,7 +94,7 @@
       </li>
     </ul>
 
-    <div class="tab-content ">
+    <div class="tab-content">
       <div class="tab-pane active" id="1">
         <div class="row" id="booking-row">
 
@@ -79,7 +128,7 @@
 
                 <td> {{ item.a_o_badge_no }} </td>
 
-                <td> <a href=""> {{ item.criminal.name }} </a> </td>
+                <td><a href="{% url 'c_profile' item.criminal.id_no %}"> {{ item.criminal.name }} </a> </td>
 
                 <td>
                   <!-- test -->
@@ -154,21 +203,21 @@
 
           </thead>
 
-          {% for items in reports %}
+          {% for item in reports %}
 
           <tr>
 
-            <td> {{ items.time }} </td>
+            <td> {{ item.time }} </td>
 
-            <td> {{ items.name }} </td>
+            <td> {{ item.name }} </td>
 
-            <td> {{ items.id_no }} </td>
+            <td> {{ item.id_no }} </td>
             <td>
               <!-- test -->
-              <a data-toggle="modal" href="#{{ items.id }}" class="btn"><h4>Click Here</h4></a>
+              <a data-toggle="modal" href="#{{item.id}}" class="btn"><h4>Click Here</h4></a>
 
 
-              <div id="{{items.id}}" class="modal modal-wide fade">
+              <div id="{{item.id}}" class="modal modal-wide fade">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header" id="mheader">
@@ -177,22 +226,22 @@
                     </div>
                     <div class="modal-body">
                       <div class="col-md-4">
-                        <h3><b>Name:</b> <i>{{ items.name }}</i></h3>
+                        <h3><b>Name:</b> <i>{{ item.name }}</i></h3>
                         <hr>
-                        <h3><b>Type of Crime:</b> <i>{{ items.crime }}</i></h3>
+                        <h3><b>Type of Crime:</b> <i>{{ item.crime }}</i></h3>
                         <hr>
                       </div>
                       <div class="col-md-2"></div>
                       <div class="col-md-6">
-                        <h3><b>Id No:</b> <i>{{ items.id_no }}</i></h3>
+                        <h3><b>Id No:</b> <i>{{ item.id_no }}</i></h3>
                         <hr>
-                        <h3><b>Reference No:</b> <i>{{ items.ref_no }}</i></h3>
+                        <h3><b>Reference No:</b> <i>{{ item.ref_no }}</i></h3>
                         <hr>
                       </div>
                     </div>
                     <div class="container-fluid" id="report-description">
                       <h3><b>Report Description:</b></h3>
-                      <h3 class="three"> {{ items.crime_description }} </h3>
+                      <h3 class="three"> {{ item.crime_description }} </h3>
                       <h3 class="sign"> <b>Signature: ........................</b></h3>
                     </div>
                     <div class="modal-footer" id="mfooter">
@@ -217,9 +266,9 @@
 
 </div>
 
-
-
-{% endblock %} {% block scripts %}
+{% endblock %}
+<!-- scripts -->
+{% block scripts %}
 
 <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet"> {% bootstrap_javascript %} {% endblock %}
 

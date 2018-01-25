@@ -1,38 +1,41 @@
-{% extends 'base.html' %}
-{% load bootstrap3 %}
+{% extends 'base.html' %} {% load bootstrap3 %}
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
+
+  <head>
     <meta charset="UTF-8">
     <title>Title</title>
-</head>
-<body>
+  </head>
+
+  <body>
 
     {% block content %}
+    <div class="container"><br>
+      <form method="get">
 
-        <form method="get">
-
-            {% csrf_token %}
-
-            {% bootstrap_form filter.form %}
+        {% csrf_token %} {% bootstrap_form filter.form %}
 
 
-            <button type="submit">Search</button>
+        <button type="submit">Search</button>
 
-        </form>
+      </form>
+      <h2><b><u>Lists and Details</u></b></h2>
 
-        <ul>
+      <ol style="font-size: 20px;">
 
-            {% for suspect in filter.qs %}
+        {% for suspect in filter.qs %}
 
-                <li> <a href="{% url 'c_profile' suspect.id_no %}"> {{ suspect.name }} </a>  - {{suspect.id_no}} - {{ suspect.pub_date}} </li>
+        <li>
+          <a href="{% url 'c_profile' suspect.id_no %}">
+            <h3> {{ suspect.name }} </a>  : {{suspect.id_no}} - {{ suspect.pub_date}}</h3> </li>
 
-            {% endfor %}
+        {% endfor %}
 
-        </ul>
-
+      </ol>
+    </div>
     {% endblock %}
 
-</body>
+  </body>
+
 </html>
