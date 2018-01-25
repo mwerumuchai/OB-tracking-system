@@ -1,5 +1,5 @@
 body {
-  background: url("image/landing.png") no-repeat;
+  font-family: 'Open Sans', cursive;
 }
 
 html {
@@ -162,6 +162,12 @@ end landing page
 Occurence book
 ***********************************/
 
+#header {
+  font-family: 'Open Sans', cursive;
+  font-size: 95px;
+  text-align: right;
+}
+
 a {
   text-decoration: none !important;
   color: #000;
@@ -177,6 +183,8 @@ a {
   text-align: left;
   margin-left: 15px;
   padding-bottom: 15px;
+  font-family: 'Open Sans', cursive;
+  font-size: 25px;
 }
 
 #legend {
@@ -336,5 +344,7 @@ footer {
 /*CASH BAIL*/
 
 .header {
+  font-family: 'Open Sans', cursive;
+  font-size: 105px;
   text-align: center;
 }
