@@ -1,3 +1,7 @@
+/*********************************************************
+                      BODY
+*****************************************************/
+
 body {
   font-family: 'Open Sans', cursive;
 }
@@ -157,6 +161,169 @@ div.help-block {
 /***************************
 end landing page
 *****************************/
+
+/***************************
+Criminal Profile
+****************************/
+
+body {
+  margin-top: 20px;
+}
+
+.btn-group-sm>.btn, .btn-sm {
+  padding: 5px 10px;
+  font-size: 19px;
+  line-height: 1.5;
+  border-radius: 5px;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.profile-user-info {
+  display: table;
+  width: 98%;
+  width: calc(100% - 24px);
+  margin: 0 auto
+}
+
+.profile-info-row {
+  display: table-row
+}
+
+.profile-info-name, .profile-info-value {
+  display: table-cell;
+  border-top: 1px dotted #D5E4F1
+}
+
+.profile-info-name {
+  text-align: right;
+  padding: 6px 10px 6px 4px;
+  font-weight: 400;
+  font-size: 27px;
+  color: #000;
+  background-color: transparent;
+  width: 110px;
+  vertical-align: middle
+}
+
+.profile-info-value {
+  padding: 6px 4px 6px 6px;
+  font-size: 26px;
+}
+
+.profile-info-value>span+span:before {
+  display: inline;
+  content: ",";
+  margin-left: 1px;
+  margin-right: 3px;
+  color: #666;
+  font-size: 26px;
+  border-bottom: 1px solid #FFF
+}
+
+.profile-info-value>span+span.editable-container:before {
+  display: none;
+  font-size: 26px;
+}
+
+.profile-info-row:first-child .profile-info-name, .profile-info-row:first-child .profile-info-value {
+  border-top: none
+}
+
+.profile-user-info-striped {
+  border: 1px solid #DCEBF7
+}
+
+.profile-user-info-striped .profile-info-name {
+  color: #000;
+  background-color: #EDF3F4;
+  border-top: 1px solid #F7FBFF
+}
+
+.profile-user-info-striped .profile-info-value {
+  border-top: 1px dotted #DCEBF7;
+  padding-left: 12px
+}
+
+.profile-picture {
+  border: 1px solid #CCC;
+  background-color: #FFF;
+  padding: 4px;
+  display: inline-block;
+  max-width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, .15)
+}
+
+.dd-empty, .dd-handle, .dd-placeholder, .dd2-content {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box
+}
+
+@media only screen and (max-width:480px) {
+  .profile-info-name {
+    width: 80px
+  }
+  .profile-user-info-striped .profile-info-name {
+    float: none;
+    width: auto;
+    text-align: left;
+    padding: 6px 4px 6px 10px;
+    display: block
+  }
+  .profile-user-info-striped .profile-info-value {
+    margin-left: 10px;
+    display: block
+  }
+  .user-profile .memberdiv {
+    width: 50%;
+    margin-left: 0;
+    margin-right: 0
+  }
+}
+
+@media (min-width:992px) {
+  .itemdiv.memberdiv {
+    max-width: 50%
+  }
+}
+
+@media (max-width:991px) {
+  .itemdiv.memberdiv {
+    min-width: 33.333%
+  }
+}
+
+@media only screen and (max-width:480px) {
+  .ace-thumbnails {
+    text-align: center
+  }
+  .ace-thumbnails>li {
+    float: none;
+    display: inline-block
+  }
+}
+
+.dark {
+  color: #333!important
+}
+
+.blue {
+  color: #000!important;
+  font-size: 35px;
+}
+
+.grey {
+  color: #777!important
+}
+
+/***************************
+End criminal profile
+****************************/
 
 /*********************************
 Occurence book
