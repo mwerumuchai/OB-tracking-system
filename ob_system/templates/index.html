@@ -1,55 +1,54 @@
-{%extends 'occurrence-book/base.html'%} {%load bootstrap3%} {%load static%} {% block content %} {{block.super}}
-<div class="container">
-  <h2 class="head" style="font-size: 45px;">iCop <small>Occurrence Book System</small></h2>
-</div><br><br>
-<div class="container" class="item">
+{%extends 'base.html'%} {%load bootstrap3%} {%load static%} {% block content %} {{block.super}}
+<div class="container-fluid"></div>
+<br>
+<br>
+<div class="container-fluid" class="item">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div class="card horizontal">
-        <a class="link" href="{%url 'cash_bail'%}">
+        <a class="link" href="/">
           <div class="card-stacked">
-            <div class="well well-lg">
-              <h5 class="content">Cash bail collected from the suspects.</h5>
-            </div>
-            <div class="card-action" id="cb">
-              <a class="link" href="{%url 'cash_bail'%}">Cash Book</a>
+            <div class="well well-lg" id="card1">
+              <h5 class="content" id="logo">iCop</h5>
             </div>
           </div>
-        </a>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div class="card horizontal">
         <a class="link" href="{%url 'occurrence_book'%}">
           <div class="card-stacked">
-            <div class="well well-lg">
-              <h5 class="content">Bookings and reporting register</h5>
-            </div>
-            <div class="card-action" id="ob">
-              <a class="link" href="{%url 'occurrence_book'%}">Occurrence Book</a>
+            <div class="well well-lg" id="card2">
+              <h5 class="content">OCCURRENCE BOOK<i class="fa fa-book" aria-hidden="true"></i></h5>
             </div>
           </div>
-        </a>
       </div>
     </div>
-    <div class="col-md-4">
+  </div>
+</div>
+<div class="container-fluid" class="item">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card horizontal">
+        <a class="link" href="{%url 'cash_bail'%}">
+          <div class="card-stacked">
+            <div class="well well-lg" id="card3">
+              <h5 class="content">CASH BAIL BOOK<i class="fa fa-money" aria-hidden="true"></i></h5>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="col-md-6">
       <div class="card horizontal">
         <a class="link" href="{%url 'archives'%}">
           <div class="card-stacked">
-            <div class="well well-lg">
-              <h5 class="content">Archives of the occurrence book.</h5>
-            </div>
-            <div class="card-action" id="ar">
-              <a class="link" href="{%url 'archives'%}">Archives</a>
+            <div class="well well-lg" id="card4">
+              <h5 class="content">ARCHIVES<i class="fa fa-archive" aria-hidden="true"></i></h5>
             </div>
           </div>
       </div>
     </div>
-    </a>
   </div>
 </div>
-
-
-
 
 {%endblock%}
