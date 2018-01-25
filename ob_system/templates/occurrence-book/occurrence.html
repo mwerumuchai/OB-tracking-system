@@ -20,12 +20,72 @@
 
     <div class="col-md-4" id="legend">
 
+      <a data-toggle="modal" href="#book1" class="btn btn-success"><h3>Add Report</h3></a>
 
-      <h3><a class="btn btn-success" href=""> BOOK </a></h3>
 
-      <h3><a class="btn btn-success" href=""> REPORT </a></h3>
+      <div id="book1" class="modal modal-wide fade">
 
-      <h3><a class="btn btn-success" href=""> CREATE CRIMINAL PROFILE </a></h3>
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header" id="mheader">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">Report Details</h4>
+            </div>
+            <div class="modal-body">
+              <div class="container-fluid">
+                <form action="occurrence_book/" method="post">
+
+                  {% csrf_token %} {% bootstrap_form form %}
+
+                  <div class="form-group">
+                    <input type="submit" class="btn btn-success btn-sm" value="Add Suspect">
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer" id="mfooter">
+              <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
+      <a data-toggle="modal" href="#book" class="btn btn-success"><h3>Suspect Profile</h3></a>
+
+
+      <div id="book" class="modal modal-wide fade">
+
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header" id="mheader">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">Suspect Details</h4>
+            </div>
+            <div class="modal-body">
+              <div class="container-fluid">
+                <form action="occurrence_book/" method="post">
+
+                  {% csrf_token %} {% bootstrap_form form %}
+
+                  <div class="form-group">
+                    <input type="submit" class="btn btn-success btn-sm" value="Add Suspect">
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer" id="mfooter">
+              <button type="button" class="btn btn-default" data-dismiss="modal" id="close">Close</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
 
     </div>
 
@@ -154,21 +214,21 @@
 
           </thead>
 
-          {% for items in reports %}
+          {% for item in reports %}
 
           <tr>
 
-            <td> {{ items.time }} </td>
+            <td> {{ item.time }} </td>
 
-            <td> {{ items.name }} </td>
+            <td> {{ item.name }} </td>
 
-            <td> {{ items.id_no }} </td>
+            <td> {{ item.id_no }} </td>
             <td>
               <!-- test -->
-              <a data-toggle="modal" href="#{{ items.id }}" class="btn"><h4>Click Here</h4></a>
+              <a data-toggle="modal" href="#{{item.id}}" class="btn"><h4>Click Here</h4></a>
 
 
-              <div id="{{items.id}}" class="modal modal-wide fade">
+              <div id="{{item.id}}" class="modal modal-wide fade">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header" id="mheader">
@@ -177,22 +237,22 @@
                     </div>
                     <div class="modal-body">
                       <div class="col-md-4">
-                        <h3><b>Name:</b> <i>{{ items.name }}</i></h3>
+                        <h3><b>Name:</b> <i>{{ item.name }}</i></h3>
                         <hr>
-                        <h3><b>Type of Crime:</b> <i>{{ items.crime }}</i></h3>
+                        <h3><b>Type of Crime:</b> <i>{{ item.crime }}</i></h3>
                         <hr>
                       </div>
                       <div class="col-md-2"></div>
                       <div class="col-md-6">
-                        <h3><b>Id No:</b> <i>{{ items.id_no }}</i></h3>
+                        <h3><b>Id No:</b> <i>{{ item.id_no }}</i></h3>
                         <hr>
-                        <h3><b>Reference No:</b> <i>{{ items.ref_no }}</i></h3>
+                        <h3><b>Reference No:</b> <i>{{ item.ref_no }}</i></h3>
                         <hr>
                       </div>
                     </div>
                     <div class="container-fluid" id="report-description">
                       <h3><b>Report Description:</b></h3>
-                      <h3 class="three"> {{ items.crime_description }} </h3>
+                      <h3 class="three"> {{ item.crime_description }} </h3>
                       <h3 class="sign"> <b>Signature: ........................</b></h3>
                     </div>
                     <div class="modal-footer" id="mfooter">
