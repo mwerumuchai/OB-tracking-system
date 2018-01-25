@@ -10,7 +10,7 @@
 
 {% block content %} {{ block.super }}
 <div class="container"><br>
-  {%for suspect in profile%}
+  {%for suspect in filter%}
   {{suspect.name}}
   {%endfor%}
 </div>

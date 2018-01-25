@@ -143,31 +143,45 @@ def occurrence_book(request):
 
             if request.method == 'POST':
 
-                form = ReportingForm(request.POST)
+                reportingform = ReportingForm(request.POST)
+                suspectform = CriminalProfileForm(request.POST)
 
-                if form.is_valid():
+                if reportingform.is_valid():
 
-                    reporting = form.save(commit=False)
-
+                    reporting = reportingform.save(commit=False)
                     reporting.user = request.user
-
                     reporting.save()
 
                     return redirect(occurrence_book)
 
                 else:
 
-                    form = ReportingForm()
+                    reportingform = ReportingForm()
 
-                    return render(request, 'occurrence-book/occurrence.html', {'form': form, 'date': date,
-                                                                               'bookings': bookings, 'reports': reports})
+                if suspectform.is_valid():
+
+                    profile = suspectform.save(commit=False)
+                    profile.user = request.user
+                    profile.save()
+
+                    return redirect(occurrence_book)
+
+                else:
+
+                    suspectform = CriminalProfileForm()
+
+                    return render(request, 'occurrence-book/occurrence.html', {'reportingform': reportingform, 'date': date,
+                                                                               'bookings': bookings, 'reports': reports,
+                                                                               'suspectform': suspectform})
 
             else:
 
-                form = ReportingForm()
+                reportingform = ReportingForm()
+                suspectform = CriminalProfileForm()
 
-                return render(request, 'occurrence-book/occurrence.html', {'form': form, 'date': date,
-                                                                           'bookings': bookings, 'reports': reports})
+                return render(request, 'occurrence-book/occurrence.html', {'reportingform': reportingform, 'date': date,
+                                                                           'bookings': bookings, 'reports': reports,
+                                                                           'suspectform': suspectform})
 
         except Exception as exception:
 
@@ -239,13 +253,13 @@ def create_criminal_profile(request):
 
                 form = CriminalProfileForm()
 
-                return render(request, 'occurrence-book/occurrence.html', {'suspectform': form})
+                return render(request, 'occurrence-book/occurrence.html', {'form': form})
 
         else:
 
             form = CriminalProfileForm()
 
-            return render(request, 'occurrence-book/occurrence.html', {'suspectform': form})
+            return render(request, 'occurrence-book/occurrence.html', {'form': form})
 
     except Exception as exception:
 
@@ -303,7 +317,7 @@ def criminal_profile(request, criminalprofile_id_no):
 
     try:
 
-        profile = CriminalProfile.objects.all()
+        profile = CriminalProfile.objects.get(id_no=criminalprofile_id_no)
 
         bookings = Booking.objects.filter(criminal=criminalprofile_id_no).all().order_by('-id')
 

@@ -36,11 +36,9 @@
               <div class="container-fluid">
                 <form action="{% url 'occurrence_book' %}" method="post">
 
-                  {% csrf_token %} {%  bootstrap_form form %}
-
-                  <div class="form-group">
+                  {% csrf_token %} {% bootstrap_form reportingform %}
                     <input type="submit" class="btn btn-success btn-sm" value="Add Report">
-                  </div>
+            
                 </form>
               </div>
             </div>
@@ -69,7 +67,7 @@
               <div class="container-fluid">
                 <form action="{%url 'occurrence_book' %}" method="post" enctype="multipart/form-data">
 
-                  {% csrf_token %} {{ suspectform }}
+                  {% csrf_token %} {% bootstrap_form suspectform %}
 
                     <input type="submit" class="btn btn-success btn-sm" value="Add Suspect">
 
