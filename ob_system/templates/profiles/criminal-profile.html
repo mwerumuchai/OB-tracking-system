@@ -55,7 +55,7 @@
                 <!-- /.modal-dialog -->
               </div>
               <!-- /.modal -->
-              {% endif %}
+
               <!-- end modal -->
             </div>
             <!-- /.col -->
@@ -75,7 +75,7 @@
                   <div class="profile-info-name"> Name: </div>
 
                   <div class="profile-info-value">
-                    <span>{{ profile.name}}</span>
+                    <span>{{ item.name}}</span>
                   </div>
                 </div>
 
@@ -93,7 +93,7 @@
                   <div class="profile-info-name"> Age: </div>
 
                   <div class="profile-info-value">
-                    <span>empty</span>
+                    <span> empty</span>
                   </div>
                 </div>
 
@@ -101,7 +101,7 @@
                   <div class="profile-info-name"> D.O.B: </div>
 
                   <div class="profile-info-value">
-                    <span>0000/00/00</span>
+                    <span> {{ profile.dob }}</span>
                   </div>
                 </div>
               </div>
@@ -110,6 +110,8 @@
             </div>
             <!-- /.col -->
           </div>
+
+          {% endif %}
           <!-- /.row -->
           <br>
           <div class="space-20"></div>
