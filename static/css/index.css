@@ -180,11 +180,11 @@ a {
 }
 
 .date {
-  text-align: left;
-  margin-left: 15px;
+  /*text-align: left;*/
+  /*margin-left: 15px;*/
   padding-bottom: 15px;
-  font-family: 'Open Sans', cursive;
-  font-size: 25px;
+  /*font-family: 'Open Sans', cursive;*/
+  /*font-size: 25px;*/
 }
 
 #legend {
@@ -202,6 +202,11 @@ a {
 
 .reports {
   color: #d61414;
+}
+.btn-success {
+    color: #080808;
+    /* background-color: #5cb85c; */
+    border-color: #4cae4c;
 }
 
 btn, .btn-large {
@@ -353,3 +358,63 @@ footer {
 }
 /*test modal*/
 /*end test modal*/
+.jumbotron{
+  background-color: #fff;
+  text-align: center;
+
+}
+ul#horizontal-list {
+	min-width: 696px;
+	list-style: none;
+	padding-top: 20px;
+  float: right;
+	}
+	ul#horizontal-list li {
+		display: inline;
+	}
+.check{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 0px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+#btn-report{
+  background-color: white;
+   color: black;
+   border: 2px solid red;
+}
+#btn-report:hover {
+    background-color: red;
+    color: white;
+}
+#btn-profile{
+  background-color: white;
+  color: black;
+  border: 2px solid green;
+}
+#btn-profile:hover {
+  background-color: green;
+  color: white;
+}
+#btn-search{
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+#btn-search:hover {
+    background-color: black;
+    color: white;
+}
+.main-logo{
+  font-size: 18px;
+  color: #000;
+  font-weight: 400;
+}

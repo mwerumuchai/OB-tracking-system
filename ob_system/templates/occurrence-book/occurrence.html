@@ -1,28 +1,22 @@
 {%extends 'occurrence-book/base.html'%} {% load bootstrap3 %} {% load static %}
-<!-- block -->
-
 {% block content %} {{ block.super }}
-
-<!--<div onload="startTime()">-->
-
-<!--<div id="todaydate" style="display:none;">2014, 07, 02, 08, 14, 35</div>&lt;!&ndash; This field is normally passed from Django-View to Template  &ndash;&gt;-->
-<!--<div id="clock"></div>-->
-
-<!--</div>-->
-<br>
+<div class="jumbotron">
+  <h1>occurrence book</h1>
+  <h4 class="date"> {{date|date:"l d-F Y"}} </h4>
+</div>
+<div class="row">
+<ul id="horizontal-list">
+  <li><a id="btn-report" class="check" data-toggle="modal" href="#book1" class="btn btn-success"><h3>Add Report</h3></a></li>
+  <li><a id="btn-profile" class="check" data-toggle="modal" href="#book" class="btn btn-success"><h3>Suspect Profile</h3></a></li>
+</ul>
+</div>
 <div class="container-fluid">
 
   <div class="row">
 
-    <div class="col-md-8">
-      <h1 align="right">Occurrence book page</h1></div>
 
     <div class="col-md-4" id="legend">
-      <a class="btn btn-success" href="{%url 'search' %}">Search</a>
-
-      <a data-toggle="modal" href="#book1" class="btn btn-success"><h3>Add Report</h3></a>
-
-
+<!-- REPORTING MODAL -->
       <div id="book1" class="modal modal-wide fade">
 
         <div class="modal-dialog">
@@ -51,7 +45,7 @@
       </div>
       <!-- /.modal -->
 
-      <a data-toggle="modal" href="#book" class="btn btn-success"><h3>Suspect Profile</h3></a>
+<!--  SUSPECT MODAL-->
 
 
       <div id="book" class="modal modal-wide fade">
@@ -85,9 +79,6 @@
 
 
     </div>
-
-    <h5 class="date"> {{date|date:"l d-F Y"}} </h5>
-
   </div>
   <!-- test tabs -->
 
