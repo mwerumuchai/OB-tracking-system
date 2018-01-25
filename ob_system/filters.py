@@ -13,5 +13,3 @@ class SearchFilter(django_filters.FilterSet):
         model = CriminalProfile
 
         fields = ('name', 'id_no')
-
-

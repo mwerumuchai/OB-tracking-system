@@ -184,11 +184,13 @@ def archives(request):
     '''
     :param request:
     :return: list of searched record e.g bookings and reports
+
     '''
+
 
     try:
 
-        return render(request, 'archives/archive.html', {'archive': archive})
+        return render(request, 'archives/archive.html')
 
     except ValueError:
 
