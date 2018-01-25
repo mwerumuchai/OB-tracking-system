@@ -28,6 +28,15 @@ html {
   color: #fafafa !important;
 }
 
+.main-logo {
+  font-size: 98px;
+  color: #000;
+  font-weight: 400;
+  text-align: center;
+  margin-left: 493px;
+  margin-top: -28px;
+}
+
 /*.card-content {
   height: 235px;
   background: #fff;
@@ -335,6 +344,8 @@ Occurence book
   text-align: right;
 }
 
+.ob-page {}
+
 a {
   text-decoration: none !important;
   color: #000;
@@ -371,10 +382,11 @@ a {
 .reports {
   color: #d61414;
 }
+
 .btn-success {
-    color: #080808;
-    /* background-color: #5cb85c; */
-    border-color: #4cae4c;
+  color: #080808;
+  /* background-color: #5cb85c; */
+  border-color: #4cae4c;
 }
 
 btn, .btn-large {
@@ -424,15 +436,13 @@ hr {
 }
 
 //*******
-modal
-*******/
-
-.modal.modal-wide .modal-dialog {
+modal *******/ .modal.modal-wide .modal-dialog {
   width: 80%;
 }
+
 .modal-backdrop.in {
-    filter: alpha(opacity=30);
-    opacity: .3;
+  filter: alpha(opacity=30);
+  opacity: .3;
 }
 
 /*.modal-wide .modal-body {
@@ -472,6 +482,7 @@ body p {
   text-align: right;
   margin: 219px;
 }
+
 /*********************************
 End Occurence book
 ***********************************/
@@ -521,69 +532,77 @@ footer {
 
 .header {
   font-family: 'Open Sans', cursive;
-  font-size: 105px;
+  font-size: 55px;
   text-align: center;
 }
+
 /*test modal*/
+
 /*end test modal*/
-.header-top{
+
+.header-top {
   background-color: #fff;
   text-align: center;
   font-size: 100px;
+}
 
-}
 ul#horizontal-list {
-	min-width: 696px;
-	list-style: none;
-	padding-top: 20px;
+  min-width: 696px;
+  list-style: none;
+  padding-top: 20px;
   /*float: right;*/
-	}
-	ul#horizontal-list li {
-		display: inline;
-	}
-.check{
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 0px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    cursor: pointer;
 }
-#btn-report{
+
+ul#horizontal-list li {
+  display: inline;
+}
+
+.check {
+  background-color: #4CAF50;
+  /* Green */
+  border: none;
+  color: white;
+  padding: 0px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s;
+  /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+#btn-report {
   background-color: white;
-   color: black;
-   border: 2px solid red;
+  color: black;
+  border: 2px solid red;
 }
+
 #btn-report:hover {
-    background-color: red;
-    color: white;
+  background-color: red;
+  color: white;
 }
-#btn-profile{
+
+#btn-profile {
   background-color: white;
   color: black;
   border: 2px solid green;
 }
+
 #btn-profile:hover {
   background-color: green;
   color: white;
 }
-#btn-search{
+
+#btn-search {
   background-color: white;
   color: black;
   border: 2px solid black;
 }
+
 #btn-search:hover {
-    background-color: black;
-    color: white;
-}
-.main-logo{
-  font-size: 18px;
-  color: #000;
-  font-weight: 400;
+  background-color: black;
+  color: white;
 }

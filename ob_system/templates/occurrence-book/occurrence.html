@@ -1,14 +1,15 @@
-{%extends 'occurrence-book/base.html'%} {% load bootstrap3 %} {% load static %}
-{% block content %} {{ block.super }}
+{%extends 'occurrence-book/base.html'%} {% load bootstrap3 %} {% load static %} {% block content %} {{ block.super }}
+<br>
 <div class="header-top">
-  <h1>occurrence book</h1>
+  <h1 class="ob-page">Occurrence Book</h1>
 </div>
 <div class="row">
-<ul id="horizontal-list">
-  <li><h4 class="date"> {{date|date:"l d-F Y"}} </h4></li>
-  <li><a id="btn-report" class="check" data-toggle="modal" href="#book1" class="btn btn-success"><h3>Add Report</h3></a></li>
-  <li><a id="btn-profile" class="check" data-toggle="modal" href="#book" class="btn btn-success"><h3>Suspect Profile</h3></a></li>
-</ul>
+  <ul id="horizontal-list">
+    <li>
+      <h4 class="date"> {{date|date:"l d-F Y"}} </h4></li>
+    <li><a id="btn-report" class="check" data-toggle="modal" href="#book1" class="btn btn-success"><h3>Add Report</h3></a></li>
+    <li><a id="btn-profile" class="check" data-toggle="modal" href="#book" class="btn btn-success"><h3>Add New Suspect</h3></a></li>
+  </ul>
 </div>
 <div class="container-fluid">
 
@@ -16,7 +17,7 @@
 
 
     <div class="col-md-4" id="legend">
-<!-- REPORTING MODAL -->
+      <!-- REPORTING MODAL -->
       <div id="book1" class="modal modal-wide fade">
 
         <div class="modal-dialog">
@@ -30,7 +31,7 @@
                 <form action="{% url 'occurrence_book' %}" method="post">
 
                   {% csrf_token %} {% bootstrap_form reportingform %}
-                    <input type="submit" class="btn btn-success btn-sm" value="Add Report">
+                  <input type="submit" class="btn btn-success btn-sm" value="Add Report">
 
                 </form>
               </div>
@@ -45,7 +46,7 @@
       </div>
       <!-- /.modal -->
 
-<!--  SUSPECT MODAL-->
+      <!--  SUSPECT MODAL-->
 
 
       <div id="book" class="modal modal-wide fade">
@@ -62,7 +63,7 @@
 
                   {% csrf_token %} {% bootstrap_form suspectform %}
 
-                    <input type="submit" class="btn btn-success btn-sm" value="Add Suspect">
+                  <input type="submit" class="btn btn-success btn-sm" value="Add Suspect">
 
                 </form>
               </div>
