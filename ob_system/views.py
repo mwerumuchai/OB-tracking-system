@@ -143,34 +143,23 @@ def occurrence_book(request):
 
             if request.method == 'POST':
 
-                report_form = ReportingForm(request.POST)
+                form = ReportingForm(request.POST)
 
-                suspect_form = CriminalProfileForm(request.POST)
+                if form.is_valid():
 
-                if report_form.is_valid() and suspect_form.is_valid():
+                    reporting = form.save(commit=False)
 
-                    report_form = form.save(commit=False)
+                    reporting.user = request.user
 
-                    suspect_form = form.save(commit=False)
-
-                    report_form.user = request.user
-
-                    report_form.save()
-
-                    suspect_form.user = request.user
-
-                    suspect_form.save()
-
+                    reporting.save()
 
                     return redirect(occurrence_book)
 
                 else:
 
-                    report_form = ReportingForm()
+                    form = ReportingForm()
 
-                    suspect_form = CriminalProfileForm()
-
-                    return render(request, 'occurrence-book/occurrence.html', {'report_form': report_form, 'suspect_form':suspect_form, 'date': date,
+                    return render(request, 'occurrence-book/occurrence.html', {'form': form, 'date': date,
                                                                                'bookings': bookings, 'reports': reports})
 
             else:
@@ -179,7 +168,6 @@ def occurrence_book(request):
 
                 return render(request, 'occurrence-book/occurrence.html', {'form': form, 'date': date,
                                                                            'bookings': bookings, 'reports': reports})
-
 
         except Exception as exception:
 
@@ -315,7 +303,7 @@ def criminal_profile(request, criminalprofile_id_no):
 
     try:
 
-        profile = CriminalProfile.objects.get(id_no=criminalprofile_id_no)
+        profile = CriminalProfile.objects.all()
 
         bookings = Booking.objects.filter(criminal=criminalprofile_id_no).all().order_by('-id')
 
