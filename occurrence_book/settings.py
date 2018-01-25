@@ -107,7 +107,7 @@ if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'HOST': '/cloudsql/karao-digital:us-central1:karao',
-            'NAME': 'karao',
+            'NAME': 'postgres',
             'USER': 'erick',
             'PASSWORD': 'qwerty12345',
         }
@@ -119,7 +119,7 @@ else:
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'karao',
-            'USER': 'muchai',
+            'USER': 'erick',
             'PASSWORD': 'Ngea!2017##',
         }
     }
