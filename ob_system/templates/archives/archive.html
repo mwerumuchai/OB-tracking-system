@@ -9,7 +9,7 @@
 
         <h1> ARCHIVES </h1>
 
-        <form class="form-group" role="search" action="">
+        <form class="form-group" role="search" action="{% url 'search-result' %}">
 
             <div class="input-group">
 
@@ -29,15 +29,6 @@
 
         <div>
 
-            <form action="" method="post">
-
-                {% csrf_token %}
-
-                {{ form.as_p }}
-
-                <input type="submit" />
-
-            </form>
         </div>
 
         <table>

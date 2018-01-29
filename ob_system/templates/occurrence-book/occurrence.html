@@ -139,7 +139,7 @@
 
                 <td> {{ item.a_o_badge_no }} </td>
 
-                <td> <a href=""> {{ item.criminal.name }} </a> </td>
+                <td> <a href="{% url 'c_profile' item.criminal.id_no %}"> {{ item.criminal.name }} </a> </td>
 
                 <td>
                   <!-- test -->
@@ -282,7 +282,3 @@
 {% block scripts %}
 
 <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet"> {% bootstrap_javascript %} {% endblock %}
-
-</body>
-
-</html>

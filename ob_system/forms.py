@@ -6,7 +6,9 @@ from django import forms
 
 from dal import autocomplete
 
-from .models import Archive, Booking, Report, CriminalProfile, CashBail
+from .models import Booking, Report, CriminalProfile, CashBail
+
+from nocaptcha_recaptcha import NoReCaptchaField
 
 RANKS = (
     ('OCS', 'OCS'),
@@ -16,11 +18,11 @@ RANKS = (
 
 class SignUpForm(UserCreationForm):
 
-    first_name = forms.CharField(max_length=50, required=True, help_text='Required', label='First Name')
+    first_name = forms.CharField(max_length=50, required=True, label='First Name', widget=forms.TextInput(attrs={'class': 'form-control'}))
 
-    last_name = forms.CharField(max_length=50, required=True, label='Last Name')
+    last_name = forms.CharField(max_length=50, required=True, label='Last Name', widget=forms.TextInput(attrs={'class': 'form-control'}))
 
-    badge_no = forms.IntegerField(required=True, label='Badge No')
+    badge_no = forms.IntegerField(required=True, label='Badge No',  widget=forms.NumberInput(attrs={'class': 'form-control'}))
 
     rank = forms.ChoiceField(
         required=True,
@@ -28,7 +30,14 @@ class SignUpForm(UserCreationForm):
         label='Rank'
     )
 
-    email = forms.EmailField(max_length=250, help_text='Required. Please Input a valid email address', label='Email')
+    email = forms.EmailField(max_length=250, required=True, label='Email')
+
+    password1 = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'class': 'form-control',
+                                                                                            'name': "password1",
+                                                                                            'type': "password"}))
+    password2 = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'class': 'form-control',
+                                                                                            'name': "password2",
+                                                                                            'type': "password"}))
 
     class Meta:
 
@@ -36,10 +45,32 @@ class SignUpForm(UserCreationForm):
 
         fields = ('first_name', 'last_name', 'badge_no', 'rank', 'email', 'password1', 'password2',)
 
+    # class Meta:
+    #
+    #     model = User
+    #
+    #     fields = ('first_name', 'last_name', 'email', 'password1', 'password2', 'badge_no', 'rank',)
+
+    # def save(self, commit=True):
+    #     user = super(SignUpForm, self).save(commit=False)
+    #
+    #     user_profile = UserProfile(user=user, badge_no=self.cleaned_data['badge_no'], renk=self.cleaned_data['rank'])
+    #
+    #     user.save()
+    #
+    #     user_profile.save()
+    #
+    #     return user, user_profile
+
 
 class LoginForm(UserCreationForm):
 
-    badge_no = forms.IntegerField()
+    badge_no = forms.IntegerField(required=True, label='Badge No',
+                                  widget=forms.NumberInput(attrs={'class': 'form-control'}))
+
+    password1 = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'class': 'form-control',
+                                                                                            'name': "password1",
+                                                                                            'type': "password"}))
 
     class Meta:
 

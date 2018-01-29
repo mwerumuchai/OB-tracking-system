@@ -338,3 +338,17 @@ footer {
 .header {
   text-align: center;
 }
+
+.details {
+    padding: 10px 20px 0px 20px;
+    text-align: left !important;
+    /*margin-left: 40%;*/
+}
+
+.hrItem {
+    border: none;
+    height: 1px;
+    /* Set the hr color */
+    color: #333; /* old IE */
+    background-color: #fff; /* Modern Browsers */
+}

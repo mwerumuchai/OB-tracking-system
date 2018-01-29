@@ -8,44 +8,22 @@ import datetime as dt
 # Create your models here.
 
 
-class Profile(models.Model):
+class UserProfile(models.Model):
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
 
-    badge_no = models.IntegerField(blank=False, null=True)
+    badge_no = models.IntegerField(blank=False, null=True, unique=True)
 
-    rank = models.TextField(max_length=50)
+    rank = models.TextField(max_length=50, unique=True)
 
-    email_confirmed = models.BooleanField(default=False)
-
-    # ob_no = models.ForeignKey(OccurrenceBook)
-
-    class UserFullName(User):
-        class Meta:
-            proxy = True
-
-        def __unicode__(self):
-            return self.get_full_name()
-
-    @classmethod
-    def officer_profile(cls, badge_no):
-
-        profile = cls.objects.get(badge_no=badge_no)
-
-        return profile
+    email_confirmed = models.BooleanField(default=False, unique=True)
 
 
 @receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
+def update_user_profile(sender, instance, created, **kwargs):
     if created:
-
-        Profile.objects.create(user=instance)
-
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-
-    instance.profile.save()
+        UserProfile.objects.create(user=instance)
+    instance.userprofile.save()
 
 
 class CriminalProfile(models.Model):
@@ -125,7 +103,7 @@ class Report(models.Model):
     @classmethod
     def search_by_pub_date(cls, search_term):
 
-        reports = cls.objects.get(pub_date__icontains=search_term)
+        reports = cls.objects.filter(pub_date__icontains=search_term)
 
         return reports
 
@@ -169,7 +147,7 @@ class Booking(models.Model):
     @classmethod
     def search_by_pub_date(cls, search_term):
 
-        reports = cls.objects.get(pub_date__icontains=search_term)
+        reports = cls.objects.filter(pub_date__icontains=search_term)
 
         return reports
 
@@ -252,13 +230,10 @@ class CashBail(models.Model):
 
     crime = models.ForeignKey(Crime, on_delete=models.CASCADE)
 
-    # def __str__(self):
-    #     return self.criminal
-
 
     @classmethod
-    def criminal_court_date(cls):
+    def single_cashbail_record(cls):
 
-        criminal = cls.objects.filter()
+        record = cls.objects.get(id=id)
 
-        return criminal
+        return record

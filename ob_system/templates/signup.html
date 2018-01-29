@@ -1,8 +1,29 @@
-{% load bootstrap3 %} {% block content %}
-<h2>Sign up</h2>
-<form method="post">
-  {% csrf_token %} {% bootstrap_form form %}
-  <button type="submit">Sign up</button>
-  <input type="hidden" name="next" value="{% url 'signup' %}">
+{% load bootstrap3 %}
+
+
+  {% block content %}
+
+
+      <h2>Sign up</h2>
+
+        <form method="post" action="{% url 'signup' %}">
+
+            {% csrf_token %} {% bootstrap_form form %}
+
+          <button type="submit">Sign up</button>
+
+          <input type="hidden" name="next" value="{% url 'index' %}">
+
+
+          <button
+
+                  class="g-recaptcha"
+
+                  data-sitekey="6LdsckIUAAAAAMoo2RDM4_dsfxeNqnJoFov1OU0h"
+
+                  data-callback="YourOnSubmitFn">
+
+          </button>
+
 </form>
 {% endblock %}

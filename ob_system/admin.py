@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import Profile, CriminalProfile, OccurrenceBook, Crime, Report, Booking,Remark,Archive,CashBail
+from .models import CriminalProfile, OccurrenceBook, Crime, Report, Booking,Remark,Archive,CashBail
 
-admin.site.register(Profile)
 admin.site.register(CriminalProfile)
 admin.site.register(OccurrenceBook)
 admin.site.register(Crime)

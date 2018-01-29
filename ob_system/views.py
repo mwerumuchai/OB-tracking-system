@@ -1,30 +1,25 @@
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import render, redirect
 from ob_system.forms import SignUpForm, LoginForm
 
-from django.http import Http404
-from django.core.exceptions import ObjectDoesNotExist, EmptyResultSet
+from django.http import Http404, HttpResponse
 
-from .models import Booking, Report, Archive, CriminalProfile, CashBail
+from .models import Booking, Report, CriminalProfile, CashBail
 from .forms import BookingForm, ReportingForm, CriminalProfileForm, CashBailForm
 from .filters import SearchFilter
 
 import datetime as dt
-import datetime
 
-from dal import autocomplete
-
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
-from django.template.loader import render_to_string
 from .tokens import account_activation_token
 
 from django.contrib.auth.models import User
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
+
+from django.views.generic import View
+from occurrence_book.utils import render_to_pdf
+from django.template.loader import get_template
 
 
 # Create your views here.
@@ -69,21 +64,15 @@ def signup(request):
         if request.method == 'POST':
             form = SignUpForm(request.POST)
             if form.is_valid():
-                user = form.save(commit=False)
-                user.is_active = False
+                user = form.save()
+                user.refresh_from_db()  # load the profile instance created by the signal
+                user.userprofile.badge_no = form.cleaned_data.get('badge_no')
+                user.userprofile.rank = form.cleaned_data.get('rank')
                 user.save()
-
-                current_site = get_current_site(request)
-                subject = 'Activate Your Account'
-                message = render_to_string('emailing/account_activation_email.html', {
-                    'user': user,
-                    'domain': current_site.domain,
-                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                    'token': account_activation_token.make_token(user),
-                })
-                user.email_user(subject, message)
-
-                return redirect('account_activation_sent')
+                raw_password = form.cleaned_data.get('password1')
+                user = authenticate(badge_no=user.badge_no, password=raw_password)
+                login(request, user)
+                return redirect('index')
         else:
             form = SignUpForm()
         return render(request, 'signup.html', {'form': form})
@@ -319,7 +308,7 @@ def criminal_profile(request, criminalprofile_id_no):
 
         profile = CriminalProfile.objects.get(id_no=criminalprofile_id_no)
 
-        bookings = Booking.objects.filter(criminal=criminalprofile_id_no).all().order_by('-id')
+        bookings = Booking.objects.filter(criminal=profile).all().order_by('-id')
 
         try:
 
@@ -357,6 +346,30 @@ def criminal_profile(request, criminalprofile_id_no):
         raise exception
 
 
+def search_results(request):
+
+    try:
+
+        if 'q' in request.GET and request.GET['q']:
+
+            search_term = request.GET.get('q')
+
+            bookings = Booking.search_by_pub_date(search_term).all()
+
+            reportings = Report.search_by_pub_date(search_term).all()
+
+            return render(request, 'archives/archive.html', {'bookings': bookings, 'reportings': reportings})
+
+        else:
+
+            message = "You haven't searched for any term"
+
+            return render(request, 'searched-tag.html', {"message": message,})
+
+    except Exception as exception:
+        raise exception
+
+
 def search(request):
 
     '''
@@ -370,3 +383,30 @@ def search(request):
     suspect_filter = SearchFilter(request.GET, queryset=suspect_list)
 
     return render(request, 'search/searchlist.html', {'filter': suspect_filter})
+
+
+class GeneratePdf(View):
+
+    def get(self, request, *args, **kwargs):
+        template = get_template('pdf/cashbail.html')
+        context = {
+            "invoice_id": 123,
+            "customer_name": "John Cooper",
+            "amount": 1399.99,
+            "today": "Today",
+        }
+        html = template.render(context)
+        pdf = render_to_pdf('pdf/cashbail.html', context)
+        if pdf:
+            response = HttpResponse(pdf, content_type='application/pdf')
+            filename = "Invoice_%s.pdf" % "12341231"
+            content = "inline; filename='%s'" % filename
+            download = request.GET.get("download")
+            if download:
+                content = "attachment; filename='%s'" % filename
+            response['Content-Disposition'] = content
+            return response
+        return HttpResponse("Not found")
+
+
+

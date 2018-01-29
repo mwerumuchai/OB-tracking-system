@@ -16,12 +16,24 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from ob_system import views as core_views
+from occurrence_book.settings import GeneratePDF
 from django.contrib.auth import views as auth_views
+
+from django.views.generic import TemplateView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path(r'', include('ob_system.urls')),
+    path('', include('ob_system.urls')),
+
+    path('', include('pwa.urls')),
+
+    path('signup/', core_views.signup, name='signup'),
+
+    path('login/', core_views.officer_login, name='login'),
+
+    # path('pdf', TemplateView.as_view.GeneratePDF(template_name='pdf/cashbail.html'), name='pdf')
 
 ]
 
