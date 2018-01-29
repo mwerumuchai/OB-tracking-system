@@ -64,10 +64,6 @@
               <h4 class="blue">
     								<span class="middle">Personal Information</span>
 
-    								<span class="label label-purple arrowed-in-right">
-    									<i class="ace-icon fa fa-circle smaller-80 align-middle"></i>
-    									online
-    								</span>
     							</h4>
 
               <div class="profile-user-info">
@@ -75,7 +71,7 @@
                   <div class="profile-info-name"> Name: </div>
 
                   <div class="profile-info-value">
-                    <span>{{ profile.name}}</span>
+                    <span id="suspectname">{{ profile.name}}</span>
                   </div>
                 </div>
 
@@ -85,15 +81,15 @@
                   <div class="profile-info-value">
                     <i class="fa fa-map-marker light-orange bigger-110"></i>
                     <span>empty</span>
-                    <span>empty</span>
+                    <span>Kenya</span>
                   </div>
                 </div>
 
                 <div class="profile-info-row">
-                  <div class="profile-info-name"> Age: </div>
+                  <div class="profile-info-name"> I.D: </div>
 
                   <div class="profile-info-value">
-                    <span>empty</span>
+                    <span>{{profile.id_no}}</span>
                   </div>
                 </div>
 
@@ -101,7 +97,7 @@
                   <div class="profile-info-name"> D.O.B: </div>
 
                   <div class="profile-info-value">
-                    <span>0000/00/00</span>
+                    <span>{{profile.dob}}</span>
                   </div>
                 </div>
               </div>
@@ -138,6 +134,8 @@
 
                           <th> Arresting Officer Badge No </th>
 
+                          <th> Suspect Name </th>
+
                           <th> Crime Details </th>
 
                         </tr>
@@ -152,11 +150,11 @@
 
                           <td> {{ item.time }} </td>
 
-                          <td> {{ item.a_o_name }} </td>
+                          <td id="suspectname"> {{ item.a_o_name }} </td>
 
                           <td> {{ item.a_o_badge_no }} </td>
 
-                          <td> <a href=""> {{ item.criminal.name }} </a> </td>
+                          <td> <a href="" id="suspectname"> {{ item.criminal.name }} </a> </td>
 
                           <td>
                             <!-- test -->
@@ -222,6 +220,3 @@
 <!-- end test -->
 
 {% endblock %}
-</body>
-
-</html>
