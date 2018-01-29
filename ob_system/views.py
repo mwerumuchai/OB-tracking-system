@@ -117,7 +117,14 @@ def activate(request, uidb64, token):
 # The landing page
 def index(request):
 
-    return render(request, 'index.html')
+    suspect_list = CriminalProfile.objects.all()
+
+    suspect_filter = SearchFilter(request.GET, queryset=suspect_list)
+
+    # return render(request, 'search/searchlist.html', {'filter': suspect_filter})
+
+
+    return render(request, 'index.html',{'filter': suspect_filter})
 
 
 # occurrence book
@@ -223,7 +230,40 @@ def cash_bail(request):
     # now = datetime.datetime.now().strftime('%H:%M:%S')
     bail = CashBail.objects.all()
 
-    return render(request, 'occurrence-book/cashbail.html',{'date':date,'bail':bail})
+    try:
+
+        if request.method == 'POST':
+
+            form = CashBailForm(request.POST)
+
+            if form.is_valid():
+
+                bail = form.save(commit=False)
+
+                bail.user = request.user
+
+                bail.save()
+
+                return redirect(cash_bail)
+
+            else:
+
+                form = CashBailForm()
+
+                return render(request, 'occurrence-book/cashbail.html', {'form': form,'date':date,'bail':bail})
+
+        else:
+
+            form = CashBailForm()
+
+            return render(request, 'occurrence-book/cashbail.html', {'form': form,'date':date,'bail':bail})
+
+    except Exception as exception:
+
+        raise exception
+
+
+# return render(request, 'occurrence-book/cashbail.html',{'date':date,'bail':bail})
 
 
 def create_criminal_profile(request):
@@ -319,7 +359,7 @@ def criminal_profile(request, criminalprofile_id_no):
 
         profile = CriminalProfile.objects.get(id_no=criminalprofile_id_no)
 
-        bookings = Booking.objects.filter(criminal=criminalprofile_id_no).all().order_by('-id')
+        bookings = Booking.objects.filter(criminal=profile).all().order_by('-id')
 
         try:
 
