@@ -9,7 +9,10 @@
 
     {% progressive_web_app_meta %}
 
-    <meta charset="utf-8"> {% if title %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    {% if title %}
 
     <title>OB - Tracking System {{title}}</title>
 
@@ -18,16 +21,21 @@
     <title> OB Tracking System </title>
 
 
-    {% endif %} {% block styles %} {% bootstrap_css %}
+    {% endif %}
 
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+      {% block styles %}
+
+        {% bootstrap_css %}
+
+          <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <!-- Compiled and minified CSS -->
 
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"> -->
-    <link rel="stylesheet" href="{% static 'js/table.js' %}">
-    <link rel="stylesheet" href="{% static 'js/navbar.js' %}">
+          <link rel="stylesheet" href="{% static 'js/table.js' %}">
+          <link rel="stylesheet" href="{% static 'js/navbar.js' %}">
 
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
+          <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
     <!-- Compiled and minified JavaScript -->
 
 
@@ -46,7 +54,8 @@
     {% block scripts %}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 
     {% bootstrap_javascript %} {% endblock %}

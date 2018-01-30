@@ -1,28 +1,22 @@
 {%extends 'occurrence-book/base.html'%} {% load bootstrap3 %} {% load static %}
-<!-- block -->
-
 {% block content %} {{ block.super }}
-
-<!--<div onload="startTime()">-->
-
-<!--<div id="todaydate" style="display:none;">2014, 07, 02, 08, 14, 35</div>&lt;!&ndash; This field is normally passed from Django-View to Template  &ndash;&gt;-->
-<!--<div id="clock"></div>-->
-
-<!--</div>-->
-<br>
-
+<div class="header-top">
+  <h1>occurrence book</h1>
+</div>
+<div class="row">
+<ul id="horizontal-list">
+  <li><h4 class="date"> {{date|date:"l d-F Y"}} </h4></li>
+  <li><a id="btn-report" class="check" data-toggle="modal" href="#book1" class="btn btn-success"><h3>Add Report</h3></a></li>
+  <li><a id="btn-profile" class="check" data-toggle="modal" href="#book" class="btn btn-success"><h3>Suspect Profile</h3></a></li>
+</ul>
+</div>
 <div class="container-fluid">
 
   <div class="row">
 
-    <div class="col-md-8">
-      <h1 align="right">Occurrence book page</h1></div>
 
     <div class="col-md-4" id="legend">
-
-      <a data-toggle="modal" href="#book1" class="btn btn-success"><h3>Add Report</h3></a>
-
-
+<!-- REPORTING MODAL -->
       <div id="book1" class="modal modal-wide fade">
 
         <div class="modal-dialog">
@@ -36,10 +30,8 @@
                 <form action="{% url 'occurrence_book' %}" method="post">
 
                   {% csrf_token %} {% bootstrap_form reportingform %}
+                    <input type="submit" class="btn btn-success btn-sm" value="Add Report">
 
-                  <div class="form-group">
-                    <input type="submit" class="btn btn-success btn-sm" value="Add Suspect">
-                  </div>
                 </form>
               </div>
             </div>
@@ -53,7 +45,7 @@
       </div>
       <!-- /.modal -->
 
-      <a data-toggle="modal" href="#book" class="btn btn-success"><h3>Suspect Profile</h3></a>
+<!--  SUSPECT MODAL-->
 
 
       <div id="book" class="modal modal-wide fade">
@@ -66,13 +58,12 @@
             </div>
             <div class="modal-body">
               <div class="container-fluid">
-                <form action="{% url 'occurrence_book' %}" method="post">
+                <form action="{%url 'occurrence_book' %}" method="post" enctype="multipart/form-data">
 
                   {% csrf_token %} {% bootstrap_form suspectform %}
 
-                  <div class="form-group">
                     <input type="submit" class="btn btn-success btn-sm" value="Add Suspect">
-                  </div>
+
                 </form>
               </div>
             </div>
@@ -88,9 +79,6 @@
 
 
     </div>
-
-    <h5 class="date"> {{date|date:"l d-F Y"}} </h5>
-
   </div>
   <!-- test tabs -->
 
@@ -105,7 +93,7 @@
       </li>
     </ul>
 
-    <div class="tab-content ">
+    <div class="tab-content">
       <div class="tab-pane active" id="1">
         <div class="row" id="booking-row">
 
@@ -158,7 +146,7 @@
                           <div class="col-md-4">
                             <h3><b>Name:</b> <i>{{ item.criminal.name }}</i></h3>
                             <hr>
-                            <h3><b>Type of Crime:</b> <i>{{ item.crime.name }}</i></h3>
+                            <h3><b>Crime:</b> <i>{{ item.crime.name }}</i></h3>
                             <hr>
                           </div>
                           <div class="col-md-2"></div>
@@ -239,7 +227,7 @@
                       <div class="col-md-4">
                         <h3><b>Name:</b> <i>{{ item.name }}</i></h3>
                         <hr>
-                        <h3><b>Type of Crime:</b> <i>{{ item.crime }}</i></h3>
+                        <h3><b>Crime:</b> <i>{{ item.crime }}</i></h3>
                         <hr>
                       </div>
                       <div class="col-md-2"></div>
@@ -278,7 +266,17 @@
 </div>
 
 {% endblock %}
-<!-- scripts -->
-{% block scripts %}
 
-<link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet"> {% bootstrap_javascript %} {% endblock %}
+
+<!-- scripts -->
+    {% block scripts %}
+
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet"> {% bootstrap_javascript %}
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet"> {% bootstrap_javascript %}
+
+    {% endblock %}
+
+</body>
+
+</html>
+

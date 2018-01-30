@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'occurrence-book/base.html' %}
 {% load bootstrap3 %}
 
 <!DOCTYPE html>
@@ -10,7 +10,7 @@
 <body>
 
     {% block content %}
-
+<div class="container"><br>
         <form method="get">
 
             {% csrf_token %}
@@ -21,17 +21,24 @@
             <button type="submit">Search</button>
 
         </form>
+        <br>
 
-        <ul>
+<table>
+  <tr>
+    <th>ID No.</th>
+    <th>Name</th>
+    <th>DATE</th>
+  </tr>
+  <tr>
+    {% for suspect in filter.qs %}
+    <td>{{suspect.id_no}}</td>
+    <td id="suspectname"><a href="{% url 'c_profile' suspect.id_no %}"> {{ suspect.name }} </a> </td>
+    <td>{{ suspect.pub_date}}</td>
+  </tr>
+  {% endfor %}
+</table>
 
-            {% for suspect in filter.qs %}
-
-                <li> <a href="{% url 'c_profile' suspect.id_no %}"> {{ suspect.name }} </a>  - {{suspect.id_no}} - {{ suspect.pub_date}} </li>
-
-            {% endfor %}
-
-        </ul>
-
+  </div>
     {% endblock %}
 
 </body>

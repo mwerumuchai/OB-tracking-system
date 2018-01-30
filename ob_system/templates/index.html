@@ -1,54 +1,35 @@
 {%extends 'base.html'%} {%load bootstrap3%} {%load static%} {% block content %} {{block.super}}
-<div class="container-fluid"></div>
-<br>
-<br>
-<div class="container-fluid" class="item">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="card horizontal">
-        <a class="link" href="/">
-          <div class="card-stacked">
-            <div class="well well-lg" id="card1">
-              <h5 class="content" id="logo">iCop</h5>
-            </div>
-          </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card horizontal">
-        <a class="link" href="{%url 'occurrence_book'%}">
-          <div class="card-stacked">
-            <div class="well well-lg" id="card2">
-              <h5 class="content">OCCURRENCE BOOK<i class="fa fa-book" aria-hidden="true"></i></h5>
-            </div>
-          </div>
-      </div>
-    </div>
-  </div>
+<div class="container">
+  <h1 style="text-align:center;">Search</h1>
 </div>
-<div class="container-fluid" class="item">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="card horizontal">
-        <a class="link" href="{%url 'cash_bail'%}">
-          <div class="card-stacked">
-            <div class="well well-lg" id="card3">
-              <h5 class="content">CASH BAIL BOOK<i class="fa fa-money" aria-hidden="true"></i></h5>
-            </div>
-          </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card horizontal">
-        <a class="link" href="{%url 'archives'%}">
-          <div class="card-stacked">
-            <div class="well well-lg" id="card4">
-              <h5 class="content">ARCHIVES<i class="fa fa-archive" aria-hidden="true"></i></h5>
-            </div>
-          </div>
-      </div>
-    </div>
-  </div>
+<div class="container">
+  <form method="get">
+
+      {% csrf_token %}
+
+      {% bootstrap_form filter.form %}
+
+
+      <button type="submit">Search</button>
+
+  </form>
+  <br>
+
+  <table>
+    <tr>
+      <th>ID No.</th>
+      <th>Name</th>
+      <th>DATE</th>
+    </tr>
+    <tr>
+      {% for suspect in filter.qs %}
+      <td>{{suspect.id_no}}</td>
+      <td><a href="{% url 'c_profile' suspect.id_no %}"> {{ suspect.name }} </a> </td>
+      <td>{{ suspect.pub_date}}</td>
+    </tr>
+    {% endfor %}
+  </table>
 </div>
+
 
 {%endblock%}
