@@ -6,7 +6,7 @@ from django import forms
 
 from dal import autocomplete
 
-from .models import Booking, Report, CriminalProfile, CashBail
+from .models import Booking, Report, CriminalProfile, CashBail, UserProfile
 
 from nocaptcha_recaptcha import NoReCaptchaField
 
@@ -22,14 +22,6 @@ class SignUpForm(UserCreationForm):
 
     last_name = forms.CharField(max_length=50, required=True, label='Last Name', widget=forms.TextInput(attrs={'class': 'form-control'}))
 
-    badge_no = forms.IntegerField(required=True, label='Badge No',  widget=forms.NumberInput(attrs={'class': 'form-control'}))
-
-    rank = forms.ChoiceField(
-        required=True,
-        choices=RANKS,
-        label='Rank'
-    )
-
     email = forms.EmailField(max_length=250, required=True, label='Email')
 
     password1 = forms.CharField(max_length=30, required=True, widget=forms.TextInput(attrs={'class': 'form-control',
@@ -43,24 +35,25 @@ class SignUpForm(UserCreationForm):
 
         model = User
 
-        fields = ('first_name', 'last_name', 'badge_no', 'rank', 'email', 'password1', 'password2',)
+        fields = ('first_name', 'last_name', 'email', 'password1', 'password2',)
 
-    # class Meta:
-    #
-    #     model = User
-    #
-    #     fields = ('first_name', 'last_name', 'email', 'password1', 'password2', 'badge_no', 'rank',)
 
-    # def save(self, commit=True):
-    #     user = super(SignUpForm, self).save(commit=False)
-    #
-    #     user_profile = UserProfile(user=user, badge_no=self.cleaned_data['badge_no'], renk=self.cleaned_data['rank'])
-    #
-    #     user.save()
-    #
-    #     user_profile.save()
-    #
-    #     return user, user_profile
+class SignUpExtendedForm(forms.ModelForm):
+
+    badge_no = forms.IntegerField(required=True, label='Badge No',
+                                  widget=forms.NumberInput(attrs={'class': 'form-control'}))
+
+    rank = forms.ChoiceField(
+        required=True,
+        choices=RANKS,
+        label='Rank'
+    )
+
+    class Meta:
+
+        model = UserProfile
+
+        fields = ('badge_no', 'rank')
 
 
 class LoginForm(UserCreationForm):

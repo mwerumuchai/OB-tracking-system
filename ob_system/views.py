@@ -6,7 +6,7 @@ from ob_system.forms import SignUpForm, LoginForm
 from django.http import Http404, HttpResponse
 
 from .models import Booking, Report, CriminalProfile, CashBail
-from .forms import BookingForm, ReportingForm, CriminalProfileForm, CashBailForm
+from .forms import BookingForm, ReportingForm, CriminalProfileForm, CashBailForm, SignUpExtendedForm
 from .filters import SearchFilter
 
 import datetime as dt
@@ -17,9 +17,7 @@ from django.contrib.auth.models import User
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 
-from django.views.generic import View
-from occurrence_book.utils import render_to_pdf
-from django.template.loader import get_template
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -62,20 +60,35 @@ def signup(request):
     try:
 
         if request.method == 'POST':
-            form = SignUpForm(request.POST)
-            if form.is_valid():
-                user = form.save()
+
+            userform = SignUpForm(request.POST)
+            profileform = SignUpExtendedForm(request.POST)
+
+            if userform.is_valid() and profileform.is_valid():
+
+                user = userform.save(commit=False)
                 user.refresh_from_db()  # load the profile instance created by the signal
-                user.userprofile.badge_no = form.cleaned_data.get('badge_no')
-                user.userprofile.rank = form.cleaned_data.get('rank')
                 user.save()
-                raw_password = form.cleaned_data.get('password1')
-                user = authenticate(badge_no=user.badge_no, password=raw_password)
-                login(request, user)
+
+                profile = profileform.save(commit=False)
+                profile.badge_no = profileform.cleaned_data.get('badge_no')
+                profile.rank = profileform.cleaned_data.get('rank')
+
+                raw_password = userform.cleaned_data.get('password1')
+
+                profile = authenticate(badge_no=profile.badge_no)
+                user = authenticate(password=raw_password)
+
+                login(request, user, profile)
+
                 return redirect('index')
+
         else:
-            form = SignUpForm()
-        return render(request, 'signup.html', {'form': form})
+
+            userform = SignUpForm()
+            profileform = SignUpExtendedForm()
+
+        return render(request, 'signup.html', {'userform': userform, 'profileform': profileform})
 
     except Exception as exception:
 
@@ -104,19 +117,18 @@ def activate(request, uidb64, token):
 
 
 # The landing page
+@login_required(login_url='/accounts/login/')
 def index(request):
 
     suspect_list = CriminalProfile.objects.all()
 
     suspect_filter = SearchFilter(request.GET, queryset=suspect_list)
 
-    # return render(request, 'search/searchlist.html', {'filter': suspect_filter})
-
-
     return render(request, 'index.html',{'filter': suspect_filter})
 
 
 # occurrence book
+@login_required(login_url='/accounts/login/')
 def occurrence_book(request):
 
     '''
@@ -189,6 +201,7 @@ def occurrence_book(request):
 
 
 # Archives page
+@login_required(login_url='/accounts/login/')
 def archives(request):
 
     '''
@@ -208,6 +221,7 @@ def archives(request):
 
 
 #  Cash bail page
+@login_required(login_url='/accounts/login/')
 def cash_bail(request):
 
     '''
@@ -254,7 +268,7 @@ def cash_bail(request):
 
 # return render(request, 'occurrence-book/cashbail.html',{'date':date,'bail':bail})
 
-
+@login_required(login_url='/accounts/login/')
 def create_criminal_profile(request):
 
     '''
@@ -295,6 +309,7 @@ def create_criminal_profile(request):
         raise exception
 
 
+@login_required(login_url='/accounts/login/')
 def cashbailform(request):
 
     '''
@@ -335,6 +350,7 @@ def cashbailform(request):
         raise exception
 
 
+@login_required(login_url='/accounts/login/')
 def criminal_profile(request, criminalprofile_id_no):
 
     '''
@@ -386,6 +402,7 @@ def criminal_profile(request, criminalprofile_id_no):
         raise exception
 
 
+@login_required(login_url='/accounts/login/')
 def search_results(request):
 
     try:
@@ -410,6 +427,7 @@ def search_results(request):
         raise exception
 
 
+@login_required(login_url='/accounts/login/')
 def search(request):
 
     '''
@@ -424,29 +442,6 @@ def search(request):
 
     return render(request, 'search/searchlist.html', {'filter': suspect_filter})
 
-
-class GeneratePdf(View):
-
-    def get(self, request, *args, **kwargs):
-        template = get_template('pdf/cashbail.html')
-        context = {
-            "invoice_id": 123,
-            "customer_name": "John Cooper",
-            "amount": 1399.99,
-            "today": "Today",
-        }
-        html = template.render(context)
-        pdf = render_to_pdf('pdf/cashbail.html', context)
-        if pdf:
-            response = HttpResponse(pdf, content_type='application/pdf')
-            filename = "Invoice_%s.pdf" % "12341231"
-            content = "inline; filename='%s'" % filename
-            download = request.GET.get("download")
-            if download:
-                content = "attachment; filename='%s'" % filename
-            response['Content-Disposition'] = content
-            return response
-        return HttpResponse("Not found")
 
 
 

@@ -10,19 +10,25 @@ import datetime as dt
 
 class UserProfile(models.Model):
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True, null=True)
 
     badge_no = models.IntegerField(blank=False, null=True, unique=True)
 
-    rank = models.TextField(max_length=50, unique=True)
+    rank = models.TextField(max_length=50, blank=False)
 
-    email_confirmed = models.BooleanField(default=False, unique=True)
+    email_confirmed = models.BooleanField(default=False, blank=False)
 
 
 @receiver(post_save, sender=User)
-def update_user_profile(sender, instance, created, **kwargs):
+def create_user_profile(sender, instance, created, **kwargs):
     if created:
+
         UserProfile.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+
     instance.userprofile.save()
 
 
@@ -229,7 +235,6 @@ class CashBail(models.Model):
     criminal = models.ForeignKey(CriminalProfile, on_delete=models.CASCADE)
 
     crime = models.ForeignKey(Crime, on_delete=models.CASCADE)
-
 
     @classmethod
     def single_cashbail_record(cls):

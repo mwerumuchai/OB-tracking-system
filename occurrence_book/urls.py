@@ -29,11 +29,7 @@ urlpatterns = [
 
     path('', include('pwa.urls')),
 
-    path('signup/', core_views.signup, name='signup'),
-
-    path('login/', core_views.officer_login, name='login'),
-
-    # path('pdf', TemplateView.as_view.GeneratePDF(template_name='pdf/cashbail.html'), name='pdf')
+    path('accounts/', include('allauth.urls')),
 
 ]
 

@@ -42,35 +42,57 @@ LOGIN_REDIRECT_URL = ('/')
 # Application definition
 
 INSTALLED_APPS = [
-    'dal',
-    'dal_select2',
-    # 'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+
+    # my app
     'ob_system',
     'bootstrap3',
+
+    # third party apps
     'django_archive',
     'django_filters',
     'nocaptcha_recaptcha',
     'pwa',
-    # 'allauth',
-    # 'allauth.account',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'dal',
+    'dal_select2',
+    # 'grappelli',
 ]
 
 SITE_ID = 1
 
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_UserProfile_MODEL_USERNAME_FIELD = None
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USER_MODEL_EMAIL_FIELD= 'email'
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
 
 PWA_APP_NAME = 'iCop'
 PWA_APP_DESCRIPTION = "Do kickass things all day long without that pesky browser chrome"
 PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'static/js', 'serviceworker.js')
+PWA_APP_THEME_COLOR = '#0A0302'
+PWA_APP_BACKGROUND_COLOR = '#FAFAFA'
+PWA_APP_ICONS = [
+    {
+        'src': '/static/images/logo.png',
+        'sizes': '192x192'
+    },
+    {
+        'src': '/static/images/kenya_logo.png',
+        'sizes': '512x512'
+    }
+]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -103,10 +125,8 @@ TEMPLATES = [
 ]
 
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    # 'allauth.account.auth_backends.AuthenticationBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 )
-
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -116,30 +136,15 @@ WSGI_APPLICATION = 'occurrence_book.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
-    # Running on production App Engine, so connect to Google Cloud SQL using
-    # the unix socket at /cloudsql/<your-cloudsql-connection string>
 
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'HOST': '/cloudsql/karao-digital:us-central1:karao',
-            'NAME': 'postgres',
-            'USER': 'erick',
-            'PASSWORD': 'qwerty12345',
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'karao',
+        'USER': 'erick',
+        'PASSWORD': 'Ngea!2017##',
     }
-
-else:
-
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'karao',
-            'USER': 'soleeh',
-            'PASSWORD': 'soleeh..',
-        }
-    }
+}
 
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
