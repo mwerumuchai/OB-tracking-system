@@ -1,4 +1,4 @@
-var CACHE_NAME = 'http://t-icop.herokuapp.com/-cache-v1';
+var CACHE_NAME = 'https://t-icop.herokuapp.com-cache-v1';
 var urlsToCache = [
   '/',
   '/static/css/index.css',
