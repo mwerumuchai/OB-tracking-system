@@ -1,0 +1,15 @@
+{
+  "short_name": "iCop",
+  "name": "",
+  "icons": [
+    {
+      "src": "/static/images/logo.png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/static/images/kenya_logo.png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "http://t-icop.herokuapp.com/accounts/login/?next=/"
+}
