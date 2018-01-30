@@ -79,7 +79,7 @@ ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
 
 PWA_APP_NAME = 'iCop'
 PWA_APP_DESCRIPTION = "Do kickass things all day long without that pesky browser chrome"
-PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, '/static/js', 'serviceworker.js')
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'static/js', 'serviceworker.js')
 PWA_APP_THEME_COLOR = '#0A0302'
 PWA_APP_BACKGROUND_COLOR = '#FAFAFA'
 PWA_APP_ICONS = [
