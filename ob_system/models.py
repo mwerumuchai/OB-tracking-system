@@ -12,10 +12,6 @@ class UserProfile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True, null=True)
 
-    badge_no = models.IntegerField(blank=False, null=True, unique=True)
-
-    rank = models.TextField(max_length=50, blank=False)
-
     email_confirmed = models.BooleanField(default=False, blank=False)
 
 
