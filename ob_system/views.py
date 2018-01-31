@@ -171,7 +171,7 @@ def occurrence_book(request):
                     profile.user = request.user
                     profile.save()
 
-                    return redirect(occurrence_book)
+                    return redirect('occurrence_book')
 
                 else:
 
