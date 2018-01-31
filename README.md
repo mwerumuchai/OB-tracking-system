@@ -27,13 +27,22 @@ As a user, I would like to;
 
 | Behaviour | Input | Output |
 | ------------ |:----------:| -------: | 
-
+| Sign up for an account| Account name: Ceaser <br> Password: Julius | An account is created and a message is displayed|
+| Login User | Email: ceaser@gmail.com <br> Password:*****| Logged in into the account and directed to the index page|
+| Display search form | Search by Name, ID No. or Year| Once authenticated, the user will be able to view suspect information if any |
+| Display suspect profile | **Add Crime** | An authenticated user can view Suspect information inclusive of previous records if any|
+| Display Occurrence Book |**Add Report** | An authenticated user can view reports taken from different people can be view|
+| Display Occurrence Book |**Add Suspect** | An authenticated user can enter new suspect information into the database|
+| Display Archive | **Enter year**| An authenticated user can view all information from the specific year|
+| Display Cash Bail Book |**Click Add Bail**| An authenticated user can view Suspects who have paid bail |
 
 ## Deployed Site
-
+[Click here](http://icop.herokuapp.com) to go to the deployed site <br/>
+or <br>
+[Copy](http://icop.herokuapp.com) this and paste to your desired web browser
 
 ## Known Bugs
-
+* Cash bail Book, flag when cash is refunded
 
 ## Technologies Used
 * Python3.6 
