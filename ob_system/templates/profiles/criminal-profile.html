@@ -55,7 +55,7 @@
                 <!-- /.modal-dialog -->
               </div>
               <!-- /.modal -->
-              {% endif %}
+
               <!-- end modal -->
             </div>
             <!-- /.col -->
@@ -71,7 +71,11 @@
                   <div class="profile-info-name"> Name: </div>
 
                   <div class="profile-info-value">
+<<<<<<< HEAD
                     <span id="suspectname">{{ profile.name}}</span>
+=======
+                    <span>{{ item.name}}</span>
+>>>>>>> 9671918a71fe910bd0f68b2c4572f1cbb7915497
                   </div>
                 </div>
 
@@ -89,7 +93,11 @@
                   <div class="profile-info-name"> I.D: </div>
 
                   <div class="profile-info-value">
+<<<<<<< HEAD
                     <span>{{profile.id_no}}</span>
+=======
+                    <span> empty</span>
+>>>>>>> 9671918a71fe910bd0f68b2c4572f1cbb7915497
                   </div>
                 </div>
 
@@ -97,7 +105,11 @@
                   <div class="profile-info-name"> D.O.B: </div>
 
                   <div class="profile-info-value">
+<<<<<<< HEAD
                     <span>{{profile.dob}}</span>
+=======
+                    <span> {{ profile.dob }}</span>
+>>>>>>> 9671918a71fe910bd0f68b2c4572f1cbb7915497
                   </div>
                 </div>
               </div>
@@ -106,6 +118,8 @@
             </div>
             <!-- /.col -->
           </div>
+
+          {% endif %}
           <!-- /.row -->
           <br>
           <div class="space-20"></div>
