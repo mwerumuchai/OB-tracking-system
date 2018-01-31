@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+            <div class='wrapper'>
+
+                <div class='header' style="text-align: center;">
+
+                    <p class='title'> CASH BAIL RECEIPT </p>
+                    <p> (Section 122, C.P.C.)</p>
+
+                </div>
+
+                <div>
+
+                    <div class='details'>
+
+                        <h3> Case File No ........         {{single_record.p_station}} Police Station </h3>
+
+                                <p> Received from {{ single_record.criminal }} </p>
+
+                        <p> the sum of Kenya Shillings {{ single_record.sum }}/-. The aforesaid </p>
+
+                        <p> person being accused on a charge of {{ single_record.crime }}. </p>
+
+                        <p> C.F No .......... and being required to appear before </p>
+
+                        <p> {{ single_record.court_name }}  at {{ single_record.court_time }} on {{ single_record.court_date }} to answer to </p>
+
+
+                        <p> the said charge or in default forfeit the sum deposited </p>
+
+
+                        <h4> Signature .......                {{single_record.p_station}} Police Station  </h4>
+
+                        <h4> Witness ............ </h4>
+
+                        <h4> Date {{ single_record.current_date }}    Time {{ single_record.current_time }} </h4>
+
+                        <hr class='hrItem' />
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+</body>
+</html>
