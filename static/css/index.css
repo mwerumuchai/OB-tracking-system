@@ -173,7 +173,7 @@ THE SIDE BAR-ToP
     }
 
     .side-nav>li>a {
-        width: 225px;
+        width: 283px;
         border-bottom: 1px rgba(0,0,0,.3) solid;
     }
 
@@ -186,6 +186,13 @@ THE SIDE BAR-ToP
 }
 .control-label{
   color: #000 !important;
+}
+.logout{
+  top: 571px;
+  text-align: center;
+  border: none;
+  color: #fff;
+
 }
 #brand{
   color: #fff;
