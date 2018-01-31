@@ -587,6 +587,12 @@ End criminal profile
 /*********************************
 Occurence book
 ***********************************/
+.header-top{
+  text-align: center;
+  font-size: 80px;
+  font-family: 'Muli', sans-serif;
+
+}
 
 #header {
   font-family: 'Muli', sans-serif;
@@ -781,16 +787,12 @@ footer {
 
 .header {
   font-family: 'Muli', sans-serif;
-  font-size: 50px;
+  font-size: 50px  ;
   text-align: center;
 }
 /*test modal*/
 /*end test modal*/
-.header-top{
-  text-align: center;
-  font-size: 100px;
 
-}
 ul#horizontal-list {
 	min-width: 696px;
 	list-style: none;

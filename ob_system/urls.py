@@ -31,6 +31,8 @@ urlpatterns = [
 
     path('criminal/profile/<int:criminalprofile_id_no>', views.criminal_profile, name='c_profile'),
 
+    path('search/archives/', views.search_results, name='search-result'),
+
     path('search/', FilterView.as_view(filterset_class=SearchFilter, template_name='search/searchlist.html'),
          name='search')
 ]

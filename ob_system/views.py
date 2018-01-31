@@ -28,7 +28,7 @@ from django.utils.http import urlsafe_base64_decode
 
 
 # Create your views here.
-
+@login_required(login_url='/accounts/login/')
 def officer_login(request):
 
     try:
@@ -61,7 +61,7 @@ def officer_login(request):
 
         raise exception
 
-
+@login_required(login_url='/accounts/login/')
 def signup(request):
 
     try:
@@ -97,7 +97,7 @@ def account_activation_sent(request):
 
     return render(request, 'emailing/account_activation_sent.html')
 
-
+@login_required(login_url='/accounts/login/')
 def activate(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
@@ -115,6 +115,7 @@ def activate(request, uidb64, token):
 
 
 # The landing page
+@login_required(login_url='/accounts/login/')
 def index(request):
 
     suspect_list = CriminalProfile.objects.all()
@@ -128,6 +129,7 @@ def index(request):
 
 
 # occurrence book
+@login_required(login_url='/accounts/login/')
 def occurrence_book(request):
 
     '''
@@ -171,7 +173,7 @@ def occurrence_book(request):
                     profile.user = request.user
                     profile.save()
 
-                    return redirect('occurrence_book')
+                    return redirect('search')
 
                 else:
 
@@ -200,6 +202,7 @@ def occurrence_book(request):
 
 
 # Archives page
+@login_required(login_url='/accounts/login/')
 def archives(request):
 
     '''
@@ -219,6 +222,7 @@ def archives(request):
 
 
 #  Cash bail page
+@login_required(login_url='/accounts/login/')
 def cash_bail(request):
 
     '''
@@ -265,7 +269,7 @@ def cash_bail(request):
 
 # return render(request, 'occurrence-book/cashbail.html',{'date':date,'bail':bail})
 
-
+@login_required(login_url='/accounts/login/')
 def create_criminal_profile(request):
 
     '''
@@ -305,7 +309,7 @@ def create_criminal_profile(request):
 
         raise exception
 
-
+@login_required(login_url='/accounts/login/')
 def cashbailform(request):
 
     '''
@@ -345,7 +349,7 @@ def cashbailform(request):
 
         raise exception
 
-
+@login_required(login_url='/accounts/login/')
 def criminal_profile(request, criminalprofile_id_no):
 
     '''
@@ -395,8 +399,32 @@ def criminal_profile(request, criminalprofile_id_no):
     except Exception as exception:
 
         raise exception
+        
+@login_required(login_url='/accounts/login/')
+def search_results(request):
 
+    try:
 
+        if 'q' in request.GET and request.GET['q']:
+
+            search_term = request.GET.get('q')
+
+            bookings = Booking.search_by_pub_date(search_term).all()
+
+            reportings = Report.search_by_pub_date(search_term).all()
+
+            return render(request, 'archives/archive.html', {'bookings': bookings, 'reportings': reportings})
+
+        else:
+
+            message = "You haven't searched for any term"
+
+            return render(request, 'searched-tag.html', {"message": message,})
+
+    except Exception as exception:
+        raise exception
+
+@login_required(login_url='/accounts/login/')
 def search(request):
 
     '''
