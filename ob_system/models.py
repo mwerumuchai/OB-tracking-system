@@ -252,8 +252,12 @@ class CashBail(models.Model):
 
     crime = models.ForeignKey(Crime, on_delete=models.CASCADE)
 
-    # def __str__(self):
-    #     return self.criminal
+    @classmethod
+    def single_cashbail_record(cls, cashbail_id):
+
+        record = cls.objects.get(id=cashbail_id)
+
+        return record
 
 
     @classmethod

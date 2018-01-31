@@ -45,6 +45,7 @@
         <th>Court Name</th>
         <th>Court Date</th>
         <th>Amount Paid</th>
+        <th>Print Receipt</th>
       </tr>
     </thead>
     <tbody>
@@ -56,6 +57,7 @@
         <td>{{item.court_name}}</td>
         <td>{{item.court_date}}</td>
         <td>{{item.sum}}</td>
+        <td><a href="{% url 'print' item.id %}"target="_blank"> Click Here <small>(Receipt)</small></a> </td>
       </tr>
       {%endfor%}
     </tbody>
