@@ -88,7 +88,7 @@ PWA_APP_ICONS = [
         'sizes': '192x192'
     },
     {
-        'src': '/static/images/kenya_logo.png',
+        'src': '/static/images/Kenya_logo.png',
         'sizes': '512x512'
     }
 ]
