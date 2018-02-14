@@ -27,6 +27,13 @@ class Profile(models.Model):
         def __unicode__(self):
             return self.get_full_name()
 
+    @classmethod
+    def officer_profile(cls, badge_no):
+
+        profile = cls.objects.get(badge_no=badge_no)
+
+        return profile
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -45,7 +52,7 @@ class CriminalProfile(models.Model):
 
     name = models.CharField(max_length=100)
 
-    id_no = models.IntegerField(null=True)
+    id_no = models.IntegerField(null=False, blank=False)
 
     dob = models.DateField()
 
@@ -55,6 +62,27 @@ class CriminalProfile(models.Model):
 
     def __str__(self):
         return self.name
+
+    @classmethod
+    def criminal_profile(cls, id_no):
+
+        profile = cls.objects.get(id_no=id_no)
+
+        return profile
+
+    @classmethod
+    def search_by_name(cls, search_term):
+
+        name = cls.objects.get(name__icontains=search_term)
+
+        return name
+
+    @classmethod
+    def search_by_id_no(cls, search_term):
+
+        id = cls.objects.get(id_no__icontains=search_term)
+
+        return id
 
 
 class Crime(models.Model):
@@ -94,8 +122,15 @@ class Report(models.Model):
 
         return reports
 
+    @classmethod
+    def search_by_pub_date(cls, search_term):
 
-# A_O stands for Arresting Officer
+        reports = cls.objects.get(pub_date__icontains=search_term)
+
+        return reports
+
+
+# # A_O stands for Arresting Officer
 
 class Booking(models.Model):
 
@@ -113,8 +148,6 @@ class Booking(models.Model):
 
     pub_date = models.DateTimeField(auto_now_add=True)
 
-
-
     def __str__(self):
         return self.a_o_name
 
@@ -125,6 +158,20 @@ class Booking(models.Model):
         bookings = cls.objects.filter(pub_date__date=day)
 
         return bookings
+
+    @classmethod
+    def single_criminal_booking(cls, criminal):
+
+        bookings = cls.objects.filter(id=criminal)
+
+        return bookings
+
+    @classmethod
+    def search_by_pub_date(cls, search_term):
+
+        reports = cls.objects.get(pub_date__icontains=search_term)
+
+        return reports
 
 
 class Remark(models.Model):
@@ -174,3 +221,48 @@ class OccurrenceBook(models.Model):
         archive = cls.objects.filter(pub_date__date=date)
 
         return archive
+
+
+class Archive(models.Model):
+
+    bookings = models.ForeignKey(Booking, on_delete=models.CASCADE)
+
+    reports = models.ForeignKey(Report, on_delete=models.CASCADE)
+
+    pub_date = models.DateField(auto_now_add=True)
+
+
+class CashBail(models.Model):
+
+    p_station = models.CharField(max_length=250)
+
+    sum = models.IntegerField()
+
+    court_name = models.CharField(max_length=250)
+
+    court_date = models.DateField()
+
+    court_time = models.TimeField()
+
+    current_date = models.DateField()
+
+    current_time = models.TimeField()
+
+    criminal = models.ForeignKey(CriminalProfile, on_delete=models.CASCADE)
+
+    crime = models.ForeignKey(Crime, on_delete=models.CASCADE)
+
+    @classmethod
+    def single_cashbail_record(cls, cashbail_id):
+
+        record = cls.objects.get(id=cashbail_id)
+
+        return record
+
+
+    @classmethod
+    def criminal_court_date(cls):
+
+        criminal = cls.objects.filter()
+
+        return criminal
