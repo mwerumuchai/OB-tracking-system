@@ -3,22 +3,22 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
+
+  <head>
     <meta charset="UTF-8">
     <title>Title</title>
-</head>
-<body>
+  </head>
+
+  <body>
 
     {% block content %}
-<div class="container"><br>
-        <form method="get">
+    <div class="container"><br>
+      <form method="get">
 
-            {% csrf_token %}
-
-            {% bootstrap_form filter.form %}
+        {% csrf_token %} {% bootstrap_form filter.form %}
 
 
-            <button type="submit">Search</button>
+        <button type="submit">Search</button>
 
         </form>
         <br>
@@ -41,5 +41,6 @@
   </div>
     {% endblock %}
 
-</body>
+  </body>
+
 </html>
