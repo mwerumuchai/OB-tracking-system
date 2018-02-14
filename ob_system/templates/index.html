@@ -1,1 +1,35 @@
-{%extends 'base.html'%} {%load bootstrap3%} {% block content %} {{block.super}} {%endblock%}
+{%extends 'base.html'%} {%load bootstrap3%} {%load static%} {% block content %} {{block.super}}
+<div class="container">
+  <h1 style="text-align:center;">Search</h1>
+</div>
+<div class="container">
+  <form method="get">
+
+      {% csrf_token %}
+
+      {% bootstrap_form filter.form %}
+
+
+      <button type="submit">Search</button>
+
+  </form>
+  <br>
+
+  <table>
+    <tr>
+      <th>ID No.</th>
+      <th>Name</th>
+      <th>DATE</th>
+    </tr>
+    <tr>
+      {% for suspect in filter.qs %}
+      <td>{{suspect.id_no}}</td>
+      <td><a href="{% url 'c_profile' suspect.id_no %}"> {{ suspect.name }} </a> </td>
+      <td>{{ suspect.pub_date}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+
+{%endblock%}

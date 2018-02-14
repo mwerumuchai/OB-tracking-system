@@ -14,8 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-
+from django.urls import path, include
+from ob_system import views as core_views
+from django.contrib.auth import views as auth_views
+from .views import generate_cashbail_view
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path(r'', include('ob_system.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('cashbail/receipt/<int:cashbail_id>', generate_cashbail_view, name='print'),
+
 ]

@@ -2,6 +2,8 @@
 import os
 import sys
 
+sys.path.append('lib')
+
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "occurrence_book.settings")
     try:
