@@ -5,7 +5,7 @@ confusable-homoglyphs==2.0.2
 defusedxml==0.5.0
 dj-database-url==0.4.2
 dj-static==0.0.6
-Django==2.0
+Django==2.2.13
 django-allauth==0.34.0
 django-archive==0.1.5
 django-autocomplete-light==3.2.10
