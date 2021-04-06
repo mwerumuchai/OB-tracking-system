@@ -16,7 +16,7 @@ django-filters==0.2.1
 django-nocaptcha-recaptcha==0.0.20
 django-phonenumber-field==2.0.0
 django-progressive-web-app==0.1
-django-registration==2.3
+django-registration==3.1.2
 gunicorn==19.7.1
 html5lib==1.0b10
 httplib2==0.10.3
